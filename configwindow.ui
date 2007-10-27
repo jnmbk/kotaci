@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>483</width>
-    <height>229</height>
+    <height>174</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -104,35 +104,6 @@
         </property>
         <property name="maximum" >
          <number>10</number>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2" >
-    <widget class="QGroupBox" name="groupBox_3" >
-     <property name="title" >
-      <string>Görünüm</string>
-     </property>
-     <layout class="QGridLayout" >
-      <item row="0" column="0" >
-       <widget class="QLabel" name="label_4" >
-        <property name="toolTip" >
-         <string>Daha az karakter daha az ayrıntı demektir. Fakat simgede daha kolay görülür.</string>
-        </property>
-        <property name="text" >
-         <string>Simgede gösterilecek karakter sayısı:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" >
-       <widget class="QSpinBox" name="chars" >
-        <property name="minimum" >
-         <number>1</number>
-        </property>
-        <property name="maximum" >
-         <number>3</number>
         </property>
        </widget>
       </item>

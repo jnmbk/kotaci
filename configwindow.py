@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'config.ui'
+# Form implementation generated from reading ui file 'configwindow.ui'
 #
-# Created: Sat Oct 27 10:04:26 2007
+# Created: Sat Oct 27 12:35:38 2007
 #      by: PyQt4 UI code generator 4.3-snapshot-20070811
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PyQt4 import QtCore, QtGui
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,483,229).size()).expandedTo(Dialog.minimumSizeHint()))
+        Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,483,174).size()).expandedTo(Dialog.minimumSizeHint()))
 
         self.gridlayout = QtGui.QGridLayout(Dialog)
         self.gridlayout.setObjectName("gridlayout")
@@ -69,23 +69,6 @@ class Ui_Dialog(object):
         self.gridlayout2.addWidget(self.retries,1,2,1,1)
         self.gridlayout.addWidget(self.groupBox_2,0,1,1,1)
 
-        self.groupBox_3 = QtGui.QGroupBox(Dialog)
-        self.groupBox_3.setObjectName("groupBox_3")
-
-        self.gridlayout3 = QtGui.QGridLayout(self.groupBox_3)
-        self.gridlayout3.setObjectName("gridlayout3")
-
-        self.label_4 = QtGui.QLabel(self.groupBox_3)
-        self.label_4.setObjectName("label_4")
-        self.gridlayout3.addWidget(self.label_4,0,0,1,1)
-
-        self.chars = QtGui.QSpinBox(self.groupBox_3)
-        self.chars.setMinimum(1)
-        self.chars.setMaximum(3)
-        self.chars.setObjectName("chars")
-        self.gridlayout3.addWidget(self.chars,0,1,1,1)
-        self.gridlayout.addWidget(self.groupBox_3,1,0,1,2)
-
         self.buttonBox = QtGui.QDialogButtonBox(Dialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.NoButton|QtGui.QDialogButtonBox.Ok)
@@ -111,7 +94,4 @@ class Ui_Dialog(object):
         self.label_5.setToolTip(QtGui.QApplication.translate("Dialog", "Giriş başarısız olunca tekrar giriş yapılmaya çalışılır", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("Dialog", "Tekrar deneme sayısı:", None, QtGui.QApplication.UnicodeUTF8))
         self.retries.setSuffix(QtGui.QApplication.translate("Dialog", " defa", None, QtGui.QApplication.UnicodeUTF8))
-        self.groupBox_3.setTitle(QtGui.QApplication.translate("Dialog", "Görünüm", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_4.setToolTip(QtGui.QApplication.translate("Dialog", "Daha az karakter daha az ayrıntı demektir. Fakat simgede daha kolay görülür.", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_4.setText(QtGui.QApplication.translate("Dialog", "Simgede gösterilecek karakter sayısı:", None, QtGui.QApplication.UnicodeUTF8))
 

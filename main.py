@@ -114,7 +114,6 @@ class ConfigWindow(QDialog, configwindow.Ui_Dialog):
         settings.setValue("checkInterval", QVariant(self.checkInterval.value()))
         settings.setValue("checkInterval", QVariant(self.checkInterval.value()))
         settings.setValue("retries", QVariant(self.retries.value()))
-        settings.setValue("chars", QVariant(self.chars.value()))
 
     def loadSettings(self):
         settings = QSettings()
@@ -122,7 +121,6 @@ class ConfigWindow(QDialog, configwindow.Ui_Dialog):
         self.password.setText(settings.value("password").toString())
         self.checkInterval.setValue(settings.value("checkInterval", QVariant(2)).toInt()[0])
         self.retries.setValue(settings.value("retries", QVariant(1)).toInt()[0])
-        self.chars.setValue(settings.value("chars", QVariant(3)).toInt()[0])
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal.SIG_DFL)
