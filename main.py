@@ -103,6 +103,26 @@ class ConfigWindow(QDialog, configwindow.Ui_Dialog):
     def __init__(self):
         QDialog.__init__(self)
         self.setupUi(self)
+        QObject.connect(self, SIGNAL("accepted()"), self.saveSettings)
+        QObject.connect(self, SIGNAL("rejected()"), self.loadSettings)
+        self.loadSettings()
+
+    def saveSettings(self):
+        settings = QSettings()
+        settings.setValue("username", QVariant(self.username.text()))
+        settings.setValue("password", QVariant(self.password.text()))
+        settings.setValue("checkInterval", QVariant(self.checkInterval.value()))
+        settings.setValue("checkInterval", QVariant(self.checkInterval.value()))
+        settings.setValue("retries", QVariant(self.retries.value()))
+        settings.setValue("chars", QVariant(self.chars.value()))
+
+    def loadSettings(self):
+        settings = QSettings()
+        self.username.setText(settings.value("username").toString())
+        self.password.setText(settings.value("password").toString())
+        self.checkInterval.setValue(settings.value("checkInterval", QVariant(2)).toInt()[0])
+        self.retries.setValue(settings.value("retries", QVariant(1)).toInt()[0])
+        self.chars.setValue(settings.value("chars", QVariant(3)).toInt()[0])
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal.SIG_DFL)
