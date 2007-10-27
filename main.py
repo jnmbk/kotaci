@@ -8,10 +8,12 @@
 #TODO: okunduğu anda simgeyi yenileme
 #TODO: geçmiş ayları da ayrıntılı olarak kaydet
 
+import commands, httplib2, os, time, signal, sys
+
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-import commands, httplib2, os, time, signal, sys
+import configwindow
 
 def grabQuota(username=None, password=None):
     http = httplib2.Http()
@@ -97,6 +99,10 @@ class TrayIcon(QSystemTrayIcon):
             QMessageBox.information(None, "Kota Bilgisi", results)
             self.refreshQuota()
 
+class ConfigWindow(QDialog, configwindow.Ui_Dialog):
+    def __init__(self):
+        QDialog.__init__(self)
+        self.setupUi(self)
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal.SIG_DFL)
@@ -108,14 +114,18 @@ if __name__ == "__main__":
 
     menu = QMenu()
     actionCheckQuota = QAction(u"Şimdi Kontrol et", menu)
+    actionConfigure = QAction(u"Yapılandır...", menu)
     actionQuit = QAction(u"Çıkış", menu)
 
     menu.addAction(actionCheckQuota)
+    menu.addAction(actionConfigure)
     menu.addAction(actionQuit)
 
     trayIcon = TrayIcon()
+    configWindow = ConfigWindow()
 
     QObject.connect(actionQuit, SIGNAL("activated()"), app.quit)
+    QObject.connect(actionConfigure, SIGNAL("activated()"), configWindow.show)
     QObject.connect(actionCheckQuota, SIGNAL("activated()"), trayIcon.checkQuota)
 
     trayIcon.setContextMenu(menu)
