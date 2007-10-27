@@ -64,18 +64,20 @@ def grabQuota(username=None, password=None):
 class TrayIcon(QSystemTrayIcon):
     def __init__(self):
         QSystemTrayIcon.__init__(self)
-        self.pixmap = QPixmap(32, 32)
-        self.setIcon(QIcon(self.pixmap))
         self.refreshQuota()
 
     def refreshQuota(self):
         settings = QSettings()
         quota = settings.value("lastreport/size", QVariant("?")).toString() + "\nGB"
-        self.pixmap.fill(QColor("red"))
-        painter = QPainter(self.pixmap)
+        pixmap = QPixmap(32, 32)
+        pixmap.fill(QColor("red"))
+        painter = QPainter(pixmap)
         painter.setPen(QColor("white"))
         painter.setFont(QFont("", 10, QFont.Bold))
         painter.drawText(QRect(0, 0, 32, 32), Qt.AlignCenter, quota)
+        painter.end()
+        icon = QIcon(pixmap)
+        self.setIcon(icon)
 
     def checkQuota(self):
         settings = QSettings()
