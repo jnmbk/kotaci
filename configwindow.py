@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'configwindow.ui'
 #
-# Created: Sat Oct 27 12:35:38 2007
-#      by: PyQt4 UI code generator 4.3-snapshot-20070811
+# Created: Sat Nov  3 21:44:10 2007
+#      by: PyQt4 UI code generator 4.3.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,68 +12,72 @@ from PyQt4 import QtCore, QtGui
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,483,174).size()).expandedTo(Dialog.minimumSizeHint()))
+        Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,289,144).size()).expandedTo(Dialog.minimumSizeHint()))
+
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Dialog.sizePolicy().hasHeightForWidth())
+        Dialog.setSizePolicy(sizePolicy)
 
         self.gridlayout = QtGui.QGridLayout(Dialog)
         self.gridlayout.setObjectName("gridlayout")
 
-        self.groupBox = QtGui.QGroupBox(Dialog)
-        self.groupBox.setObjectName("groupBox")
+        self.hboxlayout = QtGui.QHBoxLayout()
+        self.hboxlayout.setObjectName("hboxlayout")
 
-        self.gridlayout1 = QtGui.QGridLayout(self.groupBox)
-        self.gridlayout1.setObjectName("gridlayout1")
+        self.vboxlayout = QtGui.QVBoxLayout()
+        self.vboxlayout.setObjectName("vboxlayout")
 
-        self.label = QtGui.QLabel(self.groupBox)
+        self.label = QtGui.QLabel(Dialog)
         self.label.setObjectName("label")
-        self.gridlayout1.addWidget(self.label,0,0,1,1)
+        self.vboxlayout.addWidget(self.label)
 
-        self.username = QtGui.QLineEdit(self.groupBox)
-        self.username.setObjectName("username")
-        self.gridlayout1.addWidget(self.username,0,1,1,1)
-
-        self.label_2 = QtGui.QLabel(self.groupBox)
+        self.label_2 = QtGui.QLabel(Dialog)
         self.label_2.setObjectName("label_2")
-        self.gridlayout1.addWidget(self.label_2,1,0,1,1)
+        self.vboxlayout.addWidget(self.label_2)
+        self.hboxlayout.addLayout(self.vboxlayout)
 
-        self.password = QtGui.QLineEdit(self.groupBox)
+        self.vboxlayout1 = QtGui.QVBoxLayout()
+        self.vboxlayout1.setObjectName("vboxlayout1")
+
+        self.username = QtGui.QLineEdit(Dialog)
+        self.username.setObjectName("username")
+        self.vboxlayout1.addWidget(self.username)
+
+        self.password = QtGui.QLineEdit(Dialog)
         self.password.setEchoMode(QtGui.QLineEdit.Password)
         self.password.setObjectName("password")
-        self.gridlayout1.addWidget(self.password,1,1,1,1)
-        self.gridlayout.addWidget(self.groupBox,0,0,1,1)
+        self.vboxlayout1.addWidget(self.password)
+        self.hboxlayout.addLayout(self.vboxlayout1)
 
-        self.groupBox_2 = QtGui.QGroupBox(Dialog)
-        self.groupBox_2.setObjectName("groupBox_2")
+        spacerItem = QtGui.QSpacerItem(40,51,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout.addItem(spacerItem)
+        self.gridlayout.addLayout(self.hboxlayout,0,0,1,1)
 
-        self.gridlayout2 = QtGui.QGridLayout(self.groupBox_2)
-        self.gridlayout2.setObjectName("gridlayout2")
+        self.hboxlayout1 = QtGui.QHBoxLayout()
+        self.hboxlayout1.setObjectName("hboxlayout1")
 
-        self.label_3 = QtGui.QLabel(self.groupBox_2)
+        self.label_3 = QtGui.QLabel(Dialog)
         self.label_3.setObjectName("label_3")
-        self.gridlayout2.addWidget(self.label_3,0,0,1,1)
+        self.hboxlayout1.addWidget(self.label_3)
 
-        self.checkInterval = QtGui.QSpinBox(self.groupBox_2)
-        self.checkInterval.setMinimum(2)
-        self.checkInterval.setMaximum(12)
+        self.checkInterval = QtGui.QSpinBox(Dialog)
+        self.checkInterval.setMinimum(1)
+        self.checkInterval.setMaximum(4)
         self.checkInterval.setSingleStep(1)
         self.checkInterval.setObjectName("checkInterval")
-        self.gridlayout2.addWidget(self.checkInterval,0,1,1,2)
+        self.hboxlayout1.addWidget(self.checkInterval)
 
-        self.label_5 = QtGui.QLabel(self.groupBox_2)
-        self.label_5.setObjectName("label_5")
-        self.gridlayout2.addWidget(self.label_5,1,0,1,2)
-
-        self.retries = QtGui.QSpinBox(self.groupBox_2)
-        self.retries.setMinimum(1)
-        self.retries.setMaximum(10)
-        self.retries.setObjectName("retries")
-        self.gridlayout2.addWidget(self.retries,1,2,1,1)
-        self.gridlayout.addWidget(self.groupBox_2,0,1,1,1)
+        spacerItem1 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout1.addItem(spacerItem1)
+        self.gridlayout.addLayout(self.hboxlayout1,1,0,1,1)
 
         self.buttonBox = QtGui.QDialogButtonBox(Dialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.NoButton|QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.gridlayout.addWidget(self.buttonBox,2,0,1,2)
+        self.gridlayout.addWidget(self.buttonBox,2,0,1,1)
 
         self.retranslateUi(Dialog)
         QtCore.QObject.connect(self.buttonBox,QtCore.SIGNAL("accepted()"),Dialog.accept)
@@ -82,16 +86,10 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Ayarlar", None, QtGui.QApplication.UnicodeUTF8))
-        self.groupBox.setTitle(QtGui.QApplication.translate("Dialog", "Hesap Bilgileri", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setToolTip(QtGui.QApplication.translate("Dialog", "TTnet kullanıcı adınızı girin (sonuna @ttnet koymayın)", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Dialog", "Kullanıcı adı:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setToolTip(QtGui.QApplication.translate("Dialog", "TTnet parolanızı girin", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("Dialog", "Parola:", None, QtGui.QApplication.UnicodeUTF8))
-        self.groupBox_2.setTitle(QtGui.QApplication.translate("Dialog", "Kota Kontrolü", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setToolTip(QtGui.QApplication.translate("Dialog", "Kota bilgileriniz 6 saatte bir güncellenir. Bu yüzden kontrol etme sıklığının düşük olmasına gerek yoktur.", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_3.setText(QtGui.QApplication.translate("Dialog", "Kontrol etme sıklığı:", None, QtGui.QApplication.UnicodeUTF8))
-        self.checkInterval.setSuffix(QtGui.QApplication.translate("Dialog", " saat", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_5.setToolTip(QtGui.QApplication.translate("Dialog", "Giriş başarısız olunca tekrar giriş yapılmaya çalışılır", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_5.setText(QtGui.QApplication.translate("Dialog", "Tekrar deneme sayısı:", None, QtGui.QApplication.UnicodeUTF8))
-        self.retries.setSuffix(QtGui.QApplication.translate("Dialog", " defa", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("Dialog", "Her gün bu kadar kez kontrol et:", None, QtGui.QApplication.UnicodeUTF8))
 

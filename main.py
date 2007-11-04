@@ -13,48 +13,50 @@ import commands, httplib2, os, time, signal, sys
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-import configwindow
+import configwindow, captchawindow
 
-def grabQuota(username=None, password=None):
-    http = httplib2.Http()
-    url = 'http://adslkota.ttnet.net.tr/adslkota/jcaptcha'
-    request = {
-        "Content-type": "application/x-www-form-urlencoded",
-        # Firefox'u destekleyelim
-        "User-agent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)"
-        }
-    response, content = http.request(url, headers=request)
-    cookie = {'Cookie': response['set-cookie']}
-    open("/tmp/captcha.jpg",'w').write(content)
+class QuotaGrabber:
+    def __init__(self):
+        self.http = httplib2.Http()
 
-    # captcha'yı oku
-    #FIXME: temp kullanmadan ve tek komutla da yapılabilir
-    os.system("convert /tmp/captcha.jpg "
-        "-sharpen 7x7 -colors 5 /tmp/captcha.png")
-    captcha = commands.getoutput("gocr /tmp/captcha.png")
-    captcha = captcha.strip().replace(" ", "").replace("O", "0")
+    def getCatpcha(self):
+        url = 'http://adslkota.ttnet.net.tr/adslkota/jcaptcha'
+        request = {
+            "Content-type": "application/x-www-form-urlencoded",
+            # Firefox'u destekleyelim
+            "User-agent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)"
+            }
+        response, content = self.http.request(url, headers=request)
+        self.cookie = {'Cookie': response['set-cookie']}
+        open("/tmp/captcha.jpg",'w').write(content)
+        return "/tmp/captcha.jpg"
 
-    # anlaşmayı kabul et
-    url= "http://adslkota.ttnet.net.tr/adslkota/loginSelf.do?"\
-        "dispatch=login&userName=%s&password=%s&captchaResponse=%s"\
-        % (username, password, captcha)
-    http.request(url, 'GET', headers=cookie)
-    time.sleep(0.2)
-    url = "http://adslkota.ttnet.net.tr/adslkota/"\
-        "confirmAgreement.do?dispatch=agree"
-    http.request(url, 'GET', headers=cookie)
-    time.sleep(0.2)
+    def getResults(self, captcha):
+        settings = QSettings()
+        username = settings.value("username").toString()
+        password = settings.value("password").toString()
 
-    # sonucu oku
-    url = "http://adslkota.ttnet.net.tr/adslkota/viewTransfer.do?dispatch=entry"
-    response, content = http.request(url, 'GET', headers=cookie)
-    content = unicode(content, "windows-1254", errors="ignore")
-    if u"Sistem Hatası" in content:
-        return "syserror"
-    elif u"tekrar giriş yapmanız gerekmektedir" in content:
-        return "loginerror"
-    else:
-        start = content.find('<tr class="odd">')
+        # anlaşmayı kabul et
+        url= "http://adslkota.ttnet.net.tr/adslkota/loginSelf.do?"\
+            "dispatch=login&userName=%s&password=%s&captchaResponse=%s"\
+            % (username, password, captcha)
+        self.http.request(url, 'GET', headers=self.cookie)
+        time.sleep(0.2)
+        url = "http://adslkota.ttnet.net.tr/adslkota/"\
+            "confirmAgreement.do?dispatch=agree"
+        self.http.request(url, 'GET', headers=self.cookie)
+        time.sleep(0.2)
+
+        # sonucu oku
+        url = "http://adslkota.ttnet.net.tr/adslkota/viewTransfer.do?dispatch=entry"
+        response, content = self.http.request(url, 'GET', headers=self.cookie)
+        content = unicode(content, "windows-1254", errors="ignore")
+        if u"Sistem Hatası" in content:
+            return "syserror"
+        elif u"tekrar giriş yapmanız gerekmektedir" in content:
+            return "loginerror"
+        else:
+            start = content.find('<tr class="odd">')
         end = content.find('</tr></tbody></table>')
         content = content[start:end]
         content = content.replace('<tr class="odd">',"")
@@ -63,10 +65,23 @@ def grabQuota(username=None, password=None):
         content = content.replace('</tr>'," ").replace("</td>","")
         return content
 
+class CaptchaWindow(QDialog, captchawindow.Ui_CaptchaDialog):
+    def __init__(self):
+        QDialog.__init__(self)
+        self.setupUi(self)
+
+    def displayCaptcha(self, fileName):
+        self.captcha.clear()
+        self.captcha.setPixmap(QPixmap(fileName))
+
+
 class TrayIcon(QSystemTrayIcon):
     def __init__(self):
         QSystemTrayIcon.__init__(self)
         self.refreshQuota()
+        self.captchaWindow = CaptchaWindow()
+        self.grabber = QuotaGrabber()
+        QObject.connect(self.captchaWindow, SIGNAL("accepted()"), self.continueCheckQuota)
 
     def refreshQuota(self):
         settings = QSettings()
@@ -83,13 +98,14 @@ class TrayIcon(QSystemTrayIcon):
 
     def checkQuota(self):
         settings = QSettings()
-        results = grabQuota(
-                str(settings.value("username").toString()),
-                str(settings.value("password").toString()))
+        self.captchaWindow.show()
+        self.captchaWindow.displayCaptcha(self.grabber.getCatpcha())
+
+    def continueCheckQuota(self):
+        results = self.grabber.getResults(self.captchaWindow.lineEdit.text())
         if results == "syserror":
             QMessageBox.critical(None, "Hata", u"Sistem Hatası")
         if results == "loginerror":
-            #FIXME: catcpca yanlış okunmuş da olabilir
             QMessageBox.critical(None, "Hata", u"Giriş Hatası\nKullanıcı adı ve parolanızı kontrol edin.")
         else:
             lastReport = results.split("\n")[-1]
@@ -111,22 +127,19 @@ class ConfigWindow(QDialog, configwindow.Ui_Dialog):
         settings = QSettings()
         settings.setValue("username", QVariant(self.username.text()))
         settings.setValue("password", QVariant(self.password.text()))
-        settings.setValue("checkInterval", QVariant(self.checkInterval.value()))
-        settings.setValue("checkInterval", QVariant(self.checkInterval.value()))
-        settings.setValue("retries", QVariant(self.retries.value()))
+        #settings.setValue("checkInterval", QVariant(self.checkInterval.value()))
 
     def loadSettings(self):
         settings = QSettings()
         self.username.setText(settings.value("username").toString())
         self.password.setText(settings.value("password").toString())
-        self.checkInterval.setValue(settings.value("checkInterval", QVariant(2)).toInt()[0])
-        self.retries.setValue(settings.value("retries", QVariant(1)).toInt()[0])
+        #self.checkInterval.setValue(settings.value("checkInterval", QVariant(2)).toInt()[0])
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     app = QApplication(sys.argv)
-    app.setApplicationName("adslkota")
-    app.setOrganizationName("adslkota")
+    app.setApplicationName("kotacı")
+    app.setOrganizationName("kotacı")
     app.setQuitOnLastWindowClosed(False)
     settings = QSettings()
 
@@ -141,6 +154,7 @@ if __name__ == "__main__":
 
     trayIcon = TrayIcon()
     configWindow = ConfigWindow()
+    captchaWindow = CaptchaWindow()
 
     QObject.connect(actionQuit, SIGNAL("activated()"), app.quit)
     QObject.connect(actionConfigure, SIGNAL("activated()"), configWindow.show)
