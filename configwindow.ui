@@ -16,7 +16,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle" >
-   <string>Ayarlar</string>
+   <string>Yapılandır - Kotacı</string>
   </property>
   <layout class="QGridLayout" >
    <item row="0" column="0" >

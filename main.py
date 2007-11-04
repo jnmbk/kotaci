@@ -6,28 +6,28 @@
 # original version: http://forum.pardus-linux.org/viewtopic.php?t=11305
 #TODO: Use QHttp instead of httplib2
 
-import commands, httplib2, os, time, signal, sys
+import commands, httplib2, os, time, signal, sys, thread
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 import configwindow, captchawindow
 
-class QuotaGrabber:
+class QuotaGrabber(QObject):
     def __init__(self):
+        QObject.__init__(self)
         self.http = httplib2.Http()
 
     def getCatpcha(self):
         url = 'http://adslkota.ttnet.net.tr/adslkota/jcaptcha'
         request = {
             "Content-type": "application/x-www-form-urlencoded",
-            # Firefox'u destekleyelim
             "User-agent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)"
             }
         response, content = self.http.request(url, headers=request)
         self.cookie = {'Cookie': response['set-cookie']}
         open("/tmp/captcha.jpg",'w').write(content)
-        return "/tmp/captcha.jpg"
+        self.emit(SIGNAL("captchaWritten"), "/tmp/captcha.jpg")
 
     def getResults(self, captcha):
         settings = QSettings()
@@ -50,18 +50,18 @@ class QuotaGrabber:
         response, content = self.http.request(url, headers=self.cookie)
         content = unicode(content, "windows-1254", errors="ignore")
         if u"Sistem Hatası" in content:
-            return "syserror"
+            content = "syserror"
         elif u"tekrar giriş yapmanız gerekmektedir" in content:
-            return "loginerror"
+            content = "loginerror"
         else:
             start = content.find('<tr class="odd">')
-        end = content.find('</tr></tbody></table>')
-        content = content[start:end]
-        content = content.replace('<tr class="odd">',"")
-        content = content.replace('<tr class="even">',"")
-        content = content.replace('<td width="100">',"").replace('<br>&nbsp;'," ")
-        content = content.replace('</tr>'," ").replace("</td>","")
-        return content
+            end = content.find('</tr></tbody></table>')
+            content = content[start:end]
+            content = content.replace('<tr class="odd">',"")
+            content = content.replace('<tr class="even">',"")
+            content = content.replace('<td width="100">',"").replace('<br>&nbsp;'," ")
+            content = content.replace('</tr>'," ").replace("</td>","")
+        self.emit(SIGNAL("gotResults"), content)
 
 class CaptchaWindow(QDialog, captchawindow.Ui_CaptchaDialog):
     def __init__(self):
@@ -80,6 +80,8 @@ class TrayIcon(QSystemTrayIcon):
         self.captchaWindow = CaptchaWindow()
         self.grabber = QuotaGrabber()
         QObject.connect(self.captchaWindow, SIGNAL("accepted()"), self.continueCheckQuota)
+        QObject.connect(self.grabber, SIGNAL("captchaWritten"), self.captchaWindow.displayCaptcha)
+        QObject.connect(self.grabber, SIGNAL("gotResults"), self.continueCheckQuota)
 
     def refreshQuota(self):
         settings = QSettings()
@@ -95,23 +97,33 @@ class TrayIcon(QSystemTrayIcon):
         self.setIcon(icon)
 
     def checkQuota(self):
-        settings = QSettings()
         self.captchaWindow.show()
-        self.captchaWindow.displayCaptcha(self.grabber.getCatpcha())
+        self.captchaWindow.captcha.clear()
+        self.captchaWindow.lineEdit.clear()
+        self.captchaWindow.captcha.setText(u"Yükleniyor, lütfen bekleyin...")
+        thread.start_new_thread(self.grabber.getCatpcha, ())
 
-    def continueCheckQuota(self):
-        results = self.grabber.getResults(self.captchaWindow.lineEdit.text())
-        if results == "syserror":
-            QMessageBox.critical(None, "Hata", u"Sistem Hatası")
-        if results == "loginerror":
-            QMessageBox.critical(None, "Hata", u"Giriş Hatası\nKullanıcı adı ve parolanızı kontrol edin.")
+    def continueCheckQuota(self, results = None):
+        if results == None:
+            if self.captchaWindow.lineEdit.text() == "":
+                self.captchaWindow.show()
+            else:
+                thread.start_new_thread(self.grabber.getResults, (self.captchaWindow.lineEdit.text(),))
         else:
-            lastReport = results.split("\n")[-1]
-            lastReport = float(lastReport[:lastReport.index('(')-1].replace('.', ''))
-            lastReport = round(lastReport/1024/1024/1024,2)
-            settings.setValue("lastreport/size", QVariant(str(lastReport).replace('.',',')))
-            QMessageBox.information(None, "Kota Bilgisi", results)
-            self.refreshQuota()
+            if results == "syserror":
+                QMessageBox.critical(None, "Hata", u"Sistem Hatası")
+            if results == "loginerror":
+                QMessageBox.critical(None, "Hata",
+                    u"Giriş Hatası. Eğer tercihlerden kullanıcı adınızı ve "\
+                    "parolanızı belirlemediyseniz önce bunları belirleyin. "\
+                    "Ayrıca resimdeki yazıyı da yanlış yazmış olabilirsiniz.")
+            else:
+                lastReport = results.split("\n")[-1]
+                lastReport = float(lastReport[:lastReport.index('(')-1].replace('.', ''))
+                lastReport = round(lastReport/1024/1024/1024,2)
+                settings.setValue("lastreport/size", QVariant(str(lastReport).replace('.',',')))
+                QMessageBox.information(None, "Kota Bilgisi", results)
+                self.refreshQuota()
 
 class ConfigWindow(QDialog, configwindow.Ui_Dialog):
     def __init__(self):
