@@ -4,9 +4,7 @@
 # Licensed under GPL v2
 # Copyright 2007, Uğur Çetin
 # original version: http://forum.pardus-linux.org/viewtopic.php?t=11305
-#TODO: parola, kullanıcı adı, okuma sıklığı ayarı ekranı
-#TODO: okunduğu anda simgeyi yenileme
-#TODO: geçmiş ayları da ayrıntılı olarak kaydet
+#TODO: Use QHttp instead of httplib2
 
 import commands, httplib2, os, time, signal, sys
 
@@ -40,16 +38,16 @@ class QuotaGrabber:
         url= "http://adslkota.ttnet.net.tr/adslkota/loginSelf.do?"\
             "dispatch=login&userName=%s&password=%s&captchaResponse=%s"\
             % (username, password, captcha)
-        self.http.request(url, 'GET', headers=self.cookie)
+        self.http.request(url, headers=self.cookie)
         time.sleep(0.2)
         url = "http://adslkota.ttnet.net.tr/adslkota/"\
             "confirmAgreement.do?dispatch=agree"
-        self.http.request(url, 'GET', headers=self.cookie)
+        self.http.request(url, headers=self.cookie)
         time.sleep(0.2)
 
         # sonucu oku
         url = "http://adslkota.ttnet.net.tr/adslkota/viewTransfer.do?dispatch=entry"
-        response, content = self.http.request(url, 'GET', headers=self.cookie)
+        response, content = self.http.request(url, headers=self.cookie)
         content = unicode(content, "windows-1254", errors="ignore")
         if u"Sistem Hatası" in content:
             return "syserror"
