@@ -5,6 +5,8 @@
 # Copyright 2007, Uğur Çetin
 # original version: http://forum.pardus-linux.org/viewtopic.php?t=11305
 #TODO: Use QHttp instead of httplib2
+#TODO: Use some Tulliana icons
+#TODO: Use prepare distutils setup
 
 import commands, httplib2, os, time, signal, sys, thread
 
@@ -146,13 +148,11 @@ class ConfigWindow(QDialog, configwindow.Ui_Dialog):
         settings = QSettings()
         settings.setValue("username", QVariant(self.username.text()))
         settings.setValue("password", QVariant(self.password.text()))
-        #settings.setValue("checkInterval", QVariant(self.checkInterval.value()))
 
     def loadSettings(self):
         settings = QSettings()
         self.username.setText(settings.value("username").toString())
         self.password.setText(settings.value("password").toString())
-        #self.checkInterval.setValue(settings.value("checkInterval", QVariant(2)).toInt()[0])
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal.SIG_DFL)

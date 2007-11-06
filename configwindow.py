@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'configwindow.ui'
 #
-# Created: Sun Nov  4 11:21:56 2007
+# Created: Tue Nov  6 06:13:06 2007
 #      by: PyQt4 UI code generator 4.3.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PyQt4 import QtCore, QtGui
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,289,144).size()).expandedTo(Dialog.minimumSizeHint()))
+        Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,264,113).size()).expandedTo(Dialog.minimumSizeHint()))
 
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
@@ -50,34 +50,13 @@ class Ui_Dialog(object):
         self.password.setObjectName("password")
         self.vboxlayout1.addWidget(self.password)
         self.hboxlayout.addLayout(self.vboxlayout1)
-
-        spacerItem = QtGui.QSpacerItem(40,51,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout.addItem(spacerItem)
         self.gridlayout.addLayout(self.hboxlayout,0,0,1,1)
-
-        self.hboxlayout1 = QtGui.QHBoxLayout()
-        self.hboxlayout1.setObjectName("hboxlayout1")
-
-        self.label_3 = QtGui.QLabel(Dialog)
-        self.label_3.setObjectName("label_3")
-        self.hboxlayout1.addWidget(self.label_3)
-
-        self.checkInterval = QtGui.QSpinBox(Dialog)
-        self.checkInterval.setMinimum(1)
-        self.checkInterval.setMaximum(4)
-        self.checkInterval.setSingleStep(1)
-        self.checkInterval.setObjectName("checkInterval")
-        self.hboxlayout1.addWidget(self.checkInterval)
-
-        spacerItem1 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout1.addItem(spacerItem1)
-        self.gridlayout.addLayout(self.hboxlayout1,1,0,1,1)
 
         self.buttonBox = QtGui.QDialogButtonBox(Dialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.NoButton|QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.gridlayout.addWidget(self.buttonBox,2,0,1,1)
+        self.gridlayout.addWidget(self.buttonBox,1,0,1,1)
 
         self.retranslateUi(Dialog)
         QtCore.QObject.connect(self.buttonBox,QtCore.SIGNAL("accepted()"),Dialog.accept)
@@ -90,6 +69,4 @@ class Ui_Dialog(object):
         self.label.setText(QtGui.QApplication.translate("Dialog", "Kullanıcı adı:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setToolTip(QtGui.QApplication.translate("Dialog", "TTnet parolanızı girin", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("Dialog", "Parola:", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_3.setToolTip(QtGui.QApplication.translate("Dialog", "Kota bilgileriniz 6 saatte bir güncellenir. Bu yüzden kontrol etme sıklığının düşük olmasına gerek yoktur.", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_3.setText(QtGui.QApplication.translate("Dialog", "Her gün bu kadar kez kontrol et:", None, QtGui.QApplication.UnicodeUTF8))
 
