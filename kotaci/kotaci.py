@@ -163,7 +163,7 @@ class ConfigWindow(QDialog, configwindow.Ui_Dialog):
 def about():
     import __init__
     QMessageBox.about(None, u"Kotacı Hakkında",
-        u"Kotaci %s\nttnet ADSL kota göstericisi\n(c) 2007, Uğur Çetin <ugur.jnmbk at gmail.com>\n"\
+        u"Kotacı %s\nttnet ADSL kota göstericisi\n(c) 2007, Uğur Çetin <ugur.jnmbk at gmail.com>\n"\
         "http://kotaci.googlecode.com\n\nBu yazılım GPL-2 ile lisanslanmıştır. "\
         "Ayrıntılar için birlikte dağıtılan COPYING dosyasına bakın." % __init__.__version__)
 
