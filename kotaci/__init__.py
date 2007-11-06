@@ -13,5 +13,5 @@
 # Please read the COPYING file.
 #
 
-__version__ = "0.1-beta1"
+__version__ = "0.1_beta1"
 __all__ = ["kotaci"]

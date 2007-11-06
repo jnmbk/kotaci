@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/captchawindow.ui'
 #
-# Created: Tue Nov  6 13:11:29 2007
+# Created: Tue Nov  6 15:16:51 2007
 #      by: PyQt4 UI code generator 4.3.1
 #
 # WARNING! All changes made in this file will be lost!
