@@ -95,6 +95,13 @@ class TrayIcon(QSystemTrayIcon):
         painter.end()
         icon = QIcon(pixmap)
         self.setIcon(icon)
+        if settings.contains("lastreport/bytes"):
+            self.setToolTip(
+                u"Kullanılan kota: %s GB\nSon Güncelleme: %s" %\
+                (str(round(settings.value("lastreport/bytes").toInt()[0]/1024.0/1024/1024,3)).replace('.',','),
+                settings.value("lastreport/date").toDateTime().toString("d MMMM dddd hh.mm")))
+        else:
+            self.setToolTip(u"Lütfen sağ tıklayıp kotanızı kontrol ediniz.")
 
     def checkQuota(self):
         self.captchaWindow.show()
@@ -120,8 +127,10 @@ class TrayIcon(QSystemTrayIcon):
             else:
                 lastReport = results.split("\n")[-1]
                 lastReport = float(lastReport[:lastReport.index('(')-1].replace('.', ''))
+                settings.setValue("lastReport/bytes", QVariant(lastReport))
                 lastReport = round(lastReport/1024/1024/1024,2)
                 settings.setValue("lastreport/size", QVariant(str(lastReport).replace('.',',')))
+                settings.setValue("lastReport/date", QVariant(QDateTime.currentDateTime()))
                 QMessageBox.information(None, "Kota Bilgisi", results)
                 self.refreshQuota()
 
