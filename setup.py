@@ -15,6 +15,8 @@ from distutils.core import setup
 from distutils.command.build import build
 from distutils.command.clean import clean
 
+import kotaci
+
 try:
     import PyQt4
 except:
@@ -65,7 +67,7 @@ class myBuild(build):
 datas = [('share/applications', ['data/kotaci.desktop'])]
 
 setup(name = "kotaci",
-      version = "0.1",
+      version = kotaci.__version__,
       description = "ADSL quota checking tool for Turkey.",
       author = "Uğur Çetin",
       author_email = "ugur.jnmbk@gmail.com",
