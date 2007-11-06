@@ -18,13 +18,7 @@ import commands, httplib2, os, time, signal, sys, thread
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-import configwindow, captchawindow
-
-class icons:
-    path = "/usr/share/icons/Tulliana-2.0/16x16/"
-    exit = path + "actions/exit.png"
-    configure = path + "actions/configure.png"
-    check = path + "actions/ok.png"
+import configwindow, captchawindow, kotaci_rc
 
 class QuotaGrabber(QObject):
     def __init__(self):
@@ -138,14 +132,15 @@ class TrayIcon(QSystemTrayIcon):
                     "parolanızı belirlemediyseniz önce bunları belirleyin. "\
                     "Ayrıca resimdeki yazıyı da yanlış yazmış olabilirsiniz.")
             else:
+                settings = QSettings()
                 lastReport = results.split("\n")[-1]
                 lastReport = float(lastReport[:lastReport.index('(')-1].replace('.', ''))
                 settings.setValue("lastReport/bytes", QVariant(lastReport))
                 lastReport = round(lastReport/1024/1024/1024,2)
                 settings.setValue("lastreport/size", QVariant(str(lastReport).replace('.',',')))
                 settings.setValue("lastReport/date", QVariant(QDateTime.currentDateTime()))
-                QMessageBox.information(None, "Kota Bilgisi", results)
                 self.refreshQuota()
+                QMessageBox.information(None, "Kota Bilgisi", results)
 
 class ConfigWindow(QDialog, configwindow.Ui_Dialog):
     def __init__(self):
@@ -165,6 +160,13 @@ class ConfigWindow(QDialog, configwindow.Ui_Dialog):
         self.username.setText(settings.value("username").toString())
         self.password.setText(settings.value("password").toString())
 
+def about():
+    import __init__
+    QMessageBox.about(None, u"Kotacı Hakkında",
+        u"Kotaci %s\nttnet ADSL kota göstericisi\n(c) 2007, Uğur Çetin <ugur.jnmbk at gmail.com>\n"\
+        "http://kotaci.googlecode.com\n\nBu yazılım GPL-2 ile lisanslanmıştır. "\
+        "Ayrıntılar için birlikte dağıtılan COPYING dosyasına bakın." % __init__.__version__)
+
 def main():
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     app = QApplication(sys.argv)
@@ -174,12 +176,14 @@ def main():
     settings = QSettings()
 
     menu = QMenu()
-    actionCheckQuota = QAction(QIcon(icons.check), u"Şimdi Kontrol et", menu)
-    actionConfigure = QAction(QIcon(icons.configure), u"Yapılandır...", menu)
-    actionQuit = QAction(QIcon(icons.exit), u"Çıkış", menu)
+    actionAbout = QAction(QIcon(":icons/help1.png"), u"Kotacı Hakkında...", menu)
+    actionCheckQuota = QAction(QIcon(":icons/ok.png"), u"Şimdi Kontrol et...", menu)
+    actionConfigure = QAction(QIcon(":icons/configure.png"), u"Yapılandır...", menu)
+    actionQuit = QAction(QIcon(":icons/exit.png"), u"Çıkış", menu)
 
     menu.addAction(actionCheckQuota)
     menu.addAction(actionConfigure)
+    menu.addAction(actionAbout)
     menu.addAction(actionQuit)
 
     trayIcon = TrayIcon()
@@ -189,6 +193,7 @@ def main():
     QObject.connect(actionQuit, SIGNAL("activated()"), app.quit)
     QObject.connect(actionConfigure, SIGNAL("activated()"), configWindow.show)
     QObject.connect(actionCheckQuota, SIGNAL("activated()"), trayIcon.checkQuota)
+    QObject.connect(actionAbout, SIGNAL("activated()"), about)
 
     trayIcon.setContextMenu(menu)
     trayIcon.show()
