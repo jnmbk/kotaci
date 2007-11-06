@@ -1,0 +1,5 @@
+include AUTHORS COPYING INSTALL README TODO
+include kotaci/kotaci.qrc
+include kotaci/*.ui
+recursive-include kotaci/icons *
+recursive-include data *

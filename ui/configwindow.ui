@@ -18,6 +18,9 @@
   <property name="windowTitle" >
    <string>Yapılandır - Kotacı</string>
   </property>
+  <property name="windowIcon" >
+   <iconset resource="../data/kotaci.qrc" >:/icons/configure.png</iconset>
+  </property>
   <layout class="QGridLayout" >
    <item row="0" column="0" >
     <layout class="QHBoxLayout" >
@@ -73,7 +76,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../data/kotaci.qrc" />
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

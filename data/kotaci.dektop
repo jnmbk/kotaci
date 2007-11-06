@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Qt;Application;Network;TrayIcon
+Encoding=UTF-8
+Exec=kotaci
+GenericName=ADSL kota takipçisi
+Icon=ok
+Name=Kotacı
+StartupNotify=true
+Terminal=false
+Type=Application
