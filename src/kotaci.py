@@ -165,7 +165,7 @@ class ConfigWindow(QDialog, configwindow.Ui_Dialog):
         self.username.setText(settings.value("username").toString())
         self.password.setText(settings.value("password").toString())
 
-if __name__ == "__main__":
+def main():
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     app = QApplication(sys.argv)
     app.setApplicationName("kotacı")
@@ -194,3 +194,6 @@ if __name__ == "__main__":
     trayIcon.show()
 
     app.exec_()
+
+if __name__ == "__main__":
+    main()
