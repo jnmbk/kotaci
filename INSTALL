@@ -1,0 +1,3 @@
+sudo python setup.py install
+
+komutuyla kurulumu gerçkleştirebilirsiniz.

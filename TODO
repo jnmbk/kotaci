@@ -1,0 +1,4 @@
+Use QHttp instead of httplib2
+Use some Tulliana icons
+Use Qt resource system
+Prepare distutils setup
