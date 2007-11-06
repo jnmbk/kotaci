@@ -15,6 +15,12 @@ from PyQt4.QtGui import *
 
 import configwindow, captchawindow
 
+class icons:
+    path = "/usr/share/icons/Tulliana-2.0/16x16/"
+    exit = path + "actions/exit.png"
+    configure = path + "actions/configure.png"
+    check = path + "actions/ok.png"
+
 class QuotaGrabber(QObject):
     def __init__(self):
         QObject.__init__(self)
@@ -163,9 +169,9 @@ if __name__ == "__main__":
     settings = QSettings()
 
     menu = QMenu()
-    actionCheckQuota = QAction(u"Şimdi Kontrol et", menu)
-    actionConfigure = QAction(u"Yapılandır...", menu)
-    actionQuit = QAction(u"Çıkış", menu)
+    actionCheckQuota = QAction(QIcon(icons.check), u"Şimdi Kontrol et", menu)
+    actionConfigure = QAction(QIcon(icons.configure), u"Yapılandır...", menu)
+    actionQuit = QAction(QIcon(icons.exit), u"Çıkış", menu)
 
     menu.addAction(actionCheckQuota)
     menu.addAction(actionConfigure)
