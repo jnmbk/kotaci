@@ -10,6 +10,7 @@
 # Please read the COPYING file.
 #
 
+import os, shutil, sys
 from distutils.core import setup
 from distutils.command.build import build
 from distutils.command.clean import clean
@@ -17,23 +18,49 @@ from distutils.command.clean import clean
 try:
     import PyQt4
 except:
-    print "\033[31mWarning: You have to install PyQt4 on your system\033[0m"
+    print "\033[31mError: You have to install PyQt4 on your system\033[0m"
+    sys.exit()
 
 try:
     import httplib2
 except:
     print "\033[31mWarning: You have to install httplib2 module on your system\033[0m"
 
+def compileui(path, uiFile):
+    compiled = os.system("pyuic4 %s%s.ui -o kotaci/%s.py" % (path, uiFile, uiFile))
+    if compiled == 0:
+        print "Compiled %s%s.ui -> kotaci/%s.py" % (path, uiFile, uiFile)
+    else:
+        print "Failed compiling %s%s.ui" % (path, uiFile)
+        sys.exit()
+
+def compileqrc(path, qrcFile):
+    compiled = os.system("pyrcc4 %s%s.qrc -o kotaci/%s_rc.py" % (path, qrcFile, qrcFile))
+    if compiled == 0:
+        print "Compiled %s%s.qrc -> kotaci/%s_rc.py" % (path, qrcFile, qrcFile)
+    else:
+        print "Failed compiling %s%s.qrc" % (path, qrcFile)
+        sys.exit()
+
 class myClean(clean):
     def run(self):
         clean.run(self)
+        try:
+            os.remove("MANIFEST")
+            print "removed MANIFEST"
+        except:pass
+        try:
+            shutil.rmtree("build")
+            print "removed build"
+        except:pass
 
 class myBuild(build):
     def run(self):
         build.run(self)
-        os.system("pyrcc4 kotaci/kotaci.qrc -o kotaci/kotaci_rc.py")
-        os.system("pyuic4 kotaci/configwindow.ui -o kotaci/configwindow.py")
-        os.system("pyuic4 kotaci/captchawindow.ui -o kotaci/captchawindow.py")
+        for ui in (("ui/", "configwindow"), ("ui/", "captchawindow")):
+            compileui(ui[0], ui[1])
+        for qrc in (("data/", "kotaci"),):
+            compileqrc(qrc[0], qrc[1])
 
 datas = [('share/applications', ['data/kotaci.desktop'])]
 
