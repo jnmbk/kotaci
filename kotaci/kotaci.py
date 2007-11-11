@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Licensed under GPL v2
-# Copyright 2007, Uğur Çetin
+# Copyright 2007, Ugur Cetin
 # original version: http://forum.pardus-linux.org/viewtopic.php?t=11305
 #
 # This program is free software; you can redistribute it and/or modify it under
@@ -41,7 +41,7 @@ class QuotaGrabber(QObject):
         username = settings.value("username").toString()
         password = settings.value("password").toString()
 
-        # anlaşmayı kabul et
+        # accept agreenment
         url= "http://adslkota.ttnet.net.tr/adslkota/loginSelf.do?"\
             "dispatch=login&userName=%s&password=%s&captchaResponse=%s"\
             % (username, password, captcha)
@@ -52,13 +52,13 @@ class QuotaGrabber(QObject):
         self.http.request(url, headers=self.cookie)
         time.sleep(0.2)
 
-        # sonucu oku
+        # read result
         url = "http://adslkota.ttnet.net.tr/adslkota/viewTransfer.do?dispatch=entry"
         response, content = self.http.request(url, headers=self.cookie)
         content = unicode(content, "windows-1254", errors="ignore")
-        if u"Sistem Hatası" in content:
+        if u"Sistem Hatas" in content:
             content = "syserror"
-        elif u"tekrar giriş yapmanız gerekmektedir" in content:
+        elif "tekrar" in content and "gerekmektedir" in content:
             content = "loginerror"
         else:
             start = content.find('<tr class="odd">')
@@ -105,17 +105,18 @@ class TrayIcon(QSystemTrayIcon):
         self.setIcon(icon)
         if settings.contains("lastreport/bytes"):
             self.setToolTip(
-                u"Kullanılan kota: %s GB\nSon Güncelleme: %s" %\
-                (str(round(settings.value("lastreport/bytes").toInt()[0]/1024.0/1024/1024,3)).replace('.',','),
-                settings.value("lastreport/date").toDateTime().toString("d MMMM dddd hh.mm")))
+                self.tr("Used Qouta") + " %s GB\n"\
+                % str(round(settings.value("lastreport/bytes").toInt()[0]/1024.0/1024/1024,3)).replace('.',',')\
+                + self.tr("Latest Update:") + " %s" %\
+                settings.value("lastreport/date").toDateTime().toString("d MMMM dddd hh.mm"))
         else:
-            self.setToolTip(u"Lütfen sağ tıklayıp kotanızı kontrol ediniz.")
+            self.setToolTip(self.tr("Please right click and check quata."))
 
     def checkQuota(self):
         self.captchaWindow.show()
         self.captchaWindow.captcha.clear()
         self.captchaWindow.lineEdit.clear()
-        self.captchaWindow.captcha.setText(u"Yükleniyor, lütfen bekleyin...")
+        self.captchaWindow.captcha.setText(self.tr("Loading, plase wait..."))
         thread.start_new_thread(self.grabber.getCatpcha, ())
 
     def continueCheckQuota(self, results = None):
@@ -126,12 +127,11 @@ class TrayIcon(QSystemTrayIcon):
                 thread.start_new_thread(self.grabber.getResults, (self.captchaWindow.lineEdit.text(),))
         else:
             if results == "syserror":
-                QMessageBox.critical(None, "Hata", u"Sistem Hatası")
+                QMessageBox.critical(None, self.tr("Error"), self.tr("System Error"))
             if results == "loginerror":
-                QMessageBox.critical(None, "Hata",
-                    u"Giriş Hatası. Eğer tercihlerden kullanıcı adınızı ve "\
-                    "parolanızı belirlemediyseniz önce bunları belirleyin. "\
-                    "Ayrıca resimdeki yazıyı da yanlış yazmış olabilirsiniz.")
+                QMessageBox.critical(None, self.tr("Error"),
+                    self.tr("Login error. Be sure you wrote it corrcetly "\
+                    "and have specified a username in configuration."))
             else:
                 settings = QSettings()
                 lastReport = results.split("\n")[-1]
@@ -141,7 +141,7 @@ class TrayIcon(QSystemTrayIcon):
                 settings.setValue("lastreport/size", QVariant(str(lastReport).replace('.',',')))
                 settings.setValue("lastReport/date", QVariant(QDateTime.currentDateTime()))
                 self.refreshQuota()
-                QMessageBox.information(None, "Kota Bilgisi", results)
+                QMessageBox.information(None, self.tr("Quota Information"), results)
 
 class ConfigWindow(QDialog, configwindow.Ui_Dialog):
     def __init__(self):
@@ -163,33 +163,44 @@ class ConfigWindow(QDialog, configwindow.Ui_Dialog):
 
 def about():
     import __init__
-    QMessageBox.about(None, u"Kotacı Hakkında",
-        u"Kotacı %s\nttnet ADSL kota göstericisi\n(c) 2007, Uğur Çetin <ugur.jnmbk at gmail.com>\n"\
-        "http://kotaci.googlecode.com\n\nBu yazılım GPL-2 ile lisanslanmıştır. "\
-        "Ayrıntılar için birlikte dağıtılan COPYING dosyasına bakın." % __init__.__version__)
+    QMessageBox.about(None, QApplication.translate("TrayIcon", "About Kotaci", None, QApplication.UnicodeUTF8),
+        QApplication.translate("TrayIcon",
+        "<b>Kotaci %1</b> - ttnet ADSL quota displayer<br />Copyright (c) 2007, Ugur Cetin <ugur.jnmbk at gmail.com><br />"\
+        "This software is licensed under the terms of GPL-2.<br /><a href=\"http://kotaci.googlecode.com\">"\
+        "http://kotaci.googlecode.com</a>", None,
+        QApplication.UnicodeUTF8).arg(__init__.__version__))
 
 def main():
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     app = QApplication(sys.argv)
-    app.setApplicationName("kotacı")
-    app.setOrganizationName("kotacı")
+    app.setApplicationName("kotaci")
+    app.setOrganizationName("kotaci")
     app.setQuitOnLastWindowClosed(False)
     settings = QSettings()
 
+    locale = QLocale.system().name()
+    translator = QTranslator()
+    translator.load(":/kotaci_%s.qm" % locale)
+    app.installTranslator(translator)
+
+    trayIcon = TrayIcon()
+    configWindow = ConfigWindow()
+    captchaWindow = CaptchaWindow()
+
     menu = QMenu()
-    actionAbout = QAction(QIcon(":icons/help1.png"), u"Kotacı Hakkında...", menu)
-    actionCheckQuota = QAction(QIcon(":icons/ok.png"), u"Şimdi Kontrol et...", menu)
-    actionConfigure = QAction(QIcon(":icons/configure.png"), u"Yapılandır...", menu)
-    actionQuit = QAction(QIcon(":icons/exit.png"), u"Çıkış", menu)
+    actionAbout = QAction(QIcon(":icons/help1.png"),
+        QApplication.translate("TrayIcon", "About", None, QApplication.UnicodeUTF8), menu)
+    actionCheckQuota = QAction(QIcon(":icons/ok.png"),
+        QApplication.translate("TrayIcon", "Check now...", None, QApplication.UnicodeUTF8), menu)
+    actionConfigure = QAction(QIcon(":icons/configure.png"),
+        QApplication.translate("TrayIcon", "Configure...", None, QApplication.UnicodeUTF8), menu)
+    actionQuit = QAction(QIcon(":icons/exit.png"),
+        QApplication.translate("TrayIcon", "Exit", None, QApplication.UnicodeUTF8), menu)
 
     menu.addAction(actionCheckQuota)
     menu.addAction(actionConfigure)
     menu.addAction(actionAbout)
     menu.addAction(actionQuit)
-
-    trayIcon = TrayIcon()
-    configWindow = ConfigWindow()
-    captchaWindow = CaptchaWindow()
 
     QObject.connect(actionQuit, SIGNAL("activated()"), app.quit)
     QObject.connect(actionConfigure, SIGNAL("activated()"), configWindow.show)

@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>264</width>
-    <height>113</height>
+    <height>188</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -16,53 +16,170 @@
    </sizepolicy>
   </property>
   <property name="windowTitle" >
-   <string>Yapılandır - Kotacı</string>
+   <string>Configure - Kotaci</string>
   </property>
   <property name="windowIcon" >
    <iconset resource="../data/kotaci.qrc" >:/icons/configure.png</iconset>
   </property>
   <layout class="QGridLayout" >
    <item row="0" column="0" >
-    <layout class="QHBoxLayout" >
-     <item>
-      <layout class="QVBoxLayout" >
-       <item>
-        <widget class="QLabel" name="label" >
-         <property name="toolTip" >
-          <string>TTnet kullanıcı adınızı girin (sonuna @ttnet koymayın)</string>
+    <widget class="QTabWidget" name="tabWidget" >
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>Account</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <item row="0" column="0" >
+        <layout class="QHBoxLayout" >
+         <item>
+          <layout class="QVBoxLayout" >
+           <item>
+            <widget class="QLabel" name="labelUsername" >
+             <property name="toolTip" >
+              <string/>
+             </property>
+             <property name="text" >
+              <string>Username:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelPassword" >
+             <property name="toolTip" >
+              <string/>
+             </property>
+             <property name="text" >
+              <string>Password:</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" >
+           <item>
+            <widget class="QLineEdit" name="username" >
+             <property name="whatsThis" >
+              <string>Enter your TTnet username here.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="password" >
+             <property name="whatsThis" >
+              <string>Enter your TTnet password here.</string>
+             </property>
+             <property name="echoMode" >
+              <enum>QLineEdit::Password</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QCheckBox" name="savePassword" >
+         <property name="whatsThis" >
+          <string>Saves password to configuration file when selected. It may be unsafe to save the password.</string>
          </property>
          <property name="text" >
-          <string>Kullanıcı adı:</string>
+          <string>Save password</string>
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QLabel" name="label_2" >
-         <property name="toolTip" >
-          <string>TTnet parolanızı girin</string>
+       <item row="0" column="1" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
          </property>
-         <property name="text" >
-          <string>Parola:</string>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
          </property>
-        </widget>
+        </spacer>
        </item>
       </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" >
-       <item>
-        <widget class="QLineEdit" name="username" />
+     </widget>
+     <widget class="QWidget" name="tab_2" >
+      <attribute name="title" >
+       <string>Tray Icon</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <item row="0" column="0" >
+        <layout class="QHBoxLayout" >
+         <item>
+          <layout class="QVBoxLayout" >
+           <item>
+            <widget class="QLabel" name="labelTextColor" >
+             <property name="text" >
+              <string>Text color:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelBackgroundColor" >
+             <property name="text" >
+              <string>Background color:</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" >
+           <item>
+            <widget class="QComboBox" name="textColor" >
+             <property name="whatsThis" >
+              <string>Select tray icon text color.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="backgroundColor" >
+             <property name="whatsThis" >
+              <string>Select tray icon background color.</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
        </item>
-       <item>
-        <widget class="QLineEdit" name="password" >
-         <property name="echoMode" >
-          <enum>QLineEdit::Password</enum>
+       <item row="1" column="0" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
          </property>
-        </widget>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="1" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
-     </item>
-    </layout>
+     </widget>
+    </widget>
    </item>
    <item row="1" column="0" >
     <widget class="QDialogButtonBox" name="buttonBox" >

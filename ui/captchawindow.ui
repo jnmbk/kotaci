@@ -10,7 +10,7 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>Kotacı</string>
+   <string>Kotaci</string>
   </property>
   <property name="windowIcon" >
    <iconset resource="../data/kotaci.qrc" >:/icons/ok.png</iconset>
@@ -38,7 +38,7 @@
    <item row="1" column="0" colspan="2" >
     <widget class="QLabel" name="label" >
      <property name="text" >
-      <string>Aşağıdaki kutuya resimde gördüğünüzü yazın:</string>
+      <string>Write what you see into the box below:</string>
      </property>
     </widget>
    </item>
@@ -48,7 +48,7 @@
    <item row="3" column="0" >
     <widget class="QPushButton" name="changePicture" >
      <property name="text" >
-      <string>Resmi Değiştir</string>
+      <string>Change Picture</string>
      </property>
     </widget>
    </item>

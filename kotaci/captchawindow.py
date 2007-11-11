@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/captchawindow.ui'
 #
-# Created: Sun Nov 11 08:48:59 2007
+# Created: Sun Nov 11 13:00:55 2007
 #      by: PyQt4 UI code generator 4.3.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -49,9 +49,8 @@ class Ui_CaptchaDialog(object):
         QtCore.QMetaObject.connectSlotsByName(CaptchaDialog)
 
     def retranslateUi(self, CaptchaDialog):
-        CaptchaDialog.setWindowTitle(QtGui.QApplication.translate("CaptchaDialog", "Kotacı", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("CaptchaDialog", "Aşağıdaki kutuya resimde gördüğünüzü yazın:", None, QtGui.QApplication.UnicodeUTF8))
-        self.changePicture.setText(QtGui.QApplication.translate("CaptchaDialog", "Resmi Değiştir", None, QtGui.QApplication.UnicodeUTF8))
+        CaptchaDialog.setWindowTitle(QtGui.QApplication.translate("CaptchaDialog", "Kotaci", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("CaptchaDialog", "Write what you see into the box below:", None, QtGui.QApplication.UnicodeUTF8))
+        self.changePicture.setText(QtGui.QApplication.translate("CaptchaDialog", "Change Picture", None, QtGui.QApplication.UnicodeUTF8))
 
-import kotaci_rc
 import kotaci_rc

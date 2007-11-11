@@ -63,6 +63,10 @@ class myBuild(build):
             compileui(ui[0], ui[1])
         for qrc in (("data/", "kotaci"),):
             compileqrc(qrc[0], qrc[1])
+        if os.system("lrelease-qt4 data/kotaci_tr_TR.ts -qm data/kotaci_tr_TR.qm") == 0:
+            print "Compiled data/kotaci_tr_TR.ts -> data/kotaci_tr_TR.qm"
+        else:
+            print "Failed compiling data/kotaci_tr_TR.ts, lrelease-qt4 didn't work"
 
 datas = [('share/applications', ['data/kotaci.desktop'])]
 
