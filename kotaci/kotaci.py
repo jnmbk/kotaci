@@ -87,6 +87,7 @@ class TrayIcon(QSystemTrayIcon):
         self.captchaWindow = CaptchaWindow()
         self.grabber = QuotaGrabber()
         QObject.connect(self.captchaWindow, SIGNAL("accepted()"), self.continueCheckQuota)
+        QObject.connect(self.captchaWindow.changePicture, SIGNAL("clicked()"), self.checkQuota)
         QObject.connect(self.grabber, SIGNAL("captchaWritten"), self.captchaWindow.displayCaptcha)
         QObject.connect(self.grabber, SIGNAL("gotResults"), self.continueCheckQuota)
 
