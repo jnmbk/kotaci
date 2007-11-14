@@ -95,9 +95,9 @@ class TrayIcon(QSystemTrayIcon):
         settings = QSettings()
         quota = settings.value("lastreport/size", QVariant("?")).toString() + "\nGB"
         pixmap = QPixmap(32, 32)
-        pixmap.fill(QColor("red"))
+        pixmap.fill(QColor(settings.value("trayIcon/backgroundColor", QVariant("red")).toString()))
         painter = QPainter(pixmap)
-        painter.setPen(QColor("white"))
+        painter.setPen(QColor(settings.value("trayIcon/textColor", QVariant("white")).toString()))
         painter.setFont(QFont("", 10, QFont.Bold))
         painter.drawText(QRect(0, 0, 32, 32), Qt.AlignCenter, quota)
         painter.end()
@@ -144,22 +144,30 @@ class TrayIcon(QSystemTrayIcon):
                 QMessageBox.information(None, self.tr("Quota Information"), results)
 
 class ConfigWindow(QDialog, configwindow.Ui_Dialog):
-    def __init__(self):
+    def __init__(self, trayIcon):
         QDialog.__init__(self)
         self.setupUi(self)
+        self.trayIcon = trayIcon
         QObject.connect(self, SIGNAL("accepted()"), self.saveSettings)
         QObject.connect(self, SIGNAL("rejected()"), self.loadSettings)
+        self.textColor.addItems(QColor.colorNames())
+        self.backgroundColor.addItems(QColor.colorNames())
         self.loadSettings()
 
     def saveSettings(self):
         settings = QSettings()
         settings.setValue("username", QVariant(self.username.text()))
         settings.setValue("password", QVariant(self.password.text()))
+        settings.setValue("trayIcon/textColor", QVariant(self.textColor.currentText()))
+        settings.setValue("trayIcon/backgroundColor", QVariant(self.backgroundColor.currentText()))
+        self.trayIcon.refreshQuota()
 
     def loadSettings(self):
         settings = QSettings()
         self.username.setText(settings.value("username").toString())
         self.password.setText(settings.value("password").toString())
+        self.textColor.setCurrentIndex(self.textColor.findText(settings.value("trayIcon/textColor", QVariant("white")).toString()))
+        self.backgroundColor.setCurrentIndex(self.textColor.findText(settings.value("trayIcon/backgroundColor", QVariant("red")).toString()))
 
 def about():
     import __init__
@@ -184,7 +192,7 @@ def main():
     app.installTranslator(translator)
 
     trayIcon = TrayIcon()
-    configWindow = ConfigWindow()
+    configWindow = ConfigWindow(trayIcon)
     captchaWindow = CaptchaWindow()
 
     menu = QMenu()
