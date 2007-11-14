@@ -90,6 +90,11 @@ class TrayIcon(QSystemTrayIcon):
         QObject.connect(self.captchaWindow.changePicture, SIGNAL("clicked()"), self.checkQuota)
         QObject.connect(self.grabber, SIGNAL("captchaWritten"), self.captchaWindow.displayCaptcha)
         QObject.connect(self.grabber, SIGNAL("gotResults"), self.continueCheckQuota)
+        QObject.connect(self, SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self.on_activated)
+
+    def on_activated(self, activationReason):
+        if activationReason == self.DoubleClick:
+            self.checkQuota()
 
     def refreshQuota(self):
         settings = QSettings()

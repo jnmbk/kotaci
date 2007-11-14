@@ -1,5 +1,4 @@
 Use QHttp instead of httplib2
-Add options for tray icon colors selection
 Beautify results dialog
 Save old months, and show them in a statistics dialog
 Don't save captcha, it can be used from memory
