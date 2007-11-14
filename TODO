@@ -1,4 +1,3 @@
 Use QHttp instead of httplib2
-Beautify results dialog
 Save old months, and show them in a statistics dialog
 Don't save captcha, it can be used from memory

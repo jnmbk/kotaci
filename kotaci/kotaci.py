@@ -110,12 +110,11 @@ class TrayIcon(QSystemTrayIcon):
         self.setIcon(icon)
         if settings.contains("lastreport/bytes"):
             self.setToolTip(
-                self.tr("Used Qouta") + " %s GB\n"\
-                % str(round(settings.value("lastreport/bytes").toInt()[0]/1024.0/1024/1024,3)).replace('.',',')\
-                + self.tr("Latest Update:") + " %s" %\
-                settings.value("lastreport/date").toDateTime().toString("d MMMM dddd hh.mm"))
+                self.tr("Used Quota: %1 GB\nLatest Update: %2").arg(
+                str(round(settings.value("lastreport/bytes").toInt()[0]/1024.0/1024/1024,3)).replace('.',',')).arg(
+                settings.value("lastreport/date").toDateTime().toString("d MMMM dddd hh.mm")))
         else:
-            self.setToolTip(self.tr("Please right click and check quata."))
+            self.setToolTip(self.tr("Double click to check quota."))
 
     def checkQuota(self):
         self.captchaWindow.show()
@@ -132,21 +131,23 @@ class TrayIcon(QSystemTrayIcon):
                 thread.start_new_thread(self.grabber.getResults, (self.captchaWindow.lineEdit.text(),))
         else:
             if results == "syserror":
-                QMessageBox.critical(None, self.tr("Error"), self.tr("System Error"))
+                self.showMessage(self.tr("Error"), self.tr("System Error"), self.critical)
             if results == "loginerror":
-                QMessageBox.critical(None, self.tr("Error"),
-                    self.tr("Login error. Be sure you wrote it corrcetly "\
-                    "and have specified a username in configuration."))
+                self.showMessage(self.tr("Error"),
+                    self.tr("Login error. Be sure you wrote it correctly "\
+                    "and have specified a username in configuration."), self.critical)
             else:
                 settings = QSettings()
                 lastReport = results.split("\n")[-1]
                 lastReport = float(lastReport[:lastReport.index('(')-1].replace('.', ''))
-                settings.setValue("lastReport/bytes", QVariant(lastReport))
+                bytes = int(lastReport)
+                settings.setValue("lastReport/bytes", QVariant(bytes))
                 lastReport = round(lastReport/1024/1024/1024,2)
-                settings.setValue("lastreport/size", QVariant(str(lastReport).replace('.',',')))
+                settings.setValue("lastreport/size", QVariant(QString("%L1").arg(lastReport)))
                 settings.setValue("lastReport/date", QVariant(QDateTime.currentDateTime()))
                 self.refreshQuota()
-                QMessageBox.information(None, self.tr("Quota Information"), results)
+                self.showMessage(self.tr("Quota Information"), self.tr("%L1 bytes\n(%L2 GB)").arg(bytes).arg(
+                    round(float(bytes)/1024/1024/1024,3)))
 
 class ConfigWindow(QDialog, configwindow.Ui_Dialog):
     def __init__(self, trayIcon):
@@ -184,7 +185,7 @@ def about():
         QApplication.translate("TrayIcon",
         "<b>Kotaci %1</b> - ttnet ADSL quota displayer<br />Copyright (c) 2007, Ugur Cetin <ugur.jnmbk at gmail.com><br />"\
         "This software is licensed under the terms of GPL-2.<br /><a href=\"http://kotaci.googlecode.com\">"\
-        "http://kotaci.googlecode.com</a>", None,
+        "http://kotaci.googlecode.com</a><br /><br />Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.", None,
         QApplication.UnicodeUTF8).arg(__init__.__version__))
 
 def main():
