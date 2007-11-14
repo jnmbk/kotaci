@@ -155,8 +155,12 @@ class ConfigWindow(QDialog, configwindow.Ui_Dialog):
         self.trayIcon = trayIcon
         QObject.connect(self, SIGNAL("accepted()"), self.saveSettings)
         QObject.connect(self, SIGNAL("rejected()"), self.loadSettings)
-        self.textColor.addItems(QColor.colorNames())
-        self.backgroundColor.addItems(QColor.colorNames())
+        for color in QColor.colorNames():
+            pixmap = QPixmap(16, 16)
+            pixmap.fill(QColor(color))
+            icon = QIcon(pixmap)
+            self.textColor.addItem(icon, color)
+            self.backgroundColor.addItem(icon, color)
         self.loadSettings()
 
     def saveSettings(self):
