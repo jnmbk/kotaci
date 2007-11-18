@@ -21,7 +21,6 @@ try:
     import PyQt4
 except:
     print "\033[31mError: You have to install PyQt4 on your system\033[0m"
-    sys.exit()
 
 try:
     import httplib2
@@ -33,16 +32,14 @@ def compileui(path, uiFile):
     if compiled == 0:
         print "Compiled %s%s.ui -> kotaci/%s.py" % (path, uiFile, uiFile)
     else:
-        print "Failed compiling %s%s.ui" % (path, uiFile)
-        sys.exit()
+        print "\033[31mWarning: Failed compiling %s%s.ui, pyuic4 didn't work" % (path, uiFile)
 
 def compileqrc(path, qrcFile):
     compiled = os.system("pyrcc4 %s%s.qrc -o kotaci/%s_rc.py" % (path, qrcFile, qrcFile))
     if compiled == 0:
         print "Compiled %s%s.qrc -> kotaci/%s_rc.py" % (path, qrcFile, qrcFile)
     else:
-        print "Failed compiling %s%s.qrc" % (path, qrcFile)
-        sys.exit()
+        print "\033[31mWarning: Failed compiling %s%s.qrc, pyrcc4 didn't work" % (path, qrcFile)
 
 class myClean(clean):
     def run(self):
@@ -64,8 +61,7 @@ class myBuild(build):
         if os.system("lrelease-qt4 data/kotaci_tr_TR.ts -qm data/kotaci_tr_TR.qm") == 0:
             print "Compiled data/kotaci_tr_TR.ts -> data/kotaci_tr_TR.qm"
         else:
-            print "Failed compiling data/kotaci_tr_TR.ts, lrelease-qt4 didn't work"
-            sys.exit()
+            print "\033[31mWarning: Failed compiling data/kotaci_tr_TR.ts, lrelease-qt4 didn't work"
         for qrc in (("data/", "kotaci"),):
             compileqrc(qrc[0], qrc[1])
 

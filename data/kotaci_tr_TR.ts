@@ -22,67 +22,67 @@
 <context>
     <name>Dialog</name>
     <message>
-        <location filename="configwindow.py" line="128"/>
+        <location filename="configwindow.py" line="129"/>
         <source>Configure - Kotaci</source>
         <translation>Yapılandır - Kotacı</translation>
     </message>
     <message>
-        <location filename="configwindow.py" line="129"/>
+        <location filename="configwindow.py" line="130"/>
         <source>Username:</source>
         <translation>Kullanıcı adı:</translation>
     </message>
     <message>
-        <location filename="configwindow.py" line="130"/>
+        <location filename="configwindow.py" line="131"/>
         <source>Password:</source>
         <translation>Parola:</translation>
     </message>
     <message>
-        <location filename="configwindow.py" line="131"/>
+        <location filename="configwindow.py" line="132"/>
         <source>Enter your TTnet username here.</source>
         <translation>Buraya TTnet kullanıcı adınızı girin.</translation>
     </message>
     <message>
-        <location filename="configwindow.py" line="132"/>
+        <location filename="configwindow.py" line="133"/>
         <source>Enter your TTnet password here.</source>
         <translation>Buraya TTnet parolanızı girin.</translation>
     </message>
     <message>
-        <location filename="configwindow.py" line="133"/>
+        <location filename="configwindow.py" line="134"/>
         <source>Saves password to configuration file when selected. It may be unsafe to save the password.</source>
         <translation>Seçiliyse parolanız ayar dosyasına kaydedilir. Parolayı bu şekilde saklamak güvenli olmayabilir.</translation>
     </message>
     <message>
-        <location filename="configwindow.py" line="134"/>
+        <location filename="configwindow.py" line="135"/>
         <source>Save password</source>
         <translation>Parolayı kaydet</translation>
     </message>
     <message>
-        <location filename="configwindow.py" line="135"/>
+        <location filename="configwindow.py" line="136"/>
         <source>Account</source>
         <translation>Hesap</translation>
     </message>
     <message>
-        <location filename="configwindow.py" line="136"/>
+        <location filename="configwindow.py" line="137"/>
         <source>Text color:</source>
         <translation>Yazı rengi:</translation>
     </message>
     <message>
-        <location filename="configwindow.py" line="137"/>
+        <location filename="configwindow.py" line="138"/>
         <source>Background color:</source>
         <translation>Arka plan rengi:</translation>
     </message>
     <message>
-        <location filename="configwindow.py" line="138"/>
+        <location filename="configwindow.py" line="139"/>
         <source>Select tray icon text color.</source>
         <translation>Simgenin yazı rengini seçin.</translation>
     </message>
     <message>
-        <location filename="configwindow.py" line="139"/>
+        <location filename="configwindow.py" line="140"/>
         <source>Select tray icon background color.</source>
         <translation>Simgenin arka plan rengini seçin.</translation>
     </message>
     <message>
-        <location filename="configwindow.py" line="140"/>
+        <location filename="configwindow.py" line="141"/>
         <source>Tray Icon</source>
         <translation>Sistem Çekmecesi</translation>
     </message>
@@ -105,17 +105,17 @@
         <translation type="obsolete">Kotayı kontrol etmek için çift tıklayın.</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="123"/>
+        <location filename="kotaci.py" line="131"/>
         <source>Loading, plase wait...</source>
         <translation>Yükleniyor, lütfen bekleyin...</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="136"/>
+        <location filename="kotaci.py" line="149"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="134"/>
+        <location filename="kotaci.py" line="147"/>
         <source>System Error</source>
         <translation>Sistem Hatası</translation>
     </message>
@@ -125,12 +125,12 @@
         <translation type="obsolete">Giriş hatası. Yazıyı doğru yazdığınızdan ve hesap ayarlarınızın doğru olduğundan emin olun.</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="149"/>
+        <location filename="kotaci.py" line="159"/>
         <source>Quota Information</source>
         <translation>Kota Bilgisi</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="184"/>
+        <location filename="kotaci.py" line="200"/>
         <source>About Kotaci</source>
         <translation>Kotacı Hakkında</translation>
     </message>
@@ -140,22 +140,22 @@
         <translation type="obsolete">&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Copyright (c) 2007, Uğur Çetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="210"/>
+        <location filename="kotaci.py" line="226"/>
         <source>About</source>
         <translation>Hakkında</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="212"/>
+        <location filename="kotaci.py" line="228"/>
         <source>Check now...</source>
         <translation>Şimdi kontrol et...</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="214"/>
+        <location filename="kotaci.py" line="230"/>
         <source>Configure...</source>
         <translation>Yapılandır...</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="216"/>
+        <location filename="kotaci.py" line="232"/>
         <source>Exit</source>
         <translation>Çık</translation>
     </message>
@@ -163,21 +163,21 @@
         <location filename="kotaci.py" line="113"/>
         <source>Used Quota: %1 GB
 Latest Update: %2</source>
-        <translation>Kullanılan Kota: %1 GB
+        <translation type="obsolete">Kullanılan Kota: %1 GB
 Son Güncelleme: %2</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="117"/>
+        <location filename="kotaci.py" line="125"/>
         <source>Double click to check quota.</source>
         <translation>Kotayı kontrol etmek için çift tıklayın.</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="138"/>
+        <location filename="kotaci.py" line="151"/>
         <source>Login error. Be sure you wrote it correctly and have specified a username in configuration.</source>
         <translation>Giriş hatası. Yazıyı doğru yazdığınızdan ve hesap ayarlarınızın doğru olduğundan emin olun.</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="149"/>
+        <location filename="kotaci.py" line="159"/>
         <source>%L1 bytes
 (%L2 GB)</source>
         <translation>%L1 bayt
@@ -193,9 +193,40 @@ Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.</s
 Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="189"/>
+        <location filename="kotaci.py" line="205"/>
         <source>&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007, Ugur Cetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.</source>
         <translation>&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Copyright (c) 2007, Uğur Çetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.</translation>
+    </message>
+    <message>
+        <location filename="kotaci.py" line="107"/>
+        <source>%L1
+GB</source>
+        <translation>%L1
+GB</translation>
+    </message>
+    <message>
+        <location filename="kotaci.py" line="110"/>
+        <source>?
+GB</source>
+        <translation>?
+GB</translation>
+    </message>
+    <message>
+        <location filename="kotaci.py" line="121"/>
+        <source>Used Quota: %L1 GB
+Latest Update: %2</source>
+        <translation>Kullanılan Kota: %L1 GB
+Son Güncelleme: %2</translation>
+    </message>
+    <message>
+        <location filename="kotaci.py" line="141"/>
+        <source>Enter Password</source>
+        <translation>Parolayı Girin</translation>
+    </message>
+    <message>
+        <location filename="kotaci.py" line="141"/>
+        <source>Enter your TTnet password:</source>
+        <translation>TTnet parolanızı girin:</translation>
     </message>
 </context>
 </TS>
