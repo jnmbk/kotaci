@@ -141,9 +141,6 @@ class TrayIcon(QSystemTrayIcon):
         if activationReason == self.DoubleClick:
             self.checkQuota()
 
-    def showStats(self):
-        self.statsWindow.show()
-
     def refreshQuota(self):
         settings = QSettings()
         if settings.contains("lastReport/bytes"):
@@ -312,7 +309,7 @@ def main():
     QObject.connect(actionQuit, SIGNAL("activated()"), app.quit)
     QObject.connect(actionConfigure, SIGNAL("activated()"), configWindow.show)
     QObject.connect(actionCheckQuota, SIGNAL("activated()"), trayIcon.checkQuota)
-    QObject.connect(actionStatistics, SIGNAL("activated()"), trayIcon.showStats)
+    QObject.connect(actionStatistics, SIGNAL("activated()"), trayIcon.statsWindow.show)
     QObject.connect(actionAbout, SIGNAL("activated()"), about)
 
     trayIcon.setContextMenu(menu)
