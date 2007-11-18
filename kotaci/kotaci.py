@@ -20,6 +20,9 @@ from PyQt4.QtGui import *
 
 import configwindow, captchawindow, kotaci_rc
 
+def byte2gb(bytes, rounding=3):
+    return round(bytes/1024/1024/1024,rounding)
+
 class QuotaGrabber(QObject):
     def __init__(self):
         QObject.__init__(self)
@@ -98,7 +101,10 @@ class TrayIcon(QSystemTrayIcon):
 
     def refreshQuota(self):
         settings = QSettings()
-        quota = settings.value("lastreport/size", QVariant("?")).toString() + "\nGB"
+        if settings.contains("lastReport/bytes"):
+            quota = self.tr("%L1\nGB").arg(byte2gb(settings.value("lastReport/bytes").toDouble()[0], 2))
+        else:
+            quota = self.tr("?\nGB")
         pixmap = QPixmap(32, 32)
         pixmap.fill(QColor(settings.value("trayIcon/backgroundColor", QVariant("red")).toString()))
         painter = QPainter(pixmap)
@@ -108,11 +114,11 @@ class TrayIcon(QSystemTrayIcon):
         painter.end()
         icon = QIcon(pixmap)
         self.setIcon(icon)
-        if settings.contains("lastreport/bytes"):
+        if settings.contains("lastReport/bytes"):
             self.setToolTip(
-                self.tr("Used Quota: %1 GB\nLatest Update: %2").arg(
-                str(round(settings.value("lastreport/bytes").toInt()[0]/1024.0/1024/1024,3)).replace('.',',')).arg(
-                settings.value("lastreport/date").toDateTime().toString("d MMMM dddd hh.mm")))
+                self.tr("Used Quota: %L1 GB\nLatest Update: %2").arg(
+                byte2gb(settings.value("lastReport/bytes").toDouble()[0])).arg(
+                settings.value("lastReport/date").toDateTime().toString("d MMMM dddd hh.mm")))
         else:
             self.setToolTip(self.tr("Double click to check quota."))
 
@@ -139,15 +145,12 @@ class TrayIcon(QSystemTrayIcon):
             else:
                 settings = QSettings()
                 lastReport = results.split("\n")[-1]
-                lastReport = float(lastReport[:lastReport.index('(')-1].replace('.', ''))
-                bytes = int(lastReport)
-                settings.setValue("lastReport/bytes", QVariant(bytes))
-                lastReport = round(lastReport/1024/1024/1024,2)
-                settings.setValue("lastreport/size", QVariant(QString("%L1").arg(lastReport)))
+                lastReport = int(lastReport[:lastReport.index('(')-1].replace('.', ''))
+                settings.setValue("lastReport/bytes", QVariant(lastReport))
                 settings.setValue("lastReport/date", QVariant(QDateTime.currentDateTime()))
                 self.refreshQuota()
-                self.showMessage(self.tr("Quota Information"), self.tr("%L1 bytes\n(%L2 GB)").arg(bytes).arg(
-                    round(float(bytes)/1024/1024/1024,3)))
+                self.showMessage(self.tr("Quota Information"), self.tr("%L1 bytes\n(%L2 GB)").arg(lastReport).arg(
+                    byte2gb(lastReport)))
 
 class ConfigWindow(QDialog, configwindow.Ui_Dialog):
     def __init__(self, trayIcon):
