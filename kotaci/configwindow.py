@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/configwindow.ui'
 #
-# Created: Sun Nov 11 13:00:54 2007
+# Created: Sun Nov 18 10:00:32 2007
 #      by: PyQt4 UI code generator 4.3.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -122,6 +122,7 @@ class Ui_Dialog(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QObject.connect(self.buttonBox,QtCore.SIGNAL("accepted()"),Dialog.accept)
         QtCore.QObject.connect(self.buttonBox,QtCore.SIGNAL("rejected()"),Dialog.reject)
+        QtCore.QObject.connect(self.savePassword,QtCore.SIGNAL("toggled(bool)"),self.password.setEnabled)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):

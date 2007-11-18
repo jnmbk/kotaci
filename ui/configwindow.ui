@@ -229,5 +229,21 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>savePassword</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>password</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>111</x>
+     <y>116</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>149</x>
+     <y>86</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
 </ui>

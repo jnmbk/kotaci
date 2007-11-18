@@ -39,10 +39,12 @@ class QuotaGrabber(QObject):
         open("/tmp/captcha.jpg",'w').write(content)
         self.emit(SIGNAL("captchaWritten"), "/tmp/captcha.jpg")
 
-    def getResults(self, captcha):
+    def getResults(self, captcha, password=None, username=None):
         settings = QSettings()
-        username = settings.value("username").toString()
-        password = settings.value("password").toString()
+        if username is None:
+            username = settings.value("username").toString()
+        if password is None:
+            password = settings.value("password").toString()
 
         # accept agreenment
         url= "http://adslkota.ttnet.net.tr/adslkota/loginSelf.do?"\
@@ -134,14 +136,19 @@ class TrayIcon(QSystemTrayIcon):
             if self.captchaWindow.lineEdit.text() == "":
                 self.captchaWindow.show()
             else:
-                thread.start_new_thread(self.grabber.getResults, (self.captchaWindow.lineEdit.text(),))
+                settings = QSettings()
+                if settings.value("savePassword").toInt()[0] != Qt.Checked:
+                    password = QInputDialog.getText(None, self.tr("Enter Password"), self.tr("Enter your TTnet password:"), QLineEdit.Password)[0]
+                    thread.start_new_thread(self.grabber.getResults, (self.captchaWindow.lineEdit.text(),password))
+                else:
+                    thread.start_new_thread(self.grabber.getResults, (self.captchaWindow.lineEdit.text(),))
         else:
             if results == "syserror":
-                self.showMessage(self.tr("Error"), self.tr("System Error"), self.critical)
+                self.showMessage(self.tr("Error"), self.tr("System Error"), self.Critical)
             if results == "loginerror":
                 self.showMessage(self.tr("Error"),
                     self.tr("Login error. Be sure you wrote it correctly "\
-                    "and have specified a username in configuration."), self.critical)
+                    "and have specified a username in configuration."), self.Critical)
             else:
                 settings = QSettings()
                 lastReport = results.split("\n")[-1]
@@ -150,7 +157,7 @@ class TrayIcon(QSystemTrayIcon):
                 settings.setValue("lastReport/date", QVariant(QDateTime.currentDateTime()))
                 self.refreshQuota()
                 self.showMessage(self.tr("Quota Information"), self.tr("%L1 bytes\n(%L2 GB)").arg(lastReport).arg(
-                    byte2gb(lastReport)))
+                    byte2gb(float(lastReport))))
 
 class ConfigWindow(QDialog, configwindow.Ui_Dialog):
     def __init__(self, trayIcon):
@@ -171,16 +178,22 @@ class ConfigWindow(QDialog, configwindow.Ui_Dialog):
         settings = QSettings()
         settings.setValue("username", QVariant(self.username.text()))
         settings.setValue("password", QVariant(self.password.text()))
+        settings.setValue("savePassword", QVariant(self.savePassword.checkState()))
         settings.setValue("trayIcon/textColor", QVariant(self.textColor.currentText()))
         settings.setValue("trayIcon/backgroundColor", QVariant(self.backgroundColor.currentText()))
         self.trayIcon.refreshQuota()
+        if self.savePassword.checkState() == Qt.Unchecked:
+            settings.setValue("password", QVariant(""))
 
     def loadSettings(self):
         settings = QSettings()
         self.username.setText(settings.value("username").toString())
         self.password.setText(settings.value("password").toString())
+        self.savePassword.setCheckState(Qt.CheckState(settings.value("savePassword", QVariant(Qt.Checked)).toInt()[0]))
         self.textColor.setCurrentIndex(self.textColor.findText(settings.value("trayIcon/textColor", QVariant("white")).toString()))
         self.backgroundColor.setCurrentIndex(self.textColor.findText(settings.value("trayIcon/backgroundColor", QVariant("red")).toString()))
+        if self.savePassword.checkState() == Qt.Unchecked:
+            self.password.setEnabled(False)
 
 def about():
     import __init__
