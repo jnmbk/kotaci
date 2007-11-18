@@ -112,10 +112,17 @@ class StatsWindow(QDialog, statswindow.Ui_StatsWindow):
             upload = settings.value("upload").toDouble()[0]
             item.setText(2, QString("%L2 GB").arg(byte2gb(upload)))
         settings.endArray()
+        item = QTreeWidgetItem(self.stats)
+        item.setText(0, QDate.currentDate().toString("MMMM yyyy"))
+        download = settings.value("lastReport/bytes").toDouble()[0]
+        item.setText(1, QString("%L2 GB").arg(byte2gb(download)))
+        upload = settings.value("lastReport/upload").toDouble()[0]
+        item.setText(2, QString("%L2 GB").arg(byte2gb(upload)))
 
     def clearStats(self):
         settings = QSettings()
         settings.remove("stats")
+        self.updateStats()
 
 class TrayIcon(QSystemTrayIcon):
     def __init__(self):
@@ -189,7 +196,6 @@ class TrayIcon(QSystemTrayIcon):
                 values = []
                 values.append(getValues(results.split()[:8]))
                 values.append(getValues(results.split()[8:16]))
-                values.append(getValues(results.split()[16:]))
                 settings = QSettings()
                 # clean
                 statCount = settings.beginReadArray("stats")
@@ -216,6 +222,7 @@ class TrayIcon(QSystemTrayIcon):
                 lastReport = results.split("\n")[-1]
                 lastReport = int(lastReport[:lastReport.index('(')-1].replace('.', ''))
                 settings.setValue("lastReport/bytes", QVariant(lastReport))
+                settings.setValue("lastReport/upload", QVariant(getValues(results.split()[16:])[1]))
                 settings.setValue("lastReport/date", QVariant(QDateTime.currentDateTime()))
                 self.refreshQuota()
                 self.showMessage(self.tr("Quota Information"), self.tr("%L1 bytes\n(%L2 GB)").arg(lastReport).arg(
