@@ -18,10 +18,18 @@ import commands, httplib2, os, time, signal, sys, thread
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-import configwindow, captchawindow, kotaci_rc
+import configwindow, captchawindow, statswindow, kotaci_rc
 
 def byte2gb(bytes, rounding=3):
     return round(bytes/1024/1024/1024,rounding)
+
+def getValues(results):
+    months = [u'Ocak', u'\u015eubat', u'Mart', u'Nisan', u'May\u0131s', u'Haziran',
+            u'Temmuz', u'A\u011fustos', u'Eyl\xfcl', u'Ekim', u'Kas\u0131m', u'Aral\u0131k']
+    date = QDate(int(results[0]), months.index(results[1])+1, 1)
+    upload = int(results[2].replace('.', ''))
+    download = int(results[5].replace('.', ''))
+    return (date, upload, download)
 
 class QuotaGrabber(QObject):
     def __init__(self):
@@ -85,12 +93,37 @@ class CaptchaWindow(QDialog, captchawindow.Ui_CaptchaDialog):
         self.captcha.setPixmap(QPixmap(fileName))
 
 
+class StatsWindow(QDialog, statswindow.Ui_StatsWindow):
+    def __init__(self):
+        QDialog.__init__(self)
+        self.setupUi(self)
+        QObject.connect(self.clearButton, SIGNAL("clicked()"), self.clearStats)
+        self.updateStats()
+
+    def updateStats(self):
+        self.stats.clear()
+        settings = QSettings()
+        for i in range(settings.beginReadArray("stats")):
+            settings.setArrayIndex(i)
+            item = QTreeWidgetItem(self.stats)
+            item.setText(0, settings.value("date").toDate().toString("MMMM yyyy"))
+            download = settings.value("download").toDouble()[0]
+            item.setText(1, QString("%L2 GB").arg(byte2gb(download)))
+            upload = settings.value("upload").toDouble()[0]
+            item.setText(2, QString("%L2 GB").arg(byte2gb(upload)))
+        settings.endArray()
+
+    def clearStats(self):
+        settings = QSettings()
+        settings.remove("stats")
+
 class TrayIcon(QSystemTrayIcon):
     def __init__(self):
         QSystemTrayIcon.__init__(self)
         self.refreshQuota()
         self.captchaWindow = CaptchaWindow()
         self.grabber = QuotaGrabber()
+        self.statsWindow = StatsWindow()
         QObject.connect(self.captchaWindow, SIGNAL("accepted()"), self.continueCheckQuota)
         QObject.connect(self.captchaWindow.changePicture, SIGNAL("clicked()"), self.checkQuota)
         QObject.connect(self.grabber, SIGNAL("captchaWritten"), self.captchaWindow.displayCaptcha)
@@ -100,6 +133,9 @@ class TrayIcon(QSystemTrayIcon):
     def on_activated(self, activationReason):
         if activationReason == self.DoubleClick:
             self.checkQuota()
+
+    def showStats(self):
+        self.statsWindow.show()
 
     def refreshQuota(self):
         settings = QSettings()
@@ -150,7 +186,33 @@ class TrayIcon(QSystemTrayIcon):
                     self.tr("Login error. Be sure you wrote it correctly "\
                     "and have specified a username in configuration."), self.Critical)
             else:
+                values = []
+                values.append(getValues(results.split()[:8]))
+                values.append(getValues(results.split()[8:16]))
+                values.append(getValues(results.split()[16:]))
                 settings = QSettings()
+                # clean
+                statCount = settings.beginReadArray("stats")
+                j = 0
+                while j < len(values):
+                    for i in range(statCount):
+                        settings.setArrayIndex(i)
+                        if settings.value("date").toDate().__eq__(values[j][0]):
+                            del(values[j])
+                            j -= 1
+                            break
+                    j += 1
+                settings.endArray()
+
+                # write
+                settings.beginWriteArray("stats")
+                for i in range(len(values)):
+                    settings.setArrayIndex(i+statCount)
+                    settings.setValue("date", QVariant(values[i][0]))
+                    settings.setValue("upload", QVariant(values[i][1]))
+                    settings.setValue("download", QVariant(values[i][2]))
+                settings.endArray()
+
                 lastReport = results.split("\n")[-1]
                 lastReport = int(lastReport[:lastReport.index('(')-1].replace('.', ''))
                 settings.setValue("lastReport/bytes", QVariant(lastReport))
@@ -158,6 +220,7 @@ class TrayIcon(QSystemTrayIcon):
                 self.refreshQuota()
                 self.showMessage(self.tr("Quota Information"), self.tr("%L1 bytes\n(%L2 GB)").arg(lastReport).arg(
                     byte2gb(float(lastReport))))
+                self.statsWindow.updateStats()
 
 class ConfigWindow(QDialog, configwindow.Ui_Dialog):
     def __init__(self, trayIcon):
@@ -183,7 +246,7 @@ class ConfigWindow(QDialog, configwindow.Ui_Dialog):
         settings.setValue("trayIcon/backgroundColor", QVariant(self.backgroundColor.currentText()))
         self.trayIcon.refreshQuota()
         if self.savePassword.checkState() == Qt.Unchecked:
-            settings.setValue("password", QVariant(""))
+            settings.remove("password")
 
     def loadSettings(self):
         settings = QSettings()
@@ -219,7 +282,6 @@ def main():
 
     trayIcon = TrayIcon()
     configWindow = ConfigWindow(trayIcon)
-    captchaWindow = CaptchaWindow()
 
     menu = QMenu()
     actionAbout = QAction(QIcon(":icons/help1.png"),
@@ -228,17 +290,22 @@ def main():
         QApplication.translate("TrayIcon", "Check now...", None, QApplication.UnicodeUTF8), menu)
     actionConfigure = QAction(QIcon(":icons/configure.png"),
         QApplication.translate("TrayIcon", "Configure...", None, QApplication.UnicodeUTF8), menu)
+    actionStatistics = QAction(QIcon(":icons/today.png"),
+        QApplication.translate("TrayIcon", "Statistics...", None, QApplication.UnicodeUTF8), menu)
     actionQuit = QAction(QIcon(":icons/exit.png"),
         QApplication.translate("TrayIcon", "Exit", None, QApplication.UnicodeUTF8), menu)
 
     menu.addAction(actionCheckQuota)
     menu.addAction(actionConfigure)
+    menu.addAction(actionStatistics)
     menu.addAction(actionAbout)
+    menu.addSeparator()
     menu.addAction(actionQuit)
 
     QObject.connect(actionQuit, SIGNAL("activated()"), app.quit)
     QObject.connect(actionConfigure, SIGNAL("activated()"), configWindow.show)
     QObject.connect(actionCheckQuota, SIGNAL("activated()"), trayIcon.checkQuota)
+    QObject.connect(actionStatistics, SIGNAL("activated()"), trayIcon.showStats)
     QObject.connect(actionAbout, SIGNAL("activated()"), about)
 
     trayIcon.setContextMenu(menu)

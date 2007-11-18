@@ -56,7 +56,7 @@ class myClean(clean):
 class myBuild(build):
     def run(self):
         build.run(self)
-        for ui in (("ui/", "configwindow"), ("ui/", "captchawindow")):
+        for ui in (("ui/", "configwindow"), ("ui/", "captchawindow"), ("ui/", "statswindow")):
             compileui(ui[0], ui[1])
         if os.system("lrelease-qt4 data/kotaci_tr_TR.ts -qm data/kotaci_tr_TR.qm") == 0:
             print "Compiled data/kotaci_tr_TR.ts -> data/kotaci_tr_TR.qm"
