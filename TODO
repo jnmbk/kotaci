@@ -1,2 +1,1 @@
 Use QHttp instead of httplib2
-Don't save captcha, it can be used from memory

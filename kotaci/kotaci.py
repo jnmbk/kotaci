@@ -44,8 +44,7 @@ class QuotaGrabber(QObject):
             }
         response, content = self.http.request(url, headers=request)
         self.cookie = {'Cookie': response['set-cookie']}
-        open("/tmp/captcha.jpg",'w').write(content)
-        self.emit(SIGNAL("captchaWritten"), "/tmp/captcha.jpg")
+        self.emit(SIGNAL("captchaWritten"), QByteArray(content))
 
     def getResults(self, captcha, password=None, username=None):
         settings = QSettings()
@@ -88,9 +87,11 @@ class CaptchaWindow(QDialog, captchawindow.Ui_CaptchaDialog):
         QDialog.__init__(self)
         self.setupUi(self)
 
-    def displayCaptcha(self, fileName):
+    def displayCaptcha(self, byteArray):
         self.captcha.clear()
-        self.captcha.setPixmap(QPixmap(fileName))
+        pixmap = QPixmap()
+        pixmap.loadFromData(byteArray)
+        self.captcha.setPixmap(pixmap)
 
 
 class StatsWindow(QDialog, statswindow.Ui_StatsWindow):
