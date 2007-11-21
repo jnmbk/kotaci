@@ -53,7 +53,7 @@ class QuotaGrabber(QObject):
         if password is None:
             password = settings.value("password").toString()
 
-        # accept agreenment
+        # accept agreement
         url= "http://adslkota.ttnet.net.tr/adslkota/loginSelf.do?"\
             "dispatch=login&userName=%s&password=%s&captchaResponse=%s"\
             % (username, password, captcha)
@@ -139,10 +139,12 @@ class TrayIcon(QSystemTrayIcon):
         QObject.connect(self, SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self.on_activated)
 
     def on_activated(self, activationReason):
+        # check quota on double click
         if activationReason == self.DoubleClick:
             self.checkQuota()
 
     def refreshQuota(self):
+        # reads quota information from settings, and changes tray icon accordingly
         settings = QSettings()
         if settings.contains("lastReport/bytes"):
             quota = self.tr("%L1\nGB").arg(byte2gb(settings.value("lastReport/bytes").toDouble()[0], 2))
@@ -173,6 +175,7 @@ class TrayIcon(QSystemTrayIcon):
         thread.start_new_thread(self.grabber.getCatpcha, ())
 
     def continueCheckQuota(self, results = None):
+        #TODO: That's not cool, fix this mess some time
         if results == None:
             if self.captchaWindow.lineEdit.text() == "":
                 self.captchaWindow.show()
@@ -234,6 +237,7 @@ class ConfigWindow(QDialog, configwindow.Ui_Dialog):
         self.trayIcon = trayIcon
         QObject.connect(self, SIGNAL("accepted()"), self.saveSettings)
         QObject.connect(self, SIGNAL("rejected()"), self.loadSettings)
+        # for the color selector
         for color in QColor.colorNames():
             pixmap = QPixmap(16, 16)
             pixmap.fill(QColor(color))
