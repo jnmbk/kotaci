@@ -21,7 +21,7 @@ from PyQt4.QtGui import *
 import configwindow, captchawindow, statswindow, kotaci_rc
 
 def byte2gb(bytes, rounding=3):
-    return round(bytes/1024/1024/1024,rounding)
+    return round(bytes/1073741824,rounding)
 
 def getValues(results):
     months = [u'Ocak', u'\u015eubat', u'Mart', u'Nisan', u'May\u0131s', u'Haziran',
@@ -29,7 +29,7 @@ def getValues(results):
     date = QDate(int(results[0]), months.index(results[1])+1, 1)
     upload = int(results[2].replace('.', ''))
     download = int(results[5].replace('.', ''))
-    return (date, upload, download)
+    return (date, download, upload)
 
 class QuotaGrabber(QObject):
     def __init__(self):
@@ -104,15 +104,14 @@ class StatsWindow(QDialog, statswindow.Ui_StatsWindow):
     def updateStats(self):
         self.stats.clear()
         settings = QSettings()
-        for i in range(settings.beginReadArray("stats")):
-            settings.setArrayIndex(i)
+        settings.beginGroup("Stats")
+        for key in [i for i in settings.childKeys() if QDate.fromString(i, "yyyyMM").isValid()]:
+            list = settings.value(key).toList()
             item = QTreeWidgetItem(self.stats)
-            item.setText(0, settings.value("date").toDate().toString("MMMM yyyy"))
-            download = settings.value("download").toDouble()[0]
-            item.setText(1, QString("%L2 GB").arg(byte2gb(download)))
-            upload = settings.value("upload").toDouble()[0]
-            item.setText(2, QString("%L2 GB").arg(byte2gb(upload)))
-        settings.endArray()
+            item.setText(0, QDate.fromString(key, "yyyyMM").toString("MMMM yyyy"))
+            item.setText(1, QString("%L2 GB").arg(byte2gb(list[0].toDouble()[0])))
+            item.setText(2, QString("%L2 GB").arg(byte2gb(list[1].toDouble()[0])))
+        settings.endGroup()
         item = QTreeWidgetItem(self.stats)
         item.setText(0, QDate.currentDate().toString("MMMM yyyy"))
         download = settings.value("lastReport/bytes").toDouble()[0]
@@ -122,7 +121,7 @@ class StatsWindow(QDialog, statswindow.Ui_StatsWindow):
 
     def clearStats(self):
         settings = QSettings()
-        settings.remove("stats")
+        settings.remove("Stats")
         self.updateStats()
 
 class TrayIcon(QSystemTrayIcon):
@@ -194,36 +193,20 @@ class TrayIcon(QSystemTrayIcon):
                     self.tr("Login error. Be sure you wrote it correctly "\
                     "and have specified a username in configuration."), self.Critical)
             else:
+                # write previous two months to stats
                 values = []
                 values.append(getValues(results.split()[:8]))
                 values.append(getValues(results.split()[8:16]))
                 settings = QSettings()
-                # clean
-                statCount = settings.beginReadArray("stats")
-                j = 0
-                while j < len(values):
-                    for i in range(statCount):
-                        settings.setArrayIndex(i)
-                        if settings.value("date").toDate().__eq__(values[j][0]):
-                            del(values[j])
-                            j -= 1
-                            break
-                    j += 1
-                settings.endArray()
-
-                # write
-                settings.beginWriteArray("stats")
-                for i in range(len(values)):
-                    settings.setArrayIndex(i+statCount)
-                    settings.setValue("date", QVariant(values[i][0]))
-                    settings.setValue("upload", QVariant(values[i][1]))
-                    settings.setValue("download", QVariant(values[i][2]))
-                settings.endArray()
+                settings.beginGroup("Stats")
+                for value in values:
+                    settings.setValue(value[0].toString("yyyyMM"), QVariant([QVariant(value[1]), QVariant(value[2])]))
+                settings.endGroup()
 
                 lastReport = results.split("\n")[-1]
                 lastReport = int(lastReport[:lastReport.index('(')-1].replace('.', ''))
                 settings.setValue("lastReport/bytes", QVariant(lastReport))
-                settings.setValue("lastReport/upload", QVariant(getValues(results.split()[16:])[1]))
+                settings.setValue("lastReport/upload", QVariant(getValues(results.split()[16:])[2]))
                 settings.setValue("lastReport/date", QVariant(QDateTime.currentDateTime()))
                 self.refreshQuota()
                 self.showMessage(self.tr("Quota Information"), self.tr("%L1 bytes\n(%L2 GB)").arg(lastReport).arg(
