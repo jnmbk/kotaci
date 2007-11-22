@@ -252,7 +252,9 @@ def about():
         QtGui.QApplication.translate("TrayIcon",
         "<b>Kotaci %1</b> - ttnet ADSL quota displayer<br />Copyright (c) 2007, Ugur Cetin <ugur.jnmbk at gmail.com><br />"\
         "This software is licensed under the terms of GPL-2.<br /><a href=\"http://kotaci.googlecode.com\">"\
-        "http://kotaci.googlecode.com</a><br /><br />Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.", None,
+        "http://kotaci.googlecode.com</a><br />"\
+        "<br />This program uses Tulliana 2.0 icon theme.<br />"\
+        "Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.", None,
         QtGui.QApplication.UnicodeUTF8).arg(__init__.__version__))
 
 def main():

@@ -178,17 +178,17 @@
         <translation type="obsolete">Hakkında</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="278"/>
+        <location filename="kotaci.py" line="280"/>
         <source>Check now...</source>
         <translation>Şimdi kontrol et...</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="280"/>
+        <location filename="kotaci.py" line="282"/>
         <source>Configure...</source>
         <translation>Yapılandır...</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="284"/>
+        <location filename="kotaci.py" line="286"/>
         <source>Exit</source>
         <translation>Çık</translation>
     </message>
@@ -228,7 +228,7 @@ Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.<
     <message>
         <location filename="kotaci.py" line="256"/>
         <source>&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007, Ugur Cetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.</source>
-        <translation>&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Copyright (c) 2007, Uğur Çetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.</translation>
+        <translation type="obsolete">&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Copyright (c) 2007, Uğur Çetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.</translation>
     </message>
     <message>
         <location filename="kotaci.py" line="145"/>
@@ -262,14 +262,19 @@ Son Güncelleme: %2</translation>
         <translation>TTnet parolanızı girin:</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="282"/>
+        <location filename="kotaci.py" line="284"/>
         <source>Statistics...</source>
         <translation>İstatistikler...</translation>
     </message>
     <message>
-        <location filename="kotaci.py" line="276"/>
+        <location filename="kotaci.py" line="278"/>
         <source>About...</source>
         <translation>Hakkında...</translation>
+    </message>
+    <message>
+        <location filename="kotaci.py" line="258"/>
+        <source>&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007, Ugur Cetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;This program uses Tulliana 2.0 icon theme.&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.</source>
+        <translation>&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Copyright (c) 2007, Uğur Çetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Bu programda Tulliana 2.0 simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.</translation>
     </message>
 </context>
 </TS>
