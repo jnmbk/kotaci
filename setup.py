@@ -20,7 +20,7 @@ import kotaci
 try:
     import PyQt4
 except:
-    print "\033[31mError: You have to install PyQt4 on your system\033[0m"
+    print "\033[31mWarning: You have to install PyQt4 on your system\033[0m"
 
 try:
     import httplib2
