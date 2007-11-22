@@ -113,7 +113,7 @@ class StatsWindow(QtGui.QDialog, statswindow.Ui_StatsWindow):
             item.setText(2, QtCore.QString("%L2 GB").arg(byte2gb(list[1].toDouble()[0])))
         settings.endGroup()
         item = QtGui.QTreeWidgetItem(self.stats)
-        item.setText(0, QtCore.QDate.currentDate().toString("MMMM yyyy"))
+        item.setText(0, settings.value("lastReport/date").toDate().toString("MMMM yyyy"))
         download = settings.value("lastReport/download").toDouble()[0]
         item.setText(1, QtCore.QString("%L2 GB").arg(byte2gb(download)))
         upload = settings.value("lastReport/upload").toDouble()[0]
