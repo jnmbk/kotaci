@@ -114,7 +114,7 @@ class StatsWindow(QtGui.QDialog, statswindow.Ui_StatsWindow):
         settings.endGroup()
         item = QtGui.QTreeWidgetItem(self.stats)
         item.setText(0, QtCore.QDate.currentDate().toString("MMMM yyyy"))
-        download = settings.value("lastReport/bytes").toDouble()[0]
+        download = settings.value("lastReport/download").toDouble()[0]
         item.setText(1, QtCore.QString("%L2 GB").arg(byte2gb(download)))
         upload = settings.value("lastReport/upload").toDouble()[0]
         item.setText(2, QtCore.QString("%L2 GB").arg(byte2gb(upload)))
@@ -145,8 +145,8 @@ class TrayIcon(QtGui.QSystemTrayIcon):
     def refreshQuota(self):
         # reads quota information from settings, and changes tray icon accordingly
         settings = QtCore.QSettings()
-        if settings.contains("lastReport/bytes"):
-            quota = self.tr("%L1\nGB").arg(byte2gb(settings.value("lastReport/bytes").toDouble()[0], 2))
+        if settings.contains("lastReport/download"):
+            quota = self.tr("%L1\nGB").arg(byte2gb(settings.value("lastReport/download").toDouble()[0], 2))
         else:
             quota = self.tr("?\nGB")
         pixmap = QtGui.QPixmap(32, 32)
@@ -158,10 +158,10 @@ class TrayIcon(QtGui.QSystemTrayIcon):
         painter.end()
         icon = QtGui.QIcon(pixmap)
         self.setIcon(icon)
-        if settings.contains("lastReport/bytes"):
+        if settings.contains("lastReport/download"):
             self.setToolTip(
                 self.tr("Used Quota: %L1 GB\nLatest Update: %2").arg(
-                byte2gb(settings.value("lastReport/bytes").toDouble()[0])).arg(
+                byte2gb(settings.value("lastReport/download").toDouble()[0])).arg(
                 settings.value("lastReport/date").toDateTime().toString("d MMMM dddd hh.mm")))
         else:
             self.setToolTip(self.tr("Double click to check quota."))
@@ -205,7 +205,7 @@ class TrayIcon(QtGui.QSystemTrayIcon):
 
                 lastReport = results.split("\n")[-1]
                 lastReport = int(lastReport[:lastReport.index('(')-1].replace('.', ''))
-                settings.setValue("lastReport/bytes", QtCore.QVariant(lastReport))
+                settings.setValue("lastReport/download", QtCore.QVariant(lastReport))
                 settings.setValue("lastReport/upload", QtCore.QVariant(getValues(results.split()[16:])[2]))
                 settings.setValue("lastReport/date", QtCore.QVariant(QtCore.QDateTime.currentDateTime()))
                 self.refreshQuota()
@@ -277,7 +277,7 @@ def main():
 
     menu = QtGui.QMenu()
     actionAbout = QtGui.QAction(QtGui.QIcon(":icons/help1.png"),
-        QtGui.QApplication.translate("TrayIcon", "About", None, QtGui.QApplication.UnicodeUTF8), menu)
+        QtGui.QApplication.translate("TrayIcon", "About...", None, QtGui.QApplication.UnicodeUTF8), menu)
     actionCheckQuota = QtGui.QAction(QtGui.QIcon(":icons/ok.png"),
         QtGui.QApplication.translate("TrayIcon", "Check now...", None, QtGui.QApplication.UnicodeUTF8), menu)
     actionConfigure = QtGui.QAction(QtGui.QIcon(":icons/configure.png"),
