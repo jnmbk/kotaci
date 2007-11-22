@@ -180,7 +180,7 @@ class TrayIcon(QtGui.QSystemTrayIcon):
                 password = settings.value("password").toString()
                 if settings.value("savePassword").toInt()[0] != QtCore.Qt.Checked:
                     password = QtGui.QInputDialog.getText(None, self.tr("Enter Password"), self.tr("Enter your TTnet password:"), QtGui.QLineEdit.Password)[0]
-                thread.start_new_thread(self.grabber.getResults, (self.captchaWindow.lineEdit.text(),username, password))
+                thread.start_new_thread(self.grabber.getResults, (self.captchaWindow.lineEdit.text(),username,password))
         else:
             if results == "syserror":
                 self.showMessage(self.tr("Error"), self.tr("System Error"), self.Critical)
