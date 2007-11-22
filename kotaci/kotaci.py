@@ -46,12 +46,8 @@ class QuotaGrabber(QtCore.QObject):
         self.cookie = {'Cookie': response['set-cookie']}
         self.emit(QtCore.SIGNAL("captchaWritten"), QtCore.QByteArray(content))
 
-    def getResults(self, captcha, password=None, username=None):
+    def getResults(self, captcha, username, password):
         settings = QtCore.QSettings()
-        if username is None:
-            username = settings.value("username").toString()
-        if password is None:
-            password = settings.value("password").toString()
 
         # accept agreement
         url= "http://adslkota.ttnet.net.tr/adslkota/loginSelf.do?"\
@@ -180,11 +176,11 @@ class TrayIcon(QtGui.QSystemTrayIcon):
                 self.captchaWindow.show()
             else:
                 settings = QtCore.QSettings()
+                username = settings.value("username").toString()
+                password = settings.value("password").toString()
                 if settings.value("savePassword").toInt()[0] != QtCore.Qt.Checked:
                     password = QtGui.QInputDialog.getText(None, self.tr("Enter Password"), self.tr("Enter your TTnet password:"), QtGui.QLineEdit.Password)[0]
-                    thread.start_new_thread(self.grabber.getResults, (self.captchaWindow.lineEdit.text(),password))
-                else:
-                    thread.start_new_thread(self.grabber.getResults, (self.captchaWindow.lineEdit.text(),))
+                thread.start_new_thread(self.grabber.getResults, (self.captchaWindow.lineEdit.text(),username, password))
         else:
             if results == "syserror":
                 self.showMessage(self.tr("Error"), self.tr("System Error"), self.Critical)
