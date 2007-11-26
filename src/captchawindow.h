@@ -18,7 +18,7 @@
 
 #include "ui_captchawindow.h"
 
-class CaptchaWindow : public QDialog, private Ui::CaptchaWindow
+class CaptchaWindow : public QDialog, public Ui::CaptchaWindow
 {
     Q_OBJECT
 
