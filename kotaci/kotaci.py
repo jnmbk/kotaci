@@ -42,7 +42,7 @@ class QuotaGrabber(QtCore.QObject):
         self.header.setValue("User-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)")
 
     def getCatpcha(self):
-        url = 'http://adslkota.ttnet.net.tr/adslkota/jcaptcha'
+        url = '/adslkota/jcaptcha'
         QtCore.QObject.connect(self.http, QtCore.SIGNAL("done(bool)"), self.gotCaptcha)
         self.header.setRequest("GET", url)
         self.header.removeValue("Cookie")
@@ -56,7 +56,7 @@ class QuotaGrabber(QtCore.QObject):
         self.emit(QtCore.SIGNAL("gotCaptcha"), self.http.readAll())
 
     def login(self, captcha, username, password):
-        url= "http://adslkota.ttnet.net.tr/adslkota/loginSelf.do?"\
+        url= "/adslkota/loginSelf.do?"\
             "dispatch=login&userName=%s&password=%s&captchaResponse=%s"\
             % (username, password, captcha)
         self.header.setRequest("GET", url)
@@ -67,7 +67,7 @@ class QuotaGrabber(QtCore.QObject):
     def acceptAgreenment(self, error):
         if error:
             print self.http.errorString()
-        url = "http://adslkota.ttnet.net.tr/adslkota/confirmAgreement.do?dispatch=agree"
+        url = "/adslkota/confirmAgreement.do?dispatch=agree"
         self.header.setRequest("GET", url)
         QtCore.QObject.disconnect(self.http, QtCore.SIGNAL("done(bool)"), self.acceptAgreenment)
         QtCore.QObject.connect(self.http, QtCore.SIGNAL("done(bool)"), self.getResult)
@@ -76,7 +76,7 @@ class QuotaGrabber(QtCore.QObject):
     def getResult(self, error):
         if error:
             print self.http.errorString()
-        url = "http://adslkota.ttnet.net.tr/adslkota/viewTransfer.do?dispatch=entry"
+        url = "/adslkota/viewTransfer.do?dispatch=entry"
         self.header.setRequest("GET", url)
         QtCore.QObject.disconnect(self.http, QtCore.SIGNAL("done(bool)"), self.getResult)
         QtCore.QObject.connect(self.http, QtCore.SIGNAL("done(bool)"), self.gotResult)
