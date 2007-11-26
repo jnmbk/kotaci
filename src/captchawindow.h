@@ -26,7 +26,7 @@ class CaptchaWindow : public QDialog, private Ui::CaptchaWindow
         CaptchaWindow(QWidget *parent = 0);
 
     public slots:
-        void displayCaptcha(QByteArray captcha);
+        void displayCaptcha(QByteArray captchaContent);
 };
 
 #endif

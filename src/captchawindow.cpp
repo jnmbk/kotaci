@@ -18,10 +18,10 @@ CaptchaWindow::CaptchaWindow(QWidget *parent)
     setupUi(this);
 }
 
-void displayCaptcha(QByteArray captcha)
+void CaptchaWindow::displayCaptcha(QByteArray captchaContent)
 {
-    this->captcha.clear();
+    captcha->clear();
     QPixmap pixmap;
-    pixmap.loadFromData(captcha);
-    this->captcha.setPixmap(pixmap);
+    pixmap.loadFromData(captchaContent);
+    captcha->setPixmap(pixmap);
 }
