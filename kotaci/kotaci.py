@@ -13,7 +13,7 @@
 # Please read the COPYING file.
 #
 
-import signal, sys, thread
+import signal, sys
 
 from PyQt4 import QtCore
 from PyQt4 import QtGui
@@ -191,7 +191,7 @@ class TrayIcon(QtGui.QSystemTrayIcon):
         self.captchaWindow.captcha.clear()
         self.captchaWindow.lineEdit.clear()
         self.captchaWindow.captcha.setText(self.tr("Loading, plase wait..."))
-        thread.start_new_thread(self.grabber.getCatpcha, ())
+        self.grabber.getCatpcha()
 
     def continueCheckQuota(self, results = None):
         #TODO: That's not cool, fix this mess some time
@@ -204,7 +204,7 @@ class TrayIcon(QtGui.QSystemTrayIcon):
                 password = settings.value("password").toString()
                 if settings.value("savePassword").toInt()[0] != QtCore.Qt.Checked:
                     password = QtGui.QInputDialog.getText(None, self.tr("Enter Password"), self.tr("Enter your TTnet password:"), QtGui.QLineEdit.Password)[0]
-                thread.start_new_thread(self.grabber.login, (self.captchaWindow.lineEdit.text(),username,password))
+                self.grabber.login(self.captchaWindow.lineEdit.text(),username,password)
         else:
             if results == "syserror":
                 self.showMessage(self.tr("Error"), self.tr("System Error"), self.Critical)
