@@ -22,11 +22,6 @@ try:
 except:
     print "\033[31mWarning: You have to install PyQt4 on your system\033[0m"
 
-try:
-    import httplib2
-except:
-    print "\033[31mWarning: You have to install httplib2 module on your system\033[0m"
-
 def compileui(path, uiFile):
     compiled = os.system("pyuic4 %s%s.ui -o kotaci/%s.py" % (path, uiFile, uiFile))
     if compiled == 0:

@@ -13,10 +13,11 @@
 # Please read the COPYING file.
 #
 
-import commands, httplib2, os, time, signal, sys, thread
+import signal, sys, thread
 
 from PyQt4 import QtCore
 from PyQt4 import QtGui
+from PyQt4 import QtNetwork
 
 import configwindow, captchawindow, statswindow, kotaci_rc
 
@@ -34,35 +35,58 @@ def getValues(results):
 class QuotaGrabber(QtCore.QObject):
     def __init__(self):
         QtCore.QObject.__init__(self)
-        self.http = httplib2.Http()
+        self.http = QtNetwork.QHttp("adslkota.ttnet.net.tr")
+        self.header = QtNetwork.QHttpRequestHeader()
+        self.header.setValue("Content-type", "application/x-www-form-urlencoded")
+        self.header.setValue("Host", "adslkota.ttnet.net.tr")
+        self.header.setValue("User-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)")
 
     def getCatpcha(self):
         url = 'http://adslkota.ttnet.net.tr/adslkota/jcaptcha'
-        request = {
-            "Content-type": "application/x-www-form-urlencoded",
-            "User-agent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)"
-            }
-        response, content = self.http.request(url, headers=request)
-        self.cookie = {'Cookie': response['set-cookie']}
-        self.emit(QtCore.SIGNAL("captchaWritten"), QtCore.QByteArray(content))
+        QtCore.QObject.connect(self.http, QtCore.SIGNAL("done(bool)"), self.gotCaptcha)
+        self.header.setRequest("GET", url)
+        self.header.removeValue("Cookie")
+        self.http.request(self.header)
 
-    def getResults(self, captcha, username, password):
-        settings = QtCore.QSettings()
+    def gotCaptcha(self, error):
+        if error:
+            print self.http.errorString()
+        cookie = self.http.lastResponse().value("set-cookie")
+        self.header.setValue("Cookie", cookie)
+        self.emit(QtCore.SIGNAL("gotCaptcha"), self.http.readAll())
 
-        # accept agreement
+    def login(self, captcha, username, password):
         url= "http://adslkota.ttnet.net.tr/adslkota/loginSelf.do?"\
             "dispatch=login&userName=%s&password=%s&captchaResponse=%s"\
             % (username, password, captcha)
-        self.http.request(url, headers=self.cookie)
-        time.sleep(0.2)
-        url = "http://adslkota.ttnet.net.tr/adslkota/"\
-            "confirmAgreement.do?dispatch=agree"
-        self.http.request(url, headers=self.cookie)
-        time.sleep(0.2)
+        self.header.setRequest("GET", url)
+        QtCore.QObject.disconnect(self.http, QtCore.SIGNAL("done(bool)"), self.gotCaptcha)
+        QtCore.QObject.connect(self.http, QtCore.SIGNAL("done(bool)"), self.acceptAgreenment)
+        self.http.request(self.header)
 
-        # read result
+    def acceptAgreenment(self, error):
+        if error:
+            print self.http.errorString()
+        url = "http://adslkota.ttnet.net.tr/adslkota/confirmAgreement.do?dispatch=agree"
+        self.header.setRequest("GET", url)
+        QtCore.QObject.disconnect(self.http, QtCore.SIGNAL("done(bool)"), self.acceptAgreenment)
+        QtCore.QObject.connect(self.http, QtCore.SIGNAL("done(bool)"), self.getResult)
+        self.http.request(self.header)
+
+    def getResult(self, error):
+        if error:
+            print self.http.errorString()
         url = "http://adslkota.ttnet.net.tr/adslkota/viewTransfer.do?dispatch=entry"
-        response, content = self.http.request(url, headers=self.cookie)
+        self.header.setRequest("GET", url)
+        QtCore.QObject.disconnect(self.http, QtCore.SIGNAL("done(bool)"), self.getResult)
+        QtCore.QObject.connect(self.http, QtCore.SIGNAL("done(bool)"), self.gotResult)
+        self.http.request(self.header)
+
+    def gotResult(self, error):
+        QtCore.QObject.disconnect(self.http, QtCore.SIGNAL("done(bool)"), self.gotResult)
+        if error:
+            print self.http.errorString()
+        content = self.http.readAll()
         content = unicode(content, "windows-1254", errors="ignore")
         if u"Sistem Hatas" in content:
             content = "syserror"
@@ -129,7 +153,7 @@ class TrayIcon(QtGui.QSystemTrayIcon):
         self.statsWindow = StatsWindow()
         QtCore.QObject.connect(self.captchaWindow, QtCore.SIGNAL("accepted()"), self.continueCheckQuota)
         QtCore.QObject.connect(self.captchaWindow.changePicture, QtCore.SIGNAL("clicked()"), self.checkQuota)
-        QtCore.QObject.connect(self.grabber, QtCore.SIGNAL("captchaWritten"), self.captchaWindow.displayCaptcha)
+        QtCore.QObject.connect(self.grabber, QtCore.SIGNAL("gotCaptcha"), self.captchaWindow.displayCaptcha)
         QtCore.QObject.connect(self.grabber, QtCore.SIGNAL("gotResults"), self.continueCheckQuota)
         QtCore.QObject.connect(self, QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self.on_activated)
 
@@ -180,7 +204,7 @@ class TrayIcon(QtGui.QSystemTrayIcon):
                 password = settings.value("password").toString()
                 if settings.value("savePassword").toInt()[0] != QtCore.Qt.Checked:
                     password = QtGui.QInputDialog.getText(None, self.tr("Enter Password"), self.tr("Enter your TTnet password:"), QtGui.QLineEdit.Password)[0]
-                thread.start_new_thread(self.grabber.getResults, (self.captchaWindow.lineEdit.text(),username,password))
+                thread.start_new_thread(self.grabber.login, (self.captchaWindow.lineEdit.text(),username,password))
         else:
             if results == "syserror":
                 self.showMessage(self.tr("Error"), self.tr("System Error"), self.Critical)
