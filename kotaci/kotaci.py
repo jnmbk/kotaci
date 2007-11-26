@@ -43,6 +43,7 @@ class QuotaGrabber(QtCore.QObject):
 
     def getCatpcha(self):
         url = '/adslkota/jcaptcha'
+        QtCore.QObject.disconnect(self.http, QtCore.SIGNAL("done(bool)"), self.gotCaptcha)
         QtCore.QObject.connect(self.http, QtCore.SIGNAL("done(bool)"), self.gotCaptcha)
         self.header.setRequest("GET", url)
         self.header.removeValue("Cookie")
