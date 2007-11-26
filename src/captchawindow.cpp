@@ -15,5 +15,13 @@
 CaptchaWindow::CaptchaWindow(QWidget *parent)
     : QDialog(parent)
 {
+    setupUi(this);
+}
 
+void displayCaptcha(QByteArray captcha)
+{
+    this->captcha.clear();
+    QPixmap pixmap;
+    pixmap.loadFromData(captcha);
+    this->captcha.setPixmap(pixmap);
 }

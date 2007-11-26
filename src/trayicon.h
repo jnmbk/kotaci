@@ -16,6 +16,7 @@
 #include <QSystemTrayIcon>
 #include "captchawindow.h"
 #include "configwindow.h"
+#include "quota.h"
 #include "statswindow.h"
 
 class TrayIcon : public QSystemTrayIcon
@@ -26,6 +27,7 @@ class TrayIcon : public QSystemTrayIcon
         TrayIcon(QWidget *parent = 0);
         CaptchaWindow captchaWindow;
         ConfigWindow configWindow;
+        Quota quota;
         StatsWindow statsWindow;
 
     private slots:

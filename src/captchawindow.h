@@ -14,6 +14,7 @@
 #define CAPTCHAWONDOW_H
 
 #include <QDialog>
+#include <QByteArray>
 
 #include "ui_captchawindow.h"
 
@@ -23,6 +24,9 @@ class CaptchaWindow : public QDialog, private Ui::CaptchaWindow
 
     public:
         CaptchaWindow(QWidget *parent = 0);
+
+    public slots:
+        void displayCaptcha(QByteArray captcha);
 };
 
 #endif
