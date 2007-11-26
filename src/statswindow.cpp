@@ -10,4 +10,10 @@
  * Please read the COPYING file.
  */
 
+#include "statswindow.h"
 
+StatsWindow::StatsWindow(QWidget *parent)
+    : QDialog(parent)
+{
+
+}

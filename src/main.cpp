@@ -14,9 +14,7 @@
 #include <QLocale>
 #include <QTranslator>
 
-#include "captchawindow.h"
-#include "configwindow.h"
-#include "statswindow.h"
+#include "trayicon.h"
 
 int main(int argc, char *argv[])
 {
@@ -29,6 +27,9 @@ int main(int argc, char *argv[])
     QTranslator translator;
     translator.load(QString(":/kotaci_") + locale);
     app.installTranslator(&translator);
+
+    TrayIcon trayIcon;
+    trayIcon.show();
 
     return app.exec();
 }

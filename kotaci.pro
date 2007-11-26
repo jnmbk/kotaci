@@ -14,14 +14,16 @@ FORMS += \
 HEADERS += \
     src/captchawindow.h \
     src/configwindow.h \
-    src/statswindow.h
+    src/statswindow.h \
+    src/trayicon.h
 RESOURCES += \
     data/kotaci.qrc
 SOURCES += \
     src/captchawindow.cpp \
     src/configwindow.cpp \
     src/main.cpp \
-    src/statswindow.cpp
+    src/statswindow.cpp \
+    src/trayicon.cpp
 TRANSLATIONS += \
     data/qt4sozluk_tr_TR.ts
 

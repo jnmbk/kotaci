@@ -10,4 +10,10 @@
  * Please read the COPYING file.
  */
 
+#include "configwindow.h"
 
+ConfigWindow::ConfigWindow(QWidget *parent)
+    : QDialog(parent)
+{
+
+}

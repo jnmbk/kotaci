@@ -10,10 +10,30 @@
  * Please read the COPYING file.
  */
 
-#include "captchawindow.h"
+#include "trayicon.h"
 
-CaptchaWindow::CaptchaWindow(QWidget *parent)
-    : QDialog(parent)
+TrayIcon::TrayIcon(QWidget *parent)
+    : QSystemTrayIcon(parent)
+{
+    refreshQuota();
+}
+
+void TrayIcon::on_activated(QSystemTrayIcon::ActivationReason)
+{
+
+}
+
+void TrayIcon::refreshQuota()
+{
+
+}
+
+void TrayIcon::checkQuota()
+{
+
+}
+
+void TrayIcon::continueCheckQuota()
 {
 
 }
