@@ -2,9 +2,9 @@ TEMPLATE = app
 TARGET = kotaci
 VERSION = "0.2_rc1"
 DEFINES += \
-#    KOTACI_VERSION=\\\"$$VERSION\\\"
-    KOTACI_VERSION=\\\"$$VERSION\\\" \
-    QT_NO_DEBUG_OUTPUT
+    KOTACI_VERSION=\\\"$$VERSION\\\"
+#    KOTACI_VERSION=\\\"$$VERSION\\\" \
+#    QT_NO_DEBUG_OUTPUT
 
 # Input
 FORMS += \

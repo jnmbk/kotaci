@@ -15,6 +15,7 @@
 
 #include <QDialog>
 #include <QByteArray>
+#include <QPixmap>
 
 #include "ui_captchawindow.h"
 

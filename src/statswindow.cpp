@@ -15,5 +15,5 @@
 StatsWindow::StatsWindow(QWidget *parent)
     : QDialog(parent)
 {
-
+    setupUi(this);
 }

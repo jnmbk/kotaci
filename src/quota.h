@@ -39,7 +39,7 @@ class Quota : public QObject
 
     public slots:
         void getCaptcha();
-        void login(QString *captcha, QString *username, QString *password);
+        void login(QString captcha, QString username, QString password);
 };
 
 #endif

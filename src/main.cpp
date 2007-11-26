@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
 
     app.setOrganizationName(QString("kotaci"));
     app.setApplicationName(QString("kotaci"));
+    app.setQuitOnLastWindowClosed(false);
 
     QString locale = QLocale::system().name();
     QTranslator translator;

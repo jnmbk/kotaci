@@ -10,6 +10,7 @@
  * Please read the COPYING file.
  */
 
+#include <QPixmap>
 #include "captchawindow.h"
 
 CaptchaWindow::CaptchaWindow(QWidget *parent)

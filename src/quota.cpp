@@ -22,7 +22,7 @@ Quota::Quota(QObject *parent)
 
 void Quota::getCaptcha()
 {
-    requestHeader.setRequest("Get", "/adslkota/jcaptcha");
+    requestHeader.setRequest("GET", "/adslkota/jcaptcha");
     requestHeader.removeValue("Cookie");
     http.disconnect();
     http.connect(&http, SIGNAL(done(bool)), this, SLOT(gotCaptcha(bool)));
@@ -35,11 +35,11 @@ void Quota::gotCaptcha(bool error)
     emit gotCaptcha(http.readAll());
 }
 
-void Quota::login(QString *captcha, QString *username, QString *password)
+void Quota::login(QString captcha, QString username, QString password)
 {
     QString page;
     page = "/adslkota/loginSelf.do?dispatch=login&userName=%1&password=%2&captchaResponse=%3";
-    page = page.arg(*username, *password, *captcha);
+    page = page.arg(username, password, captcha);
     requestHeader.setRequest("GET", page);
     http.disconnect();
     http.connect(&http, SIGNAL(done(bool)), this, SLOT(acceptAgreenment(bool)));

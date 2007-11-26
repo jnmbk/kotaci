@@ -15,5 +15,5 @@
 ConfigWindow::ConfigWindow(QWidget *parent)
     : QDialog(parent)
 {
-
+    setupUi(this);
 }

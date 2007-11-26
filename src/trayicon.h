@@ -13,6 +13,8 @@
 #ifndef TRAYICON_H
 #define TRAYICON_H
 
+#include <QAction>
+#include <QMenu>
 #include <QString>
 #include <QSystemTrayIcon>
 #include "captchawindow.h"
@@ -30,12 +32,16 @@ class TrayIcon : public QSystemTrayIcon
         ConfigWindow configWindow;
         Quota quota;
         StatsWindow statsWindow;
+        QMenu menu;
+        QAction *actionCheckQuota, *actionAbout,
+                *actionConfigure, *actionStatistics, *actionExit;
 
     private slots:
         void on_activated(QSystemTrayIcon::ActivationReason);
         void checkQuota();
         void refreshQuota();
         void continueCheckQuota(QString content="");
+        void about();
 };
 
 #endif
