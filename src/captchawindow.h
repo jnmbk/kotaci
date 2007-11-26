@@ -13,4 +13,16 @@
 #ifndef CAPTCHAWONDOW_H
 #define CAPTCHAWONDOW_H
 
+#include <QDialog>
+
 #include "ui_captchawindow.h"
+
+class CaptchaWindow : public QDialog, private Ui::CaptchaWindow
+{
+    Q_OBJECT
+
+    public:
+        CaptchaWindow(QWidget *parent = 0);
+};
+
+#endif

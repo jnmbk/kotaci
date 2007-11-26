@@ -14,6 +14,10 @@
 #include <QLocale>
 #include <QTranslator>
 
+#include "captchawindow.h"
+#include "configwindow.h"
+#include "statswindow.h"
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);

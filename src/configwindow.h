@@ -13,4 +13,16 @@
 #ifndef CONFIGWONDOW_H
 #define CONFIGWONDOW_H
 
+#include <QDialog>
+
 #include "ui_configwindow.h"
+
+class ConfigWindow : public QDialog, private Ui::ConfigWindow
+{
+    Q_OBJECT
+
+    public:
+        ConfigWindow(QWidget *parent = 0);
+};
+
+#endif

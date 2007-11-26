@@ -13,4 +13,16 @@
 #ifndef STATSWONDOW_H
 #define STATSWONDOW_H
 
+#include <QDialog>
+
 #include "ui_statswindow.h"
+
+class StatsWindow : public QDialog, private Ui::StatsWindow
+{
+    Q_OBJECT
+
+    public:
+        StatsWindow(QWidget *parent = 0);
+};
+
+#endif
