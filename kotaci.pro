@@ -14,6 +14,7 @@ FORMS += \
 HEADERS += \
     src/captchawindow.h \
     src/configwindow.h \
+    src/quota.h \
     src/statswindow.h \
     src/trayicon.h
 RESOURCES += \
@@ -22,6 +23,7 @@ SOURCES += \
     src/captchawindow.cpp \
     src/configwindow.cpp \
     src/main.cpp \
+    src/quota.cpp \
     src/statswindow.cpp \
     src/trayicon.cpp
 TRANSLATIONS += \
