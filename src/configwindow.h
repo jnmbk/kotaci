@@ -15,14 +15,22 @@
 
 #include <QDialog>
 
+#include "trayicon.h"
 #include "ui_configwindow.h"
 
-class ConfigWindow : public QDialog, private Ui::ConfigWindow
+class TrayIcon;
+
+class ConfigWindow : public QDialog, public Ui::ConfigWindow
 {
     Q_OBJECT
 
     public:
-        ConfigWindow(QWidget *parent = 0);
+        ConfigWindow(QWidget *parent, TrayIcon *trayIcon);
+        TrayIcon *trayIcon;
+
+    private slots:
+        void loadSettings();
+        void saveSettings();
 };
 
 #endif

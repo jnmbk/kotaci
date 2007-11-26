@@ -53,8 +53,10 @@ TrayIcon::TrayIcon(QWidget *parent)
     connect(&quota, SIGNAL(gotResults(QString)), this, SLOT(continueCheckQuota(QString)));
     connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(on_activated(QSystemTrayIcon::ActivationReason)));
 
+    this->configWindow = new ConfigWindow(0, this);
+
     connect(actionCheckQuota, SIGNAL(activated()), this, SLOT(checkQuota()));
-    connect(actionConfigure, SIGNAL(activated()), &configWindow, SLOT(show()));
+    connect(actionConfigure, SIGNAL(activated()), configWindow, SLOT(show()));
     connect(actionStatistics, SIGNAL(activated()), &statsWindow, SLOT(show()));
     connect(actionAbout, SIGNAL(activated()), this, SLOT(about()));
     connect(actionExit, SIGNAL(activated()), qApp, SLOT(quit()));
@@ -74,9 +76,9 @@ void TrayIcon::refreshQuota()
     else
         quota = tr("?\nGB");
     QPixmap pixmap(32, 32);
-    pixmap.fill(QColor(settings.value("trayIcon/backgrounColor", "red").toString()));
+    pixmap.fill(QColor(settings.value("TrayIcon/backgroundColor", "red").toString()));
     QPainter painter(&pixmap);
-    painter.setPen(QColor(settings.value("trayIcon/textColor", "white").toString()));
+    painter.setPen(QColor(settings.value("TrayIcon/textColor", "white").toString()));
     painter.setFont(QFont("", 10, QFont::Bold));
     painter.drawText(QRect(0,0,32,32), Qt::AlignCenter, quota);
     painter.end();

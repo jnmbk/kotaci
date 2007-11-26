@@ -22,6 +22,8 @@
 #include "quota.h"
 #include "statswindow.h"
 
+class ConfigWindow;
+
 class TrayIcon : public QSystemTrayIcon
 {
     Q_OBJECT
@@ -29,7 +31,7 @@ class TrayIcon : public QSystemTrayIcon
     public:
         TrayIcon(QWidget *parent = 0);
         CaptchaWindow captchaWindow;
-        ConfigWindow configWindow;
+        ConfigWindow *configWindow;
         Quota quota;
         StatsWindow statsWindow;
         QMenu menu;
@@ -39,9 +41,11 @@ class TrayIcon : public QSystemTrayIcon
     private slots:
         void on_activated(QSystemTrayIcon::ActivationReason);
         void checkQuota();
-        void refreshQuota();
         void continueCheckQuota(QString content="");
         void about();
+
+    public slots:
+        void refreshQuota();
 };
 
 #endif
