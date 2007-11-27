@@ -71,8 +71,10 @@ void TrayIcon::refreshQuota()
 {
     QSettings settings;
     QString quota;
-    if (settings.contains("lastReport/download"))
-        quota = tr("%L1\nGB").arg(settings.value("lastReport/download").toDouble()/1073741824, 0, 'f', 2);
+    QString lastMonth = "Stats/";
+    lastMonth += QDate::currentDate().toString("yyyyMM");
+    if (settings.contains(lastMonth))
+        quota = tr("%L1\nGB").arg(settings.value(lastMonth).toList()[0].toDouble()/1073741824, 0, 'f', 2);
     else
         quota = tr("?\nGB");
     QPixmap pixmap(32, 32);
@@ -83,10 +85,10 @@ void TrayIcon::refreshQuota()
     painter.drawText(QRect(0,0,32,32), Qt::AlignCenter, quota);
     painter.end();
     setIcon(QIcon(pixmap));
-    if (settings.contains("lastReport/download")) {
+    if (settings.contains(lastMonth)) {
         setToolTip(tr("Used Quota: %L1 GB\nLatest Update: %2").arg(
-            settings.value("lastReport/download").toDouble()/1073741824).arg(
-            settings.value("lastReport/date").toDateTime().toString("d MMMM dddd hh.mm")));
+            settings.value(lastMonth).toList()[0].toDouble()/1073741824).arg(
+            settings.value("LastReport/date").toDateTime().toString("d MMMM dddd hh.mm")));
     } else {
         setToolTip(tr("Double click to check quota."));
     }
@@ -102,16 +104,16 @@ void TrayIcon::checkQuota()
 }
 
 QList<QVariant> getValues(QStringList values){
-    qDebug() << values;
     QStringList months;
-    months << "Ocak" << "\u015eubat" << "Mart" << "Nisan" << "May\u0131s" << "Haziran"
-           << "Temmuz" << "A\u011fustos" << "Eyl\xfcl" << "Ekim" << "Kas\u0131m" << "Aral\u0131k";
+    months << "Ocak" << QString::fromUtf8("Şubat") << "Mart" << "Nisan"
+           << QString::fromUtf8("Mayıs") << "Haziran" << "Temmuz"
+           << QString::fromUtf8("Ağustos") << "Eyl\xfcl" << "Ekim"
+           << QString::fromUtf8("Kasım") << QString::fromUtf8("Aralık");
     QDate date(values[0].toInt(), months.indexOf(values[1])+1, 1);
     double upload = values[2].split('(')[0].remove('.').toDouble();
     double download = values[4].split('(')[0].remove('.').toDouble();
     QList<QVariant> list;
     list << QVariant(date) << QVariant(download) << QVariant(upload);
-    qDebug() << list;
     return list;
 }
 
@@ -136,13 +138,18 @@ void TrayIcon::continueCheckQuota(QString content)
                 " correctly and have specified a username in configuration."), Critical);
         else {
             QList< QList <QVariant> > values;
-            qDebug() << content.split(QRegExp("\\s+"));
             values << getValues(content.split(QRegExp("\\s+")).mid(1,6));
             values << getValues(content.split(QRegExp("\\s+")).mid(7,6));
+            values << getValues(content.split(QRegExp("\\s+")).mid(13,6));
             settings.beginGroup("Stats");
-            settings.setValue(values[0][0].toDate().toString("yyyMM"), values[0].mid(1,2));
-            settings.setValue(values[1][0].toDate().toString("yyyMM"), values[1].mid(1,2));
+            settings.setValue(values[0][0].toDate().toString("yyyyMM"), values[0].mid(1,2));
+            settings.setValue(values[1][0].toDate().toString("yyyyMM"), values[1].mid(1,2));
+            settings.setValue(values[2][0].toDate().toString("yyyyMM"), values[2].mid(1,2));
             settings.endGroup();
+            settings.setValue("LastReport/date", QDateTime::currentDateTime());
+            refreshQuota();
+            showMessage(tr("Quota Information"), tr("%L1 bytes\n(%L2 GB)").arg(
+                        values[2][1].toDouble(), 0, 'f', 0).arg(values[2][1].toDouble()/1073741824));
             //statsWindow.updateStats();
         }
     }
