@@ -150,7 +150,7 @@ void TrayIcon::continueCheckQuota(QString content)
             refreshQuota();
             showMessage(tr("Quota Information"), tr("%L1 bytes\n(%L2 GB)").arg(
                         values[2][1].toDouble(), 0, 'f', 0).arg(values[2][1].toDouble()/1073741824));
-            //statsWindow.updateStats();
+            statsWindow.updateStats();
         }
     }
 }

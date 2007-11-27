@@ -23,6 +23,10 @@ class StatsWindow : public QDialog, private Ui::StatsWindow
 
     public:
         StatsWindow(QWidget *parent = 0);
+
+    public slots:
+        void updateStats();
+        void clearStats();
 };
 
 #endif
