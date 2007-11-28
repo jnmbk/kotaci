@@ -11,7 +11,6 @@
  */
 
 #include <QDate>
-#include <QDebug>
 #include <QSettings>
 #include "statswindow.h"
 
@@ -40,7 +39,6 @@ void StatsWindow::updateStats()
         QString key(i.next());
         if (QDate::fromString(key, "yyyyMM").isValid()) {
             QStringList list(settings.value(key).toStringList());
-            qDebug() << list;
             QTreeWidgetItem *item = new QTreeWidgetItem(stats);
             item->setText(0, QDate::fromString(key, "yyyyMM").toString("MMMM yyyy"));
             item->setText(1, tr("%L2 GB").arg(list[0].toDouble()/1073741824, 0, 'f', 3));

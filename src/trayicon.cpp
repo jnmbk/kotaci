@@ -10,7 +10,6 @@
  * Please read the COPYING file.
  */
 
-#include <QDebug>
 #include <QAction>
 #include <QColor>
 #include <QDateTime>
