@@ -1,4 +1,4 @@
 Kotacı, sistem bildirim alanına yerleşerek ttnet ADSL kota durumunuzu gösterir.
 
-Projenin geliştirme aşamasında olan halini Pardus'ta çalıştırmak için öncelikle PyQt4 paketini kurmalısınız.
+Projenin geliştirme aşamasında olan halini Pardus'ta çalıştırmak için öncelikle Qt4 paketini kurmalısınız.
 Son kodlara buradan ulaşabilirsiniz: http://kotaci.googlecode.com/svn/trunk

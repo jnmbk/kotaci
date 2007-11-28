@@ -1,3 +1,0 @@
-include AUTHORS COPYING INSTALL README TODO
-recursive-include data *
-recursive-include ui *

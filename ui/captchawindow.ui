@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>CaptchaDialog</class>
- <widget class="QDialog" name="CaptchaDialog" >
+ <class>CaptchaWindow</class>
+ <widget class="QDialog" name="CaptchaWindow" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -71,7 +71,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>CaptchaDialog</receiver>
+   <receiver>CaptchaWindow</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -87,7 +87,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>CaptchaDialog</receiver>
+   <receiver>CaptchaWindow</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
