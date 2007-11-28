@@ -27,7 +27,7 @@ SOURCES += \
     src/statswindow.cpp \
     src/trayicon.cpp
 TRANSLATIONS += \
-    data/qt4sozluk_tr_TR.ts
+    data/kotaci_tr_TR.ts
 
 DESTDIR = bin
 OBJECTS_DIR = build
