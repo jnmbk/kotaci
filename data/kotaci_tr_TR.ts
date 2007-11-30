@@ -174,6 +174,64 @@
     </message>
 </context>
 <context>
+    <name>Quota</name>
+    <message>
+        <location filename="../src/quota.cpp" line="88"/>
+        <source>Connection Error</source>
+        <translation>Bağlantı Hatası</translation>
+    </message>
+    <message>
+        <location filename="../src/quota.cpp" line="60"/>
+        <source>Code Error</source>
+        <translation>Kod Hatası</translation>
+    </message>
+    <message>
+        <location filename="../src/quota.cpp" line="60"/>
+        <source>You entered wrong code!</source>
+        <translation>Girdiğiniz kod hatalı!</translation>
+    </message>
+    <message>
+        <location filename="../src/quota.cpp" line="62"/>
+        <source>Password Error</source>
+        <translation>Parola Hatası</translation>
+    </message>
+    <message>
+        <location filename="../src/quota.cpp" line="62"/>
+        <source>You entered wrong password!</source>
+        <translation>Girdiğiniz parola hatalı!</translation>
+    </message>
+    <message>
+        <location filename="../src/quota.cpp" line="64"/>
+        <source>Login Error</source>
+        <translation>Giriş Hatası</translation>
+    </message>
+    <message>
+        <location filename="../src/quota.cpp" line="64"/>
+        <source>Please check your username from configuration.</source>
+        <translation>Lütfen yapılandırmadan kullanıcı adınızı kontrol edin.</translation>
+    </message>
+    <message>
+        <location filename="../src/quota.cpp" line="92"/>
+        <source>Error</source>
+        <translation>Hata</translation>
+    </message>
+    <message>
+        <location filename="../src/quota.cpp" line="92"/>
+        <source>TTnet System error</source>
+        <translation>TTnet Sistem hatası</translation>
+    </message>
+    <message>
+        <location filename="../src/quota.cpp" line="101"/>
+        <source>Unknown Error</source>
+        <translation>Bilinmeyen Hata</translation>
+    </message>
+    <message>
+        <location filename="../src/quota.cpp" line="102"/>
+        <source>TTnet site may be changed, check for updates at http://kotaci.googlecode.com</source>
+        <translation>TTnet sitesi değişmiş olabilir. http://kotaci.googlecode.com adresinden güncellemeleri kontrol ediniz</translation>
+    </message>
+</context>
+<context>
     <name>StatsWindow</name>
     <message>
         <location filename="../ui/statswindow.ui" line="13"/>
@@ -236,12 +294,12 @@
     <message>
         <location filename="../src/trayicon.cpp" line="142"/>
         <source>Error</source>
-        <translation>Hata</translation>
+        <translation type="obsolete">Hata</translation>
     </message>
     <message>
         <location filename="../src/trayicon.cpp" line="140"/>
         <source>System Error</source>
-        <translation>Sistem Hatası</translation>
+        <translation type="obsolete">Sistem Hatası</translation>
     </message>
     <message>
         <location filename="" line="7471221"/>
@@ -249,12 +307,12 @@
         <translation type="obsolete">Giriş hatası. Yazıyı doğru yazdığınızdan ve hesap ayarlarınızın doğru olduğundan emin olun.</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="156"/>
+        <location filename="../src/trayicon.cpp" line="153"/>
         <source>Quota Information</source>
         <translation>Kota Bilgisi</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="165"/>
+        <location filename="../src/trayicon.cpp" line="160"/>
         <source>About Kotaci</source>
         <translation>Kotacı Hakkında</translation>
     </message>
@@ -298,10 +356,10 @@ Son Güncelleme: %2</translation>
     <message>
         <location filename="../src/trayicon.cpp" line="143"/>
         <source>Login error. Be sure you wrote it correctly and have specified a username in configuration.</source>
-        <translation>Giriş hatası. Yazıyı doğru yazdığınızdan ve hesap ayarlarınızın doğru olduğundan emin olun.</translation>
+        <translation type="obsolete">Giriş hatası. Yazıyı doğru yazdığınızdan ve hesap ayarlarınızın doğru olduğundan emin olun.</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="156"/>
+        <location filename="../src/trayicon.cpp" line="153"/>
         <source>%L1 bytes
 (%L2 GB)</source>
         <translation>%L1 bayt
@@ -343,12 +401,12 @@ Latest Update: %2</source>
 Son Güncelleme: %2</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="135"/>
+        <location filename="../src/trayicon.cpp" line="134"/>
         <source>Enter Password</source>
         <translation>Parolayı Girin</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="135"/>
+        <location filename="../src/trayicon.cpp" line="134"/>
         <source>Enter your TTnet password:</source>
         <translation>TTnet parolanızı girin:</translation>
     </message>
@@ -363,14 +421,14 @@ Son Güncelleme: %2</translation>
         <translation>Hakkında...</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="171"/>
+        <location filename="../src/trayicon.cpp" line="166"/>
         <source>&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007, Ugur Cetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;This program uses Tulliana 2.0 icon theme.&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.</source>
         <translation>&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Copyright (c) 2007, Uğur Çetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Bu programda Tulliana 2.0 simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.</translation>
     </message>
     <message>
         <location filename="../src/trayicon.cpp" line="72"/>
         <source>Connection Error</source>
-        <translation>Bağlantı Hatası</translation>
+        <translation type="obsolete">Bağlantı Hatası</translation>
     </message>
 </context>
 </TS>
