@@ -132,7 +132,7 @@ void TrayIcon::continueCheckQuota()
         QString password = settings.value("password").toString();
         if (settings.value("savePassword").toInt() == Qt::Unchecked)
             password = QInputDialog::getText(0, tr("Enter Password"), tr("Enter your TTnet password:"), QLineEdit::Password);
-        quota.login(captchaWindow.lineEdit->text(), username, password);
+        quota.login(captchaWindow.lineEdit->text().toLower(), username, password);
     }
 }
 
