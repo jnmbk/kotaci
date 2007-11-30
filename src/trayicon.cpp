@@ -49,8 +49,8 @@ TrayIcon::TrayIcon(QWidget *parent)
     connect(&captchaWindow, SIGNAL(accepted()), this, SLOT(continueCheckQuota()));
     connect(captchaWindow.changePicture, SIGNAL(clicked()), this, SLOT(checkQuota()));
     connect(&quota, SIGNAL(gotCaptcha(QByteArray)), &captchaWindow, SLOT(displayCaptcha(QByteArray)));
-    connect(&quota, SIGNAL(gotResults(QString)), this, SLOT(continueCheckQuota(QString)));
-    connect(&quota, SIGNAL(connectionError(QString)), this, SLOT(displayError(QString)));
+    connect(&quota, SIGNAL(gotResults(QString)), this, SLOT(finishCheckQuota(QString)));
+    connect(&quota, SIGNAL(error(QString, QString)), this, SLOT(showError(QString, QString)));
     connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(on_activated(QSystemTrayIcon::ActivationReason)));
 
     this->configWindow = new ConfigWindow(0, this);
@@ -62,14 +62,14 @@ TrayIcon::TrayIcon(QWidget *parent)
     connect(actionExit, SIGNAL(activated()), qApp, SLOT(quit()));
 }
 
+void TrayIcon::showError(QString title, QString message)
+{
+    showMessage(title, message, Critical);
+}
+
 void TrayIcon::on_activated(QSystemTrayIcon::ActivationReason activationReason)
 {
     if (activationReason == DoubleClick) checkQuota();
-}
-
-void TrayIcon::displayError(QString errorString)
-{
-    showMessage(tr("Connection Error"), errorString);
 }
 
 void TrayIcon::refreshQuota()
@@ -122,42 +122,37 @@ QList<QVariant> getValues(QStringList values){
     return list;
 }
 
-void TrayIcon::continueCheckQuota(QString content)
+void TrayIcon::continueCheckQuota()
 {
     QSettings settings;
-    if (content.isEmpty()) {
-        if (captchaWindow.lineEdit->text().isEmpty()) {
-            captchaWindow.show();
-        } else {
-            QString username = settings.value("username").toString();
-            QString password = settings.value("password").toString();
-            if (settings.value("savePassword").toInt() == Qt::Unchecked)
-                password = QInputDialog::getText(0, tr("Enter Password"), tr("Enter your TTnet password:"), QLineEdit::Password);
-            quota.login(captchaWindow.lineEdit->text(), username, password);
-        }
+    if (captchaWindow.lineEdit->text().isEmpty()) {
+        captchaWindow.show();
     } else {
-        if (content == QString("syserror"))
-            showMessage(tr("Error"), tr("System Error"), Critical);
-        else if (content == QString("loginerror"))
-            showMessage(tr("Error"), tr("Login error. Be sure you wrote it"
-                " correctly and have specified a username in configuration."), Critical);
-        else {
-            QList< QList <QVariant> > values;
-            values << getValues(content.split(QRegExp("\\s+")).mid(1,6));
-            values << getValues(content.split(QRegExp("\\s+")).mid(7,6));
-            values << getValues(content.split(QRegExp("\\s+")).mid(13,6));
-            settings.beginGroup("Stats");
-            settings.setValue(values[0][0].toDate().toString("yyyyMM"), values[0].mid(1,2));
-            settings.setValue(values[1][0].toDate().toString("yyyyMM"), values[1].mid(1,2));
-            settings.setValue(values[2][0].toDate().toString("yyyyMM"), values[2].mid(1,2));
-            settings.endGroup();
-            settings.setValue("LastReport/date", QDateTime::currentDateTime());
-            refreshQuota();
-            showMessage(tr("Quota Information"), tr("%L1 bytes\n(%L2 GB)").arg(
-                        values[2][1].toDouble(), 0, 'f', 0).arg(values[2][1].toDouble()/1073741824));
-            statsWindow.updateStats();
-        }
+        QString username = settings.value("username").toString();
+        QString password = settings.value("password").toString();
+        if (settings.value("savePassword").toInt() == Qt::Unchecked)
+            password = QInputDialog::getText(0, tr("Enter Password"), tr("Enter your TTnet password:"), QLineEdit::Password);
+        quota.login(captchaWindow.lineEdit->text(), username, password);
     }
+}
+
+void TrayIcon::finishCheckQuota(QString content)
+{
+    QSettings settings;
+    QList< QList <QVariant> > values;
+    values << getValues(content.split(QRegExp("\\s+")).mid(1,6));
+    values << getValues(content.split(QRegExp("\\s+")).mid(7,6));
+    values << getValues(content.split(QRegExp("\\s+")).mid(13,6));
+    settings.beginGroup("Stats");
+    settings.setValue(values[0][0].toDate().toString("yyyyMM"), values[0].mid(1,2));
+    settings.setValue(values[1][0].toDate().toString("yyyyMM"), values[1].mid(1,2));
+    settings.setValue(values[2][0].toDate().toString("yyyyMM"), values[2].mid(1,2));
+    settings.endGroup();
+    settings.setValue("LastReport/date", QDateTime::currentDateTime());
+    refreshQuota();
+    showMessage(tr("Quota Information"), tr("%L1 bytes\n(%L2 GB)").arg(
+                values[2][1].toDouble(), 0, 'f', 0).arg(values[2][1].toDouble()/1073741824));
+    statsWindow.updateStats();
 }
 
 void TrayIcon::about()

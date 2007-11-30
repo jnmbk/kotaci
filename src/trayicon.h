@@ -41,9 +41,10 @@ class TrayIcon : public QSystemTrayIcon
     private slots:
         void on_activated(QSystemTrayIcon::ActivationReason);
         void checkQuota();
-        void continueCheckQuota(QString content="");
+        void continueCheckQuota();
+        void finishCheckQuota(QString);
         void about();
-        void displayError(QString errorString);
+        void showError(QString, QString);
 
     public slots:
         void refreshQuota();

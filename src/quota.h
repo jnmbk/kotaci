@@ -17,6 +17,7 @@
 #include <QHttp>
 #include <QHttpRequestHeader>
 #include <QString>
+#include <QTextCodec>
 
 class Quota : public QObject
 {
@@ -24,11 +25,14 @@ class Quota : public QObject
 
     public:
         Quota(QObject *parent = 0);
+
+    private:
         QHttp http;
         QHttpRequestHeader requestHeader;
+        QTextCodec *codec;
 
     signals:
-        void connectionError(QString errorString);
+        void error(QString title, QString errorString);
         void gotCaptcha(QByteArray captcha);
         void gotResults(QString content);
 

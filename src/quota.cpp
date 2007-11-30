@@ -10,7 +10,6 @@
  * Please read the COPYING file.
  */
 
-#include <QTextCodec>
 #include "quota.h"
 
 Quota::Quota(QObject *parent)
@@ -18,6 +17,7 @@ Quota::Quota(QObject *parent)
 {
     http.setHost("adslkota.ttnet.net.tr");
     requestHeader.setValue("Host", "adslkota.ttnet.net.tr");
+    codec = QTextCodec::codecForName("Windows-1254");
 }
 
 void Quota::getCaptcha()
@@ -29,10 +29,10 @@ void Quota::getCaptcha()
     http.request(requestHeader);
 }
 
-void Quota::gotCaptcha(bool error)
+void Quota::gotCaptcha(bool connectionError)
 {
-    if (error)
-        emit(connectionError(http.errorString()));
+    if (connectionError)
+        emit(error(tr("Connection Error"), http.errorString()));
     else {
         requestHeader.setValue("Cookie", http.lastResponse().value("set-cookie"));
         emit gotCaptcha(http.readAll());
@@ -50,11 +50,18 @@ void Quota::login(QString captcha, QString username, QString password)
     http.request(requestHeader);
 }
 
-void Quota::acceptAgreenment(bool error)
+void Quota::acceptAgreenment(bool connectionError)
 {
     http.disconnect();
-    if (error)
-        emit(connectionError(http.errorString()));
+    QString content(codec->toUnicode(http.readAll()));
+    if (connectionError)
+        emit(error(tr("Connection Error"), http.errorString()));
+    else if (content.contains(QString::fromUtf8("Güvenlik kodu doğru değil")))
+        emit(error(tr("Code Error"), tr("You entered wrong code!")));
+    else if (content.contains(QString::fromUtf8("Girilen şifre hatalıdır")))
+        emit(error(tr("Password Error"), tr("You entered wrong password!")));
+    else if (content.contains(QString::fromUtf8("Giriş başarısız")))
+        emit(error(tr("Login Error"), tr("Please check your username from configuration.")));
     else {
         requestHeader.setRequest("GET", "/adslkota/confirmAgreement.do?dispatch=agree");
         http.connect(&http, SIGNAL(done(bool)), this, SLOT(getResult(bool)));
@@ -62,11 +69,11 @@ void Quota::acceptAgreenment(bool error)
     }
 }
 
-void Quota::getResult(bool error)
+void Quota::getResult(bool connectionError)
 {
     http.disconnect();
-    if (error)
-        emit(connectionError(http.errorString()));
+    if (connectionError)
+        emit(error(tr("Connection Error"), http.errorString()));
     else {
         requestHeader.setRequest("GET", "/adslkota/viewTransfer.do?dispatch=entry");
         http.connect(&http, SIGNAL(done(bool)), this, SLOT(gotResult(bool)));
@@ -74,19 +81,15 @@ void Quota::getResult(bool error)
     }
 }
 
-void Quota::gotResult(bool error)
+void Quota::gotResult(bool connectionError)
 {
-
     http.disconnect();
-    if (error)
-        emit(connectionError(http.errorString()));
+    if (connectionError)
+        emit(error(tr("Connection Error"), http.errorString()));
     else {
-        QTextCodec *codec = QTextCodec::codecForName("Windows-1254");
         QString content = codec->toUnicode(http.readAll());
         if (content.contains("Sistem Hatası")) {
-            content = "syserror";
-        } else if (content.contains("tekrar giriş yapmanız gerekmektedir")) {
-        content = "loginerror";
+            emit(error(tr("Error"), tr("TTnet System error")));
         } else {
             int start = content.indexOf("<tr class=\"odd\">");
             int end = content.indexOf("</tr></tbody></table>");
@@ -94,7 +97,11 @@ void Quota::gotResult(bool error)
             content = content.remove("<tr class=\"odd\">").remove("<tr class=\"even\">");
             content = content.remove("<td width=\"100\">").remove("<br>&nbsp;");
             content = content.remove("</tr>").remove("</td>");
+            if (content.isEmpty())
+                emit(error(tr("Unknown Error"), tr("TTnet site may be changed, "
+                    "check for updates at http://kotaci.googlecode.com")));
+            else
+                emit gotResults(content);
         }
-        emit gotResults(content);
     }
 }
