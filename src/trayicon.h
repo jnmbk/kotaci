@@ -43,6 +43,7 @@ class TrayIcon : public QSystemTrayIcon
         void checkQuota();
         void continueCheckQuota(QString content="");
         void about();
+        void displayError(QString errorString);
 
     public slots:
         void refreshQuota();

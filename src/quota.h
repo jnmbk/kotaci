@@ -28,6 +28,7 @@ class Quota : public QObject
         QHttpRequestHeader requestHeader;
 
     signals:
+        void connectionError(QString errorString);
         void gotCaptcha(QByteArray captcha);
         void gotResults(QString content);
 

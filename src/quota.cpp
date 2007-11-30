@@ -31,8 +31,12 @@ void Quota::getCaptcha()
 
 void Quota::gotCaptcha(bool error)
 {
-    requestHeader.setValue("Cookie", http.lastResponse().value("set-cookie"));
-    emit gotCaptcha(http.readAll());
+    if (error)
+        emit(connectionError(http.errorString()));
+    else {
+        requestHeader.setValue("Cookie", http.lastResponse().value("set-cookie"));
+        emit gotCaptcha(http.readAll());
+    }
 }
 
 void Quota::login(QString captcha, QString username, QString password)
@@ -48,37 +52,49 @@ void Quota::login(QString captcha, QString username, QString password)
 
 void Quota::acceptAgreenment(bool error)
 {
-    requestHeader.setRequest("GET", "/adslkota/confirmAgreement.do?dispatch=agree");
     http.disconnect();
-    http.connect(&http, SIGNAL(done(bool)), this, SLOT(getResult(bool)));
-    http.request(requestHeader);
+    if (error)
+        emit(connectionError(http.errorString()));
+    else {
+        requestHeader.setRequest("GET", "/adslkota/confirmAgreement.do?dispatch=agree");
+        http.connect(&http, SIGNAL(done(bool)), this, SLOT(getResult(bool)));
+        http.request(requestHeader);
+    }
 }
 
 void Quota::getResult(bool error)
 {
-    requestHeader.setRequest("GET", "/adslkota/viewTransfer.do?dispatch=entry");
     http.disconnect();
-    http.connect(&http, SIGNAL(done(bool)), this, SLOT(gotResult(bool)));
-    http.request(requestHeader);
+    if (error)
+        emit(connectionError(http.errorString()));
+    else {
+        requestHeader.setRequest("GET", "/adslkota/viewTransfer.do?dispatch=entry");
+        http.connect(&http, SIGNAL(done(bool)), this, SLOT(gotResult(bool)));
+        http.request(requestHeader);
+    }
 }
 
 void Quota::gotResult(bool error)
 {
-    QTextCodec *codec = QTextCodec::codecForName("Windows-1254");
 
     http.disconnect();
-    QString content = codec->toUnicode(http.readAll());
-    if (content.contains("Sistem Hatası")) {
-        content = "syserror";
-    } else if (content.contains("tekrar giriş yapmanız gerekmektedir")) {
+    if (error)
+        emit(connectionError(http.errorString()));
+    else {
+        QTextCodec *codec = QTextCodec::codecForName("Windows-1254");
+        QString content = codec->toUnicode(http.readAll());
+        if (content.contains("Sistem Hatası")) {
+            content = "syserror";
+        } else if (content.contains("tekrar giriş yapmanız gerekmektedir")) {
         content = "loginerror";
-    } else {
-        int start = content.indexOf("<tr class=\"odd\">");
-        int end = content.indexOf("</tr></tbody></table>");
-        content = content.mid(start, end - start);
-        content = content.remove("<tr class=\"odd\">").remove("<tr class=\"even\">");
-        content = content.remove("<td width=\"100\">").remove("<br>&nbsp;");
-        content = content.remove("</tr>").remove("</td>");
+        } else {
+            int start = content.indexOf("<tr class=\"odd\">");
+            int end = content.indexOf("</tr></tbody></table>");
+            content = content.mid(start, end - start);
+            content = content.remove("<tr class=\"odd\">").remove("<tr class=\"even\">");
+            content = content.remove("<td width=\"100\">").remove("<br>&nbsp;");
+            content = content.remove("</tr>").remove("</td>");
+        }
+        emit gotResults(content);
     }
-    emit gotResults(content);
 }

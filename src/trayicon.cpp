@@ -50,6 +50,7 @@ TrayIcon::TrayIcon(QWidget *parent)
     connect(captchaWindow.changePicture, SIGNAL(clicked()), this, SLOT(checkQuota()));
     connect(&quota, SIGNAL(gotCaptcha(QByteArray)), &captchaWindow, SLOT(displayCaptcha(QByteArray)));
     connect(&quota, SIGNAL(gotResults(QString)), this, SLOT(continueCheckQuota(QString)));
+    connect(&quota, SIGNAL(connectionError(QString)), this, SLOT(displayError(QString)));
     connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(on_activated(QSystemTrayIcon::ActivationReason)));
 
     this->configWindow = new ConfigWindow(0, this);
@@ -64,6 +65,11 @@ TrayIcon::TrayIcon(QWidget *parent)
 void TrayIcon::on_activated(QSystemTrayIcon::ActivationReason activationReason)
 {
     if (activationReason == DoubleClick) checkQuota();
+}
+
+void TrayIcon::displayError(QString errorString)
+{
+    showMessage(tr("Connection Error"), errorString);
 }
 
 void TrayIcon::refreshQuota()
