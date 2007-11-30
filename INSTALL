@@ -1,3 +1,6 @@
-qmake-qt4 && make && sudo make install
+Bu işlem için sistemizinde qt4'ün kurulu olması gereklidir.
 
-komutuyla kurulumu gerçekleştirebilirsiniz.
+qmake-qt4 && make
+
+komutuyla kotacıyı derleyebilir, daha sonra bin dizini içinde
+oluşan kotaci dosyasını ./bin/kotaci komutuyla çalıştırabilirsiniz.
