@@ -78,10 +78,16 @@ void TrayIcon::refreshQuota()
     QString quota;
     QString lastMonth = "Stats/";
     lastMonth += QDate::currentDate().toString("yyyyMM");
-    if (settings.contains(lastMonth))
-        quota = tr("%L1\nGB").arg(settings.value(lastMonth).toList()[0].toDouble()/1073741824, 0, 'f', 2);
-    else
-        quota = tr("?\nGB");
+    if (settings.contains(lastMonth)) {
+        quota = QString("%L1").arg(settings.value(lastMonth).toList()[0].toDouble()/1073741824, 0, 'f', 2);
+        //make it fit into tray icon
+        if (quota.size() == 5)
+            quota = quota.left(4);
+        else if (quota.size() > 5)
+            quota = QString("%1").arg(settings.value(lastMonth).toList()[0].toDouble()/1073741824, 0, 'f', 0);
+    } else
+        quota = QString("?");
+    quota += QString("\nGB");
     QPixmap pixmap(32, 32);
     pixmap.fill(QColor(settings.value("TrayIcon/backgroundColor", "red").toString()));
     QPainter painter(&pixmap);
@@ -108,7 +114,8 @@ void TrayIcon::checkQuota()
     quota.getCaptcha();
 }
 
-QList<QVariant> getValues(QStringList values){
+QList<QVariant> getValues(QStringList values)
+{
     QStringList months;
     months << "Ocak" << QString::fromUtf8("Şubat") << "Mart" << "Nisan"
            << QString::fromUtf8("Mayıs") << "Haziran" << "Temmuz"
