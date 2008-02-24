@@ -12,6 +12,7 @@
 
 #include <QApplication>
 #include <QLocale>
+#include <QSettings>
 #include <QTranslator>
 
 #include "trayicon.h"
@@ -31,6 +32,12 @@ int main(int argc, char *argv[])
 
     TrayIcon trayIcon;
     trayIcon.show();
+
+    QSettings settings;
+    if (settings.value("firstLaunch", true).toBool()) {
+        settings.setValue("firstLaunch", QVariant(false));
+        trayIcon.configWindow->show();
+    }
 
     return app.exec();
 }
