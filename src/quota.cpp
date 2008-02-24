@@ -42,7 +42,7 @@ void Quota::gotCaptcha(bool connectionError)
 void Quota::login(QString captcha, QString username, QString password)
 {
     QString page;
-    page = "/adslkota/loginSelf.do?dispatch=login&userName=%1&password=%2&captchaResponse=%3";
+    page = "/adslkota/loginSelf.do?dispatch=login&userName=%1&password=%2&captchaResponse=%3&lang=tr";
     page = page.arg(username, password, captcha);
     requestHeader.setRequest("GET", page);
     http.disconnect();
