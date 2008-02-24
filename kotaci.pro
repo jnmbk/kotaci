@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = kotaci
-VERSION = "0.2"
+VERSION = "0.3"
 DEFINES += \
 #    KOTACI_VERSION=\\\"$$VERSION\\\"
     KOTACI_VERSION=\\\"$$VERSION\\\" \
