@@ -136,6 +136,12 @@ void TrayIcon::continueCheckQuota()
         captchaWindow.show();
     } else {
         QString username = settings.value("username").toString();
+        if (username.isEmpty())
+            username = QInputDialog::getText(0, tr("Enter Username"), tr("Enter your TTnet username:"));
+            username.remove("@ttnet");
+            settings.setValue("username", QVariant(username));
+            configWindow->username->setText(username);
+
         QString password = settings.value("password").toString();
         if (settings.value("savePassword").toInt() == Qt::Unchecked)
             password = QInputDialog::getText(0, tr("Enter Password"), tr("Enter your TTnet password:"), QLineEdit::Password);

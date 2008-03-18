@@ -51,6 +51,8 @@ void ConfigWindow::loadSettings()
 
 void ConfigWindow::saveSettings()
 {
+    username->setText(username->text().remove("@ttnet"));
+
     QSettings settings;
     settings.setValue("username", QVariant(username->text()));
     settings.setValue("password", QVariant(password->text()));
