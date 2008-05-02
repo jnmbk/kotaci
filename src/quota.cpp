@@ -88,7 +88,7 @@ void Quota::gotResult(bool connectionError)
         emit(error(tr("Connection Error"), http.errorString()));
     else {
         QString content = codec->toUnicode(http.readAll());
-        if (content.contains("Sistem Hatası")) {
+        if (content.contains(QString::fromUtf8("İşlem hatası"))) {
             emit(error(tr("Error"), tr("TTnet System error")));
         } else {
             int start = content.indexOf("<tr class=\"odd\">");
