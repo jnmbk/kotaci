@@ -4,17 +4,14 @@
 <context>
     <name>CaptchaDialog</name>
     <message>
-        <location filename="" line="7471221"/>
         <source>Kotaci</source>
         <translation type="obsolete">Kotacı</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Write what you see into the box below:</source>
         <translation type="obsolete">Aşağıdaki kutuya resimde gördüğünüzü yazın:</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Change Picture</source>
         <translation type="obsolete">Resmi Değiştir</translation>
     </message>
@@ -108,67 +105,54 @@
 <context>
     <name>Dialog</name>
     <message>
-        <location filename="" line="7471221"/>
         <source>Configure - Kotaci</source>
         <translation type="obsolete">Yapılandır - Kotacı</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Username:</source>
         <translation type="obsolete">Kullanıcı adı:</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Password:</source>
         <translation type="obsolete">Parola:</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Enter your TTnet username here.</source>
         <translation type="obsolete">Buraya TTnet kullanıcı adınızı girin.</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Enter your TTnet password here.</source>
         <translation type="obsolete">Buraya TTnet parolanızı girin.</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Saves password to configuration file when selected. It may be unsafe to save the password.</source>
         <translation type="obsolete">Seçiliyse parolanız ayar dosyasına kaydedilir. Parolayı bu şekilde saklamak güvenli olmayabilir.</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Save password</source>
         <translation type="obsolete">Parolayı kaydet</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Account</source>
         <translation type="obsolete">Hesap</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Text color:</source>
         <translation type="obsolete">Yazı rengi:</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Background color:</source>
         <translation type="obsolete">Arka plan rengi:</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Select tray icon text color.</source>
         <translation type="obsolete">Simgenin yazı rengini seçin.</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Select tray icon background color.</source>
         <translation type="obsolete">Simgenin arka plan rengini seçin.</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Tray Icon</source>
         <translation type="obsolete">Sistem Çekmecesi</translation>
     </message>
@@ -272,22 +256,19 @@
 <context>
     <name>TrayIcon</name>
     <message>
-        <location filename="" line="7471221"/>
         <source>Used Qouta</source>
         <translation type="obsolete">Kullanılan Kota</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Latest Update:</source>
         <translation type="obsolete">Son Güncelleme:</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Please right click and check quata.</source>
         <translation type="obsolete">Kotayı kontrol etmek için çift tıklayın.</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="107"/>
+        <location filename="../src/trayicon.cpp" line="113"/>
         <source>Loading, plase wait...</source>
         <translation>Yükleniyor, lütfen bekleyin...</translation>
     </message>
@@ -302,27 +283,24 @@
         <translation type="obsolete">Sistem Hatası</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Login error. Be sure you wrote it corrcetly and have specified a username in configuration.</source>
         <translation type="obsolete">Giriş hatası. Yazıyı doğru yazdığınızdan ve hesap ayarlarınızın doğru olduğundan emin olun.</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="153"/>
+        <location filename="../src/trayicon.cpp" line="166"/>
         <source>Quota Information</source>
         <translation>Kota Bilgisi</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="160"/>
+        <location filename="../src/trayicon.cpp" line="173"/>
         <source>About Kotaci</source>
         <translation>Kotacı Hakkında</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007, Ugur Cetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;</source>
         <translation type="obsolete">&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Copyright (c) 2007, Uğur Çetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>About</source>
         <translation type="obsolete">Hakkında</translation>
     </message>
@@ -342,14 +320,13 @@
         <translation>Çık</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>Used Quota: %1 GB
 Latest Update: %2</source>
         <translation type="obsolete">Kullanılan Kota: %1 GB
 Son Güncelleme: %2</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="98"/>
+        <location filename="../src/trayicon.cpp" line="104"/>
         <source>Double click to check quota.</source>
         <translation>Kotayı kontrol etmek için çift tıklayın.</translation>
     </message>
@@ -359,14 +336,13 @@ Son Güncelleme: %2</translation>
         <translation type="obsolete">Giriş hatası. Yazıyı doğru yazdığınızdan ve hesap ayarlarınızın doğru olduğundan emin olun.</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="153"/>
+        <location filename="../src/trayicon.cpp" line="166"/>
         <source>%L1 bytes
 (%L2 GB)</source>
         <translation>%L1 bayt
 (%L2 GB)</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007, Ugur Cetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;
 
 Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.</source>
@@ -375,7 +351,6 @@ Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.</s
 Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.</translation>
     </message>
     <message>
-        <location filename="" line="7471221"/>
         <source>&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007, Ugur Cetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.</source>
         <translation type="obsolete">&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Copyright (c) 2007, Uğur Çetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.</translation>
     </message>
@@ -383,30 +358,30 @@ Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.<
         <location filename="../src/trayicon.cpp" line="82"/>
         <source>%L1
 GB</source>
-        <translation>%L1
+        <translation type="obsolete">%L1
 GB</translation>
     </message>
     <message>
         <location filename="../src/trayicon.cpp" line="84"/>
         <source>?
 GB</source>
-        <translation>?
+        <translation type="obsolete">?
 GB</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="94"/>
+        <location filename="../src/trayicon.cpp" line="100"/>
         <source>Used Quota: %L1 GB
 Latest Update: %2</source>
         <translation>Kullanılan Kota: %L1 GB
 Son Güncelleme: %2</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="134"/>
+        <location filename="../src/trayicon.cpp" line="147"/>
         <source>Enter Password</source>
         <translation>Parolayı Girin</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="134"/>
+        <location filename="../src/trayicon.cpp" line="147"/>
         <source>Enter your TTnet password:</source>
         <translation>TTnet parolanızı girin:</translation>
     </message>
@@ -423,12 +398,27 @@ Son Güncelleme: %2</translation>
     <message>
         <location filename="../src/trayicon.cpp" line="166"/>
         <source>&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007, Ugur Cetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;This program uses Tulliana 2.0 icon theme.&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.</source>
-        <translation>&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Copyright (c) 2007, Uğur Çetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Bu programda Tulliana 2.0 simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.</translation>
+        <translation type="obsolete">&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Copyright (c) 2007, Uğur Çetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Bu programda Tulliana 2.0 simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.</translation>
     </message>
     <message>
         <location filename="../src/trayicon.cpp" line="72"/>
         <source>Connection Error</source>
         <translation type="obsolete">Bağlantı Hatası</translation>
+    </message>
+    <message>
+        <location filename="../src/trayicon.cpp" line="140"/>
+        <source>Enter Username</source>
+        <translation>Kullanıcı Adını Girin</translation>
+    </message>
+    <message>
+        <location filename="../src/trayicon.cpp" line="140"/>
+        <source>Enter your TTnet username:</source>
+        <translation>TTnet kullanıcı adınızı girin:</translation>
+    </message>
+    <message>
+        <location filename="../src/trayicon.cpp" line="180"/>
+        <source>&lt;p&gt;&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007, 2008, Ugur Cetin - jnmbk at users.sourceforge.net&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;This program uses &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; icon theme.&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Telif Hakkı (c) 2007, 2008, Uğur Çetin - jnmbk at users.sourceforge.net&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bu programda &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.&lt;/p&gt;</translation>
     </message>
 </context>
 </TS>
