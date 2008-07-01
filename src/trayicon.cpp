@@ -138,11 +138,14 @@ void TrayIcon::continueCheckQuota()
         QString username = settings.value("username").toString();
         if (username.isEmpty())
             username = QInputDialog::getText(0, tr("Enter Username"), tr("Enter your TTnet username:"));
-            username.remove("@ttnet");
-            settings.setValue("username", QVariant(username));
-            configWindow->username->setText(username);
+        username.remove("@ttnet"); // some users try to put this at the end, resulting username error
+        /* following two line is for those who didn't write their username in config,
+         * we need username because this application is intended for only one person's use */
+        settings.setValue("username", QVariant(username));
+        configWindow->username->setText(username);
 
         QString password = settings.value("password").toString();
+        /* we don't have to save the password */
         if (settings.value("savePassword").toInt() == Qt::Unchecked)
             password = QInputDialog::getText(0, tr("Enter Password"), tr("Enter your TTnet password:"), QLineEdit::Password);
         quota.login(captchaWindow.lineEdit->text().toLower(), username, password);
