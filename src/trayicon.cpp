@@ -13,6 +13,7 @@
 #include <QAction>
 #include <QColor>
 #include <QDateTime>
+#include <QDebug>
 #include <QFont>
 #include <QIcon>
 #include <QInputDialog>
@@ -156,15 +157,18 @@ void TrayIcon::finishCheckQuota(QString content)
 {
     QSettings settings;
     QList< QList <QVariant> > values;
+    qDebug() << content;
     values << getValues(content.split(QRegExp("\\s+")).mid(1,6));
     values << getValues(content.split(QRegExp("\\s+")).mid(7,6));
     values << getValues(content.split(QRegExp("\\s+")).mid(13,6));
+    qDebug() << "Date:" << content.right(19);
     settings.beginGroup("Stats");
     settings.setValue(values[0][0].toDate().toString("yyyyMM"), values[0].mid(1,2));
     settings.setValue(values[1][0].toDate().toString("yyyyMM"), values[1].mid(1,2));
     settings.setValue(values[2][0].toDate().toString("yyyyMM"), values[2].mid(1,2));
     settings.endGroup();
-    settings.setValue("LastReport/date", QDateTime::currentDateTime());
+    /* 06-10-2008 11:33:26 */
+    settings.setValue("LastReport/date", QDateTime::fromString(content.right(19), "dd-MM-yyyy HH:mm:ss"));
     refreshQuota();
     showMessage(tr("Quota Information"), tr("%L1 bytes\n(%L2 GB)").arg(
                 values[2][1].toDouble(), 0, 'f', 0).arg(values[2][1].toDouble()/1073741824));

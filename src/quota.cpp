@@ -91,12 +91,17 @@ void Quota::gotResult(bool connectionError)
         if (content.contains(QString::fromUtf8("İşlem hatası"))) {
             emit(error(tr("Error"), tr("TTnet System error")));
         } else {
+            /* get date */
+            int dateStart = content.indexOf(QString::fromUtf8("Son Gelen Kayıt Zamanı"));
+            QString date = content.mid(dateStart + 35, 19);
+            /* get quota */
             int start = content.indexOf("<tr class=\"odd\">");
             int end = content.indexOf("</tr></tbody></table>");
             content = content.mid(start, end - start);
             content = content.remove("<tr class=\"odd\">").remove("<tr class=\"even\">");
             content = content.remove("<td width=\"100\">").remove("<br>&nbsp;");
             content = content.remove("</tr>").remove("</td>");
+            content += date;
             if (content.isEmpty())
                 emit(error(tr("Unknown Error"), tr("TTnet site may be changed, "
                     "check for updates at http://kotaci.googlecode.com")));
