@@ -15,8 +15,8 @@
 Quota::Quota(QObject *parent)
     : QObject(parent)
 {
-    http.setHost("adslkota.ttnet.net.tr");
-    requestHeader.setValue("Host", "adslkota.ttnet.net.tr");
+    http.setHost("adslkota.ttnet.com.tr");
+    requestHeader.setValue("Host", "adslkota.ttnet.com.tr");
     codec = QTextCodec::codecForName("Windows-1254");
 }
 
