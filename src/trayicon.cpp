@@ -170,8 +170,9 @@ void TrayIcon::finishCheckQuota(QString content)
     /* 06-10-2008 11:33:26 */
     settings.setValue("LastReport/date", QDateTime::fromString(content.right(19), "dd-MM-yyyy HH:mm:ss"));
     refreshQuota();
-    showMessage(tr("Quota Information"), tr("%L1 bytes\n(%L2 GB)").arg(
-                values[2][1].toDouble(), 0, 'f', 0).arg(values[2][1].toDouble()/1073741824));
+    showMessage(tr("Quota Information"), tr("%L1 bytes\n(%L2 GB)\nLast Update:\n%3").arg(
+                values[2][1].toDouble(), 0, 'f', 0).arg(values[2][1].toDouble()/1073741824).arg(
+                settings.value("LastReport/date").toDateTime().toString("d MMMM dddd hh.mm")));
     statsWindow.updateStats();
 }
 
