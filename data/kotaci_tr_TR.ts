@@ -205,12 +205,12 @@
         <translation>TTnet Sistem hatası</translation>
     </message>
     <message>
-        <location filename="../src/quota.cpp" line="101"/>
+        <location filename="../src/quota.cpp" line="106"/>
         <source>Unknown Error</source>
         <translation>Bilinmeyen Hata</translation>
     </message>
     <message>
-        <location filename="../src/quota.cpp" line="102"/>
+        <location filename="../src/quota.cpp" line="107"/>
         <source>TTnet site may be changed, check for updates at http://kotaci.googlecode.com</source>
         <translation>TTnet sitesi değişmiş olabilir. http://kotaci.googlecode.com adresinden güncellemeleri kontrol ediniz</translation>
     </message>
@@ -268,7 +268,7 @@
         <translation type="obsolete">Kotayı kontrol etmek için çift tıklayın.</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="113"/>
+        <location filename="../src/trayicon.cpp" line="114"/>
         <source>Loading, plase wait...</source>
         <translation>Yükleniyor, lütfen bekleyin...</translation>
     </message>
@@ -287,12 +287,12 @@
         <translation type="obsolete">Giriş hatası. Yazıyı doğru yazdığınızdan ve hesap ayarlarınızın doğru olduğundan emin olun.</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="166"/>
+        <location filename="../src/trayicon.cpp" line="173"/>
         <source>Quota Information</source>
         <translation>Kota Bilgisi</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="173"/>
+        <location filename="../src/trayicon.cpp" line="181"/>
         <source>About Kotaci</source>
         <translation>Kotacı Hakkında</translation>
     </message>
@@ -305,17 +305,17 @@
         <translation type="obsolete">Hakkında</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="34"/>
+        <location filename="../src/trayicon.cpp" line="35"/>
         <source>Check now...</source>
         <translation>Şimdi kontrol et...</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="35"/>
+        <location filename="../src/trayicon.cpp" line="36"/>
         <source>Configure...</source>
         <translation>Yapılandır...</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="38"/>
+        <location filename="../src/trayicon.cpp" line="39"/>
         <source>Exit</source>
         <translation>Çık</translation>
     </message>
@@ -326,7 +326,7 @@ Latest Update: %2</source>
 Son Güncelleme: %2</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="104"/>
+        <location filename="../src/trayicon.cpp" line="105"/>
         <source>Double click to check quota.</source>
         <translation>Kotayı kontrol etmek için çift tıklayın.</translation>
     </message>
@@ -339,7 +339,7 @@ Son Güncelleme: %2</translation>
         <location filename="../src/trayicon.cpp" line="166"/>
         <source>%L1 bytes
 (%L2 GB)</source>
-        <translation>%L1 bayt
+        <translation type="obsolete">%L1 bayt
 (%L2 GB)</translation>
     </message>
     <message>
@@ -369,29 +369,29 @@ GB</source>
 GB</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="100"/>
+        <location filename="../src/trayicon.cpp" line="101"/>
         <source>Used Quota: %L1 GB
 Latest Update: %2</source>
         <translation>Kullanılan Kota: %L1 GB
 Son Güncelleme: %2</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="147"/>
+        <location filename="../src/trayicon.cpp" line="151"/>
         <source>Enter Password</source>
         <translation>Parolayı Girin</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="147"/>
+        <location filename="../src/trayicon.cpp" line="151"/>
         <source>Enter your TTnet password:</source>
         <translation>TTnet parolanızı girin:</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="36"/>
+        <location filename="../src/trayicon.cpp" line="37"/>
         <source>Statistics...</source>
         <translation>İstatistikler...</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="37"/>
+        <location filename="../src/trayicon.cpp" line="38"/>
         <source>About...</source>
         <translation>Hakkında...</translation>
     </message>
@@ -406,19 +406,30 @@ Son Güncelleme: %2</translation>
         <translation type="obsolete">Bağlantı Hatası</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="140"/>
+        <location filename="../src/trayicon.cpp" line="141"/>
         <source>Enter Username</source>
         <translation>Kullanıcı Adını Girin</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="140"/>
+        <location filename="../src/trayicon.cpp" line="141"/>
         <source>Enter your TTnet username:</source>
         <translation>TTnet kullanıcı adınızı girin:</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="180"/>
+        <location filename="../src/trayicon.cpp" line="188"/>
         <source>&lt;p&gt;&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007, 2008, Ugur Cetin - jnmbk at users.sourceforge.net&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;This program uses &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; icon theme.&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Telif Hakkı (c) 2007, 2008, Uğur Çetin - jnmbk at users.sourceforge.net&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bu programda &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../src/trayicon.cpp" line="173"/>
+        <source>%L1 bytes
+(%L2 GB)
+Last Update:
+%3</source>
+        <translation>%L1 bayt
+￼(%L2 GB)￼
+Son Güncelleme:
+￼%3</translation>
     </message>
 </context>
 </TS>
