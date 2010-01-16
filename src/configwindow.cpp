@@ -1,6 +1,6 @@
 /*
  * kotaci, ADSL quota viewer for Turkey
- * Copyright (C) 2007, Uğur Çetin
+ * Copyright (C) 2007-2009, Uğur Çetin
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,6 +45,7 @@ void ConfigWindow::loadSettings()
     savePassword->setCheckState(Qt::CheckState(settings.value("savePassword", QVariant(Qt::Checked)).toInt()));
     textColor->setCurrentIndex(textColor->findText(settings.value("TrayIcon/textColor", "white").toString()));
     backgroundColor->setCurrentIndex(textColor->findText(settings.value("TrayIcon/backgroundColor", "red").toString()));
+    fontSize->setValue(settings.value("TrayIcon/fontSize").toInt());
     if (savePassword->checkState() == Qt::Unchecked)
         password->setEnabled(false);
 }
@@ -59,6 +60,7 @@ void ConfigWindow::saveSettings()
     settings.setValue("savePassword", QVariant(savePassword->checkState()));
     settings.setValue("TrayIcon/textColor", QVariant(textColor->currentText()));
     settings.setValue("TrayIcon/backgroundColor", QVariant(backgroundColor->currentText()));
+    settings.setValue("TrayIcon/fontSize", QVariant(fontSize->value()));
 
     trayIcon->refreshQuota();
     if (savePassword->checkState() == Qt::Unchecked)

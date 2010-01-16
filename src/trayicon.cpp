@@ -1,6 +1,6 @@
 /*
  * kotaci, ADSL quota viewer for Turkey
- * Copyright (C) 2007, Uğur Çetin
+ * Copyright (C) 2007-2009, Uğur Çetin
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -93,7 +93,7 @@ void TrayIcon::refreshQuota()
     pixmap.fill(QColor(settings.value("TrayIcon/backgroundColor", "red").toString()));
     QPainter painter(&pixmap);
     painter.setPen(QColor(settings.value("TrayIcon/textColor", "white").toString()));
-    painter.setFont(QFont("", 10, QFont::Bold));
+    painter.setFont(QFont("", settings.value("TrayIcon/fontSize", 8).toInt(), QFont::Bold));
     painter.drawText(QRect(0,0,32,32), Qt::AlignCenter, quota);
     painter.end();
     setIcon(QIcon(pixmap));
@@ -179,7 +179,7 @@ void TrayIcon::finishCheckQuota(QString content)
 void TrayIcon::about()
 {
     QMessageBox::about(0, tr("About Kotaci"), tr(
-        "<p><b>Kotaci %1</b> - ttnet ADSL quota displayer<br />Copyright (c) 2007, 2008, Ugur Cetin - jnmbk at users.sourceforge.net<br />"
+        "<p><b>Kotaci %1</b> - ttnet ADSL quota displayer<br />Copyright (c) 2007-2009, Ugur Cetin - jnmbk at users.sourceforge.net<br />"
         "This software is licensed under the terms of GPL-2.<br /><a href=\"http://kotaci.googlecode.com\">"
         "http://kotaci.googlecode.com</a></p>"
         "<p>This program uses <a href=\"http://www.kde-look.org/content/show.php/show.php?content=38757\">"

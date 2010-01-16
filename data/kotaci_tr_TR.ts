@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="tr">
-<defaultcodec></defaultcodec>
+<!DOCTYPE TS>
+<TS version="2.0" language="tr">
 <context>
     <name>CaptchaDialog</name>
     <message>
@@ -37,67 +37,72 @@
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../ui/configwindow.ui" line="19"/>
+        <location filename="../ui/configwindow.ui" line="20"/>
         <source>Configure - Kotaci</source>
         <translation>Yapılandır - Kotacı</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="32"/>
+        <location filename="../ui/configwindow.ui" line="34"/>
         <source>Account</source>
         <translation>Hesap</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="45"/>
+        <location filename="../ui/configwindow.ui" line="47"/>
         <source>Username:</source>
         <translation>Kullanıcı adı:</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="55"/>
+        <location filename="../ui/configwindow.ui" line="57"/>
         <source>Password:</source>
         <translation>Parola:</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="66"/>
+        <location filename="../ui/configwindow.ui" line="68"/>
         <source>Enter your TTnet username here.</source>
         <translation>Buraya TTnet kullanıcı adınızı girin.</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="73"/>
+        <location filename="../ui/configwindow.ui" line="75"/>
         <source>Enter your TTnet password here.</source>
         <translation>Buraya TTnet parolanızı girin.</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="87"/>
+        <location filename="../ui/configwindow.ui" line="89"/>
         <source>Saves password to configuration file when selected. It may be unsafe to save the password.</source>
         <translation>Seçiliyse parolanız ayar dosyasına kaydedilir. Parolayı bu şekilde saklamak güvenli olmayabilir.</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="90"/>
+        <location filename="../ui/configwindow.ui" line="92"/>
         <source>Save password</source>
         <translation>Parolayı kaydet</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="111"/>
+        <location filename="../ui/configwindow.ui" line="113"/>
         <source>Tray Icon</source>
         <translation>Sistem Çekmecesi</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="121"/>
+        <location filename="../ui/configwindow.ui" line="123"/>
         <source>Text color:</source>
         <translation>Yazı rengi:</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="128"/>
+        <location filename="../ui/configwindow.ui" line="130"/>
         <source>Background color:</source>
         <translation>Arka plan rengi:</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="139"/>
+        <location filename="../ui/configwindow.ui" line="137"/>
+        <source>Font size:</source>
+        <translation>Yazıtipi boyutu:</translation>
+    </message>
+    <message>
+        <location filename="../ui/configwindow.ui" line="148"/>
         <source>Select tray icon text color.</source>
         <translation>Simgenin yazı rengini seçin.</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="146"/>
+        <location filename="../ui/configwindow.ui" line="155"/>
         <source>Select tray icon background color.</source>
         <translation>Simgenin arka plan rengini seçin.</translation>
     </message>
@@ -160,6 +165,9 @@
 <context>
     <name>Quota</name>
     <message>
+        <location filename="../src/quota.cpp" line="35"/>
+        <location filename="../src/quota.cpp" line="58"/>
+        <location filename="../src/quota.cpp" line="76"/>
         <location filename="../src/quota.cpp" line="88"/>
         <source>Connection Error</source>
         <translation>Bağlantı Hatası</translation>
@@ -210,7 +218,7 @@
         <translation>Bilinmeyen Hata</translation>
     </message>
     <message>
-        <location filename="../src/quota.cpp" line="107"/>
+        <location filename="../src/quota.cpp" line="106"/>
         <source>TTnet site may be changed, check for updates at http://kotaci.googlecode.com</source>
         <translation>TTnet sitesi değişmiş olabilir. http://kotaci.googlecode.com adresinden güncellemeleri kontrol ediniz</translation>
     </message>
@@ -248,6 +256,7 @@
         <translation>Kapat</translation>
     </message>
     <message>
+        <location filename="../src/statswindow.cpp" line="44"/>
         <location filename="../src/statswindow.cpp" line="45"/>
         <source>%L2 GB</source>
         <translation>%L2 GB</translation>
@@ -273,12 +282,10 @@
         <translation>Yükleniyor, lütfen bekleyin...</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="142"/>
         <source>Error</source>
         <translation type="obsolete">Hata</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="140"/>
         <source>System Error</source>
         <translation type="obsolete">Sistem Hatası</translation>
     </message>
@@ -320,6 +327,11 @@
         <translation>Çık</translation>
     </message>
     <message>
+        <location filename="../src/trayicon.cpp" line="181"/>
+        <source>&lt;p&gt;&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007-2009, Ugur Cetin - jnmbk at users.sourceforge.net&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;This program uses &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; icon theme.&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Telif Hakkı (c) 2007-2009, Uğur Çetin - jnmbk at users.sourceforge.net&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bu programda &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.&lt;/p&gt;</translation>
+    </message>
+    <message>
         <source>Used Quota: %1 GB
 Latest Update: %2</source>
         <translation type="obsolete">Kullanılan Kota: %1 GB
@@ -331,12 +343,10 @@ Son Güncelleme: %2</translation>
         <translation>Kotayı kontrol etmek için çift tıklayın.</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="143"/>
         <source>Login error. Be sure you wrote it correctly and have specified a username in configuration.</source>
         <translation type="obsolete">Giriş hatası. Yazıyı doğru yazdığınızdan ve hesap ayarlarınızın doğru olduğundan emin olun.</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="166"/>
         <source>%L1 bytes
 (%L2 GB)</source>
         <translation type="obsolete">%L1 bayt
@@ -355,14 +365,12 @@ Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.<
         <translation type="obsolete">&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Copyright (c) 2007, Uğur Çetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="82"/>
         <source>%L1
 GB</source>
         <translation type="obsolete">%L1
 GB</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="84"/>
         <source>?
 GB</source>
         <translation type="obsolete">?
@@ -396,12 +404,10 @@ Son Güncelleme: %2</translation>
         <translation>Hakkında...</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="166"/>
         <source>&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007, Ugur Cetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;This program uses Tulliana 2.0 icon theme.&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.</source>
         <translation type="obsolete">&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Copyright (c) 2007, Uğur Çetin &lt;ugur.jnmbk at gmail.com&gt;&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Bu programda Tulliana 2.0 simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="72"/>
         <source>Connection Error</source>
         <translation type="obsolete">Bağlantı Hatası</translation>
     </message>
@@ -416,9 +422,8 @@ Son Güncelleme: %2</translation>
         <translation>TTnet kullanıcı adınızı girin:</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="188"/>
         <source>&lt;p&gt;&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007, 2008, Ugur Cetin - jnmbk at users.sourceforge.net&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;This program uses &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; icon theme.&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Telif Hakkı (c) 2007, 2008, Uğur Çetin - jnmbk at users.sourceforge.net&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bu programda &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.&lt;/p&gt;</translation>
+        <translation type="obsolete">&lt;p&gt;&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Telif Hakkı (c) 2007, 2008, Uğur Çetin - jnmbk at users.sourceforge.net&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bu programda &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/trayicon.cpp" line="173"/>
