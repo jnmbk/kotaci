@@ -11,6 +11,7 @@
  */
 
 #include "quota.h"
+#include <QDebug>
 
 Quota::Quota(QObject *parent)
     : QObject(parent)
@@ -88,7 +89,8 @@ void Quota::gotResult(bool connectionError)
         emit(error(tr("Connection Error"), http.errorString()));
     else {
         QString content = codec->toUnicode(http.readAll());
-        if (content.contains(QString::fromUtf8("İşlem hatası"))) {
+        qDebug() << content;
+        if (content.contains(QString::fromUtf8("İşlem hatası")) || content.contains(QString::fromUtf8("Oturum sonlandığından"))) {
             emit(error(tr("Error"), tr("TTnet System error")));
         } else {
             /* get date */
