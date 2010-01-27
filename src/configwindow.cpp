@@ -1,6 +1,6 @@
 /*
  * kotaci, ADSL quota viewer for Turkey
- * Copyright (C) 2007-2009, Uğur Çetin
+ * Copyright (C) 2007-2010, Uğur Çetin
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
