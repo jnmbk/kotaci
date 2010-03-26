@@ -1,4 +1,5 @@
 Bu işlem için sistemizinde qt4'ün kurulu olması gereklidir.
+Debian/Ubuntu türevleri için: libqt4-dev paketini kurun.
 
 qmake-qt4 && make
 
