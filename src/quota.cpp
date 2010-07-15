@@ -35,7 +35,7 @@ void Quota::gotCaptcha(bool connectionError)
     if (connectionError)
         emit(error(tr("Connection Error"), http.errorString()));
     else {
-        requestHeader.setValue("Cookie", http.lastResponse().value("set-cookie"));
+        requestHeader.setValue("Cookie", http.lastResponse().allValues("set-cookie").join(";"));
         emit gotCaptcha(http.readAll());
     }
 }
