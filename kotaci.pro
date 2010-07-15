@@ -37,3 +37,5 @@ RCC_DIR = build
 
 QT += \
     network
+CONFIG += qt
+#CONFIG += qt debug
