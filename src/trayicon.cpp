@@ -158,14 +158,13 @@ void TrayIcon::finishCheckQuota(QString content)
     QSettings settings;
     QList< QList <QVariant> > values;
     qDebug() << content;
-    values << getValues(content.split(QRegExp("\\s+")).mid(1,6));
-    values << getValues(content.split(QRegExp("\\s+")).mid(7,6));
     values << getValues(content.split(QRegExp("\\s+")).mid(13,6));
+    values << getValues(content.split(QRegExp("\\s+")).mid(7,6));
+    values << getValues(content.split(QRegExp("\\s+")).mid(1,6));
     qDebug() << "Date:" << content.right(19);
     settings.beginGroup("Stats");
-    settings.setValue(values[0][0].toDate().toString("yyyyMM"), values[0].mid(1,2));
-    settings.setValue(values[1][0].toDate().toString("yyyyMM"), values[1].mid(1,2));
-    settings.setValue(values[2][0].toDate().toString("yyyyMM"), values[2].mid(1,2));
+    for (int i=0;i<3;i++)
+        settings.setValue(values[i][0].toDate().toString("yyyyMM"), values[i].mid(1,2));
     settings.endGroup();
     /* 06.10.2008 11:33:26 or 06-10-2008 11:33:26 */
     QString dateMask;
