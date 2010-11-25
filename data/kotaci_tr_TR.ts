@@ -436,9 +436,9 @@ Son Güncelleme: %2</translation>
 Last Update:
 %3</source>
         <translation>%L1 bayt
-￼(%L2 GB)￼
+(%L2 GB)
 Son Güncelleme:
-￼%3</translation>
+%3</translation>
     </message>
 </context>
 </TS>
