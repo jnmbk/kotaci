@@ -32,7 +32,7 @@
 TrayIcon::TrayIcon(QWidget *parent)
     : QSystemTrayIcon(parent)
 {
-    actionCheckQuota = new QAction(QIcon(":icons/ok.png"), tr("Check now..."), &menu);
+    actionCheckQuota = new QAction(QIcon(":icons/kotaci.png"), tr("Check now..."), &menu);
     actionConfigure = new QAction(QIcon(":icons/configure.png"), tr("Configure..."), &menu);
     actionStatistics = new QAction(QIcon(":icons/today.png"), tr("Statistics..."), &menu);
     actionAbout = new QAction(QIcon(":icons/help1.png"), tr("About..."), &menu);
