@@ -24,6 +24,8 @@ int main(int argc, char *argv[])
     app.setOrganizationName(QString("kotaci"));
     app.setApplicationName(QString("kotaci"));
     app.setQuitOnLastWindowClosed(false);
+    //for inclusion of  qt plugins on win32
+    app.addLibraryPath("plugins");
 
     QString locale = QLocale::system().name();
     QTranslator translator;
