@@ -5,3 +5,6 @@ qmake && make
 
 komutuyla kotacıyı derleyebilir, daha sonra bin dizini içinde
 oluşan kotaci dosyasını ./bin/kotaci komutuyla çalıştırabilirsiniz.
+
+Kaynak paketi oluşturmak için şu komutu kullanabilirsiniz:
+git archive master --prefix kotaci-1.2/ | bzip2 >kotaci-1.2.tar.bz2
