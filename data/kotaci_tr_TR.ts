@@ -294,12 +294,12 @@
         <translation type="obsolete">Giriş hatası. Yazıyı doğru yazdığınızdan ve hesap ayarlarınızın doğru olduğundan emin olun.</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="178"/>
+        <location filename="../src/trayicon.cpp" line="177"/>
         <source>Quota Information</source>
         <translation>Kota Bilgisi</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="186"/>
+        <location filename="../src/trayicon.cpp" line="185"/>
         <source>About Kotaci</source>
         <translation>Kotacı Hakkında</translation>
     </message>
@@ -327,9 +327,13 @@
         <translation>Çık</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="186"/>
+        <location filename="../src/trayicon.cpp" line="185"/>
+        <source>&lt;p&gt;&lt;b&gt;Kotaci %1&lt;/b&gt; - TTNet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007-2010, Ugur Cetin - jnmbk at users.sourceforge.net&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;This program uses &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; icon theme.&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by TTNet.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;&lt;b&gt;Kotacı %1&lt;/b&gt; - TTNet ADSL kota görüntüleyicisi&lt;br /&gt;Telif Hakkı (c) 2007-2010, Uğur Çetin - jnmbk at users.sourceforge.net&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bu programda &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının TTNet ile hiçbir ilişkisi yoktur.&lt;/p&gt;</translation>
+    </message>
+    <message>
         <source>&lt;p&gt;&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007-2010, Ugur Cetin - jnmbk at users.sourceforge.net&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;This program uses &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; icon theme.&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Telif Hakkı (c) 2007-2010, Uğur Çetin - jnmbk at users.sourceforge.net&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bu programda &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.&lt;/p&gt;</translation>
+        <translation type="obsolete">&lt;p&gt;&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Telif Hakkı (c) 2007-2010, Uğur Çetin - jnmbk at users.sourceforge.net&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bu programda &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Kotaci %1&lt;/b&gt; - ttnet ADSL quota displayer&lt;br /&gt;Copyright (c) 2007-2009, Ugur Cetin - jnmbk at users.sourceforge.net&lt;br /&gt;This software is licensed under the terms of GPL-2.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;This program uses &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; icon theme.&lt;br /&gt;Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.&lt;/p&gt;</source>
@@ -430,7 +434,7 @@ Son Güncelleme: %2</translation>
         <translation type="obsolete">&lt;p&gt;&lt;b&gt;Kotacı %1&lt;/b&gt; - ttnet ADSL kota görüntüleyicisi&lt;br /&gt;Telif Hakkı (c) 2007, 2008, Uğur Çetin - jnmbk at users.sourceforge.net&lt;br /&gt;Bu yazılım GPL-2 lisansıyla dağıtılmaktadır.&lt;br /&gt;&lt;a href=&quot;http://kotaci.googlecode.com&quot;&gt;http://kotaci.googlecode.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bu programda &lt;a href=&quot;http://www.kde-look.org/content/show.php/show.php?content=38757&quot;&gt;Tulliana 2.0&lt;/a&gt; simge teması kullanılmıştır.&lt;br /&gt;Kotacı programı ve yazarlarının Türk Telekom ile hiçbir ilişkisi yoktur.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/trayicon.cpp" line="178"/>
+        <location filename="../src/trayicon.cpp" line="177"/>
         <source>%L1 bytes
 (%L2 GB)
 Last Update:

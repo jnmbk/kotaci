@@ -183,11 +183,11 @@ void TrayIcon::finishCheckQuota(QString content)
 void TrayIcon::about()
 {
     QMessageBox::about(0, tr("About Kotaci"), tr(
-        "<p><b>Kotaci %1</b> - ttnet ADSL quota displayer<br />Copyright (c) 2007-2010, Ugur Cetin - jnmbk at users.sourceforge.net<br />"
+        "<p><b>Kotaci %1</b> - TTNet ADSL quota displayer<br />Copyright (c) 2007-2010, Ugur Cetin - jnmbk at users.sourceforge.net<br />"
         "This software is licensed under the terms of GPL-2.<br /><a href=\"http://kotaci.googlecode.com\">"
         "http://kotaci.googlecode.com</a></p>"
         "<p>This program uses <a href=\"http://www.kde-look.org/content/show.php/show.php?content=38757\">"
         "Tulliana 2.0</a> icon theme.<br />"
-        "Kotaci nor its authors are in any way affiliated or endorsed by Turk Telekom.</p>"
+        "Kotaci nor its authors are in any way affiliated or endorsed by TTNet.</p>"
         ).arg(KOTACI_VERSION));
 }
