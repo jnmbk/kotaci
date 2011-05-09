@@ -1,7 +1,7 @@
 Bu işlem için sistemizinde qt4'ün kurulu olması gereklidir.
 Debian/Ubuntu türevleri için: libqt4-dev paketini kurun.
 
-qmake-qt4 && make
+qmake && make
 
 komutuyla kotacıyı derleyebilir, daha sonra bin dizini içinde
 oluşan kotaci dosyasını ./bin/kotaci komutuyla çalıştırabilirsiniz.
