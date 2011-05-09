@@ -11,6 +11,7 @@
  */
 
 #include <QPixmap>
+#include <QDebug>
 #include "captchawindow.h"
 
 CaptchaWindow::CaptchaWindow(QWidget *parent)
@@ -21,6 +22,7 @@ CaptchaWindow::CaptchaWindow(QWidget *parent)
 
 void CaptchaWindow::displayCaptcha(QByteArray captchaContent)
 {
+    qDebug() << captchaContent;
     captcha->clear();
     QPixmap pixmap;
     pixmap.loadFromData(captchaContent);
